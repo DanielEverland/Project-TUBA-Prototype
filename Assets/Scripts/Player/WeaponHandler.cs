@@ -44,8 +44,8 @@ public class WeaponHandler : MonoBehaviour {
     {
         if (Input.GetKey(KeyCode.Mouse0))
         {
-            Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
-            Vector2 mouseDelta = (Vector2)Input.mousePosition - screenCenter;
+            Vector2 playerScreenSpace = Camera.main.WorldToScreenPoint(transform.position);
+            Vector2 mouseDelta = (Vector2)Input.mousePosition - playerScreenSpace;
 
             response.InputDirection = mouseDelta.normalized;
         }
