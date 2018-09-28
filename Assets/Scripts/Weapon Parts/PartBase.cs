@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class PartBase : ScriptableObject {
 
-	
+    public const string MENU_ROOT = "Parts/";
+    public const int MENU_ORDER = 105;
 }
