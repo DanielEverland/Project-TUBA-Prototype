@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponHandler : MonoBehaviour {
+public class AttackHandler : MonoBehaviour {
 
     [SerializeField]
     private GameEvent OnFire;
