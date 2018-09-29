@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224502699155294174}
   - component: {fileID: 114261402277735748}
+  - component: {fileID: 114465227486405484}
   m_Layer: 5
   m_Name: Weapon Slots
   m_TagString: Untagged
@@ -81,6 +82,24 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
   m_ChildControlHeight: 1
+--- !u!114 &114465227486405484
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1106715824687314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f322efa2b43e3a6409ec07f0662fe9b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weaponSlotCount:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: d251c8038738759408980be6f44b9d05, type: 2}
+  _weaponSlotPrefab: {fileID: 1075026059851048, guid: 05272a1fc2230ac46b0015c7169d6a7e,
+    type: 2}
+  _parent: {fileID: 224502699155294174}
 --- !u!114 &114759258488766408
 MonoBehaviour:
   m_ObjectHideFlags: 1

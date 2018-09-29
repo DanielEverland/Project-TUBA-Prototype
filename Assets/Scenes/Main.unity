@@ -439,34 +439,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &906317061 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1106715824687314, guid: a3d45f8e5397e294f92e8dbfbe688ac7,
-    type: 2}
-  m_PrefabInternal: {fileID: 1622838938}
---- !u!224 &906317062 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 224502699155294174, guid: a3d45f8e5397e294f92e8dbfbe688ac7,
-    type: 2}
-  m_PrefabInternal: {fileID: 1622838938}
---- !u!114 &906317063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 906317061}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f322efa2b43e3a6409ec07f0662fe9b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _weaponSlotCount:
-    _useConstant: 0
-    _constantValue: 0
-    _variable: {fileID: 11400000, guid: d251c8038738759408980be6f44b9d05, type: 2}
-  _weaponSlotPrefab: {fileID: 1075026059851048, guid: 05272a1fc2230ac46b0015c7169d6a7e,
-    type: 2}
-  _parent: {fileID: 906317062}
 --- !u!1001 &1622838938
 Prefab:
   m_ObjectHideFlags: 0
@@ -563,6 +535,10 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1999963396995022, guid: a3d45f8e5397e294f92e8dbfbe688ac7, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3d45f8e5397e294f92e8dbfbe688ac7, type: 2}
