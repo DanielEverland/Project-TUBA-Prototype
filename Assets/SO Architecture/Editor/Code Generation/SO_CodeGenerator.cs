@@ -1,12 +1,11 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
-public static class SO_CodeGenerator {
-
+public static class SO_CodeGenerator
+{
     static SO_CodeGenerator()
     {
         CreateTargetDirectories();
@@ -70,12 +69,12 @@ public static class SO_CodeGenerator {
 
     private static string[] _templateNames = new string[TYPE_COUNT]
     {
-        "GameEventListenerTemplate.cs",
-        "GameEventTemplate.cs",
-        "ReferenceTemplate.cs",
-        "RuntimeSetTemplate.cs",
-        "UnityEventTemplate.cs",
-        "VariableTemplate.cs"
+        "GameEventListenerTemplate",
+        "GameEventTemplate",
+        "ReferenceTemplate",
+        "RuntimeSetTemplate",
+        "UnityEventTemplate",
+        "VariableTemplate"
     };
 
     private static string[] _targetFileNames = new string[TYPE_COUNT]

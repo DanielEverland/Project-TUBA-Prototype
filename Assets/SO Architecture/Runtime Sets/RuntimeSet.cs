@@ -1,11 +1,39 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RuntimeSet<T> : ScriptableObject, IEnumerable<T>
+public class RuntimeSet<T> : BaseRuntimeSet, IEnumerable<T>
 {
+    public new T this[int index]
+    {
+        get
+        {
+            return _items[index];
+        }
+        set
+        {
+            _items[index] = value;
+        }
+    }
+
     [SerializeField]
     private List<T> _items = new List<T>();
+
+    public override IList Items
+    {
+        get
+        {
+            return _items;
+        }
+    }
+    public override Type Type
+    {
+        get
+        {
+            return typeof(T);
+        }
+    }
 
     public void Add(T obj)
     {
@@ -19,7 +47,7 @@ public class RuntimeSet<T> : ScriptableObject, IEnumerable<T>
     }
     IEnumerator IEnumerable.GetEnumerator()
     {
-        return GetEnumerator();        
+        return GetEnumerator();
     }
     public IEnumerator<T> GetEnumerator()
     {

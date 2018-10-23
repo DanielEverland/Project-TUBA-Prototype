@@ -1,23 +1,8 @@
 ﻿using UnityEngine;
 
-public class BaseVariable<T> : ScriptableObject
+public abstract class BaseVariable<T> : SOArchitectureBaseObject
 {
-    public T Value
-    {
-        get
-        {
-            return _value;
-        }
-        set
-        {
-            _value = value;
-        }
-    }
-
-#if UNITY_EDITOR
-    [Multiline]
-    public string DeveloperDescription = "";
-#endif    
+    public T Value { get { return _value; } set { _value = value; } }
 
     [SerializeField]
     protected T _value;

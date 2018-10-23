@@ -1,27 +1,56 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 
-#if UNITY_EDITOR
-using System;
-#endif
-
-[CreateAssetMenu(
-    fileName = "GameEvent.asset",
-    menuName = SOArchitecture_Utility.GAME_EVENT + "Void",
-    order = SOArchitecture_Utility.ASSET_MENU_ORDER)]
-public class GameEvent : ScriptableObject
+public abstract class GameEventBase<T> : SOArchitectureBaseObject, IGameEvent<T>, IStackTraceObject
 {
-#if UNITY_EDITOR
-    public List<GameEventStackTrace> StackTraces = new List<GameEventStackTrace>();
-#endif
+    private readonly List<IGameEventListener<T>> _listeners = new List<IGameEventListener<T>>();
 
+    public List<StackTraceEntry> StackTraces { get { return _stackTraces; } }
+    private List<StackTraceEntry> _stackTraces = new List<StackTraceEntry>();
+
+    public void AddStackTrace()
+    {
+        _stackTraces.Insert(0, StackTraceEntry.Create());
+    }
+    public void AddStackTrace(object value)
+    {
+        _stackTraces.Insert(0, StackTraceEntry.Create(value));
+    }
+    public void Raise(T value)
+    {
+        AddStackTrace(value);
+
+        for (int i = _listeners.Count - 1; i >= 0; i--)
+            _listeners[i].OnEventRaised(value);
+    }
+    public void RegisterListener(IGameEventListener<T> listener)
+    {
+        if (!_listeners.Contains(listener))
+            _listeners.Add(listener);
+    }
+    public void UnregisterListener(IGameEventListener<T> listener)
+    {
+        if (_listeners.Contains(listener))
+            _listeners.Remove(listener);
+    }
+}
+public abstract class GameEventBase : SOArchitectureBaseObject, IGameEvent, IStackTraceObject
+{
     private readonly List<IGameEventListener> _listeners = new List<IGameEventListener>();
 
+    public List<StackTraceEntry> StackTraces { get { return _stackTraces; } }
+    private List<StackTraceEntry> _stackTraces = new List<StackTraceEntry>();
+
+    public void AddStackTrace()
+    {
+        _stackTraces.Insert(0, StackTraceEntry.Create());
+    }
+    public void AddStackTrace(object value)
+    {
+        _stackTraces.Insert(0, StackTraceEntry.Create(value));
+    }
     public void Raise()
     {
-#if UNITY_EDITOR
-        StackTraces.Insert(0, GameEventStackTrace.Create());
-#endif
+        AddStackTrace();
 
         for (int i = _listeners.Count - 1; i >= 0; i--)
             _listeners[i].OnEventRaised();
