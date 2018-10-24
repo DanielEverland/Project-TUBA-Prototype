@@ -6,8 +6,5 @@ using UnityEngine.UI;
 
 public class TriggerPartSelector : PartSelectorBase
 {
-    protected override void OnSelectionChanged(int index)
-    {
-        Owner.ChangePart(PartLoader.TriggerData.ElementAt(index));
-    }
+    protected override IEnumerable<PartBase> AvailableParts { get { return PartLoader.TriggerData; } }
 }

@@ -9,15 +9,19 @@ public abstract class PartSelectorBase : MonoBehaviour
     [SerializeField]
     private Dropdown _dropDown;
 
-    protected WeaponSlotElement Owner;
+    private WeaponSlotElement _owner;
 
-    protected abstract void OnSelectionChanged(int index);
-
+    protected abstract IEnumerable<PartBase> AvailableParts { get; }
+    
     public void Initialize(WeaponSlotElement owner)
     {
-        Owner = owner;
+        _owner = owner;
 
-        _dropDown.options = new List<Dropdown.OptionData>(PartLoader.TriggerData.Select(x => new Dropdown.OptionData(x.name)));
+        _dropDown.options = new List<Dropdown.OptionData>(AvailableParts.Select(x => new Dropdown.OptionData(x.name)));
         _dropDown.onValueChanged.AddListener(OnSelectionChanged);
+    }
+    private void OnSelectionChanged(int index)
+    {
+        _owner.ChangePart(AvailableParts.ElementAt(index));
     }
 }

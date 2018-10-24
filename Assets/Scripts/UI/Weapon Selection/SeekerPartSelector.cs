@@ -5,8 +5,5 @@ using UnityEngine;
 
 public class SeekerPartSelector : PartSelectorBase
 {
-    protected override void OnSelectionChanged(int index)
-    {
-        Owner.ChangePart(PartLoader.SeekerData.ElementAt(index));
-    }
+    protected override IEnumerable<PartBase> AvailableParts { get { return PartLoader.SeekerData; } }
 }
