@@ -1,3 +1,0 @@
-﻿public sealed class $TYPE_NAME$GameEventListener : BaseGameEventListener<$TYPE$, $TYPE_NAME$GameEvent, $TYPE_NAME$UnityEvent>
-{
-}
