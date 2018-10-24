@@ -59,7 +59,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &114261402277735748
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -97,7 +97,7 @@ MonoBehaviour:
     _useConstant: 0
     _constantValue: 0
     _variable: {fileID: 11400000, guid: d251c8038738759408980be6f44b9d05, type: 2}
-  _weaponSlotPrefab: {fileID: 1075026059851048, guid: 05272a1fc2230ac46b0015c7169d6a7e,
+  _weaponSlotPrefab: {fileID: 114108655217783310, guid: 05272a1fc2230ac46b0015c7169d6a7e,
     type: 2}
   _parent: {fileID: 224502699155294174}
 --- !u!114 &114759258488766408

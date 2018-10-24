@@ -14,19 +14,9 @@ public class Weapon : IEquatable<Weapon> {
 
     private Guid _guid;
     
-    public TriggerData TriggerData
-    {
-        get
-        {
-            return _triggerData;
-        }
-        set
-        {
-            _triggerData = value;
-        }
-    }
-
-    private TriggerData _triggerData;
+    public TriggerData TriggerData { get; set; }
+    public EventData EventData { get; set; }
+    public SeekerData SeekerData { get; set; }
 
     public bool Equals(Weapon other)
     {

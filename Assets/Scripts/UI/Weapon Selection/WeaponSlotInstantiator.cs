@@ -7,7 +7,7 @@ public class WeaponSlotInstantiator : MonoBehaviour {
     [SerializeField]
     private IntReference _weaponSlotCount;
     [SerializeField]
-    private GameObject _weaponSlotPrefab;
+    private WeaponSlotElement _weaponSlotPrefab;
     [SerializeField]
     private Transform _parent;
 
@@ -15,8 +15,10 @@ public class WeaponSlotInstantiator : MonoBehaviour {
     {
         for (int i = 0; i < _weaponSlotCount.Value; i++)
         {
-            GameObject instance = Instantiate(_weaponSlotPrefab);
+            WeaponSlotElement instance = Instantiate(_weaponSlotPrefab);
             instance.transform.SetParent(_parent);
+
+            instance.Initialize(i);
         }
     }
 }

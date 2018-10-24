@@ -5,14 +5,40 @@ using UnityEngine;
 public class WeaponSlotElement : MonoBehaviour {
 
     [SerializeField]
-    private TriggerSelector _triggerSelector;
+    private List<PartSelectorBase> _triggerSelectors;
+    [SerializeField]
+    private WeaponContainer _weaponContainer;
 
-    private void Awake()
+#if UNITY_EDITOR
+    [SerializeField]
+    private int _debugWeaponIndex = 0;
+#endif
+
+    private int? _weaponIndex = null;
+    
+    private void Start()
     {
-        _triggerSelector.Initialize(this);
+        for (int i = 0; i < _triggerSelectors.Count; i++)
+        {
+            _triggerSelectors[i].Initialize(this);
+        }
     }
-    public void ChangeTrigger(TriggerData trigger)
+    public void Initialize(int weaponIndex)
     {
-        Debug.Log(trigger);
+        _weaponIndex = weaponIndex;
+    }
+    public void ChangePart(PartBase partdata)
+    {
+#if UNITY_EDITOR
+        if(_weaponIndex == null)
+        {
+            Debug.LogWarning("Not initialized, using debug weapon index");
+
+            _weaponContainer.ChangePart(_debugWeaponIndex, partdata);
+            return;
+        }
+#endif
+
+        _weaponContainer.ChangePart(_weaponIndex.Value, partdata);
     }
 }
