@@ -11,6 +11,6 @@ public class PlayerHealth : MonoBehaviour {
 
     private void Awake()
     {
-        _currentHealth.Value = _maxHealth;
+        _currentHealth.Value = _maxHealth.Value;
     }
 }

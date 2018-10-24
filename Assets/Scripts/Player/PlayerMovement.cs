@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour {
     }
     private void Move(Vector2 direction)
     {
-        _characterController.Move(direction * _movementSpeed * Time.deltaTime);
+        _characterController.Move(direction * _movementSpeed.Value * Time.deltaTime);
     }
     private Vector2 PollInput()
     {
