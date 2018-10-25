@@ -8,6 +8,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb33bce302b716d468c075aa8a07ae14, type: 3}
-  m_Name: Seeker 1
+  m_Script: {fileID: 11500000, guid: d13adf41c76192a41918d853e8f4597e, type: 3}
+  m_Name: WeaponInventory
   m_EditorClassIdentifier: 
+  DeveloperDescription:
+    _value: 
+  _items:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

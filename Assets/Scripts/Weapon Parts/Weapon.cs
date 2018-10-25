@@ -1,45 +1,49 @@
 ﻿using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
 /// Contains all data for a given weapon
-/// </summary>
-public class Weapon : IEquatable<Weapon> {
-
-    public Weapon()
-    {
-        _guid = new Guid();
-    }
-
-    private Guid _guid;
+/// </summary>[
+[Serializable]
+public class Weapon : ScriptableObject {
     
-    public TriggerData TriggerData { get; set; }
-    public EventData EventData { get; set; }
-    public SeekerData SeekerData { get; set; }
+    public TriggerData TriggerData { get { return _triggerData; } set { _triggerData = value; } }
+    public EventData EventData { get { return _eventData; } set { _eventData = value; } }
+    public SeekerData SeekerData { get { return _seekerData; } set { _seekerData = value; } }
 
-    public bool Equals(Weapon other)
+    [SerializeField]
+    private TriggerData _triggerData;
+    [SerializeField]
+    private EventData _eventData;
+    [SerializeField]
+    private SeekerData _seekerData;
+    
+    public void ChangePart(PartBase part)
     {
-        return other._guid == this._guid;
-    }
-    public override bool Equals(object obj)
-    {
-        if (obj == null)
-            return false;
-
-        if(obj is Weapon)
+        if(part is TriggerData)
         {
-            return Equals(obj as Weapon);
+            TriggerData = part as TriggerData;
         }
-
-        return false;
+        else if(part is EventData)
+        {
+            EventData = part as EventData;
+        }
+        else if(part is SeekerData)
+        {
+            SeekerData = part as SeekerData;
+        }
+        else
+        {
+            throw new NotImplementedException();
+        }
     }
-    public override int GetHashCode()
+    public void AssignRandomParts()
     {
-        return _guid.GetHashCode();
-    }
-    public override string ToString()
-    {
-        return base.ToString();
+        _triggerData = PartLoader.TriggerData.Random();
+        _eventData = PartLoader.EventData.Random();
+        _seekerData = PartLoader.SeekerData.Random();
     }
 }

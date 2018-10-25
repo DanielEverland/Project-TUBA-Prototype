@@ -5,7 +5,21 @@ using UnityEngine;
 public class AttackHandler : MonoBehaviour {
 
     [SerializeField]
-    private GameEvent OnFire;
+    private GameEvent _onFire;
+    [SerializeField]
+    private WeaponVariable _selectedWeapon;
+    [SerializeField]
+    private Transform _weaponTransform;
+
+    private bool CanFire
+    {
+        get
+        {
+            return Time.time - _lastFireTime > _selectedWeapon.Value.TriggerData.Cooldown;
+        }        
+    }
+
+    private float _lastFireTime = float.MinValue;
 
     private void Update()
     {
@@ -13,10 +27,30 @@ public class AttackHandler : MonoBehaviour {
 
         if (response.HasInput)
         {
-            Debug.DrawLine(transform.position, transform.position + (Vector3)(response.InputDirection.normalized * 10), Color.red);
+            Vector3 targetPosition = transform.position + (Vector3)(response.InputDirection.normalized * 10);
 
-            OnFire.Raise();
+            Debug.DrawLine(transform.position, targetPosition, Color.red);
+
+            AngleWeapon(response);
+
+            if (CanFire)
+            {
+                Fire();
+            }
         }        
+    }
+    private void AngleWeapon(InputResponse response)
+    {
+        Vector3 direction = response.InputDirection.normalized;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        _weaponTransform.transform.eulerAngles = new Vector3(0, 0, angle);
+    }
+    private void Fire()
+    {
+        _lastFireTime = Time.time;
+
+        _onFire.Raise();
     }
     private InputResponse PollInput()
     {

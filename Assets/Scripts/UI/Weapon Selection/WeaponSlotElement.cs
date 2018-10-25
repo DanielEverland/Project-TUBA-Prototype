@@ -7,7 +7,7 @@ public class WeaponSlotElement : MonoBehaviour {
     [SerializeField]
     private List<PartSelectorBase> _triggerSelectors;
     [SerializeField]
-    private WeaponContainer _weaponContainer;
+    private WeaponSet _weaponInventory;
 
 #if UNITY_EDITOR
     [SerializeField]
@@ -34,11 +34,11 @@ public class WeaponSlotElement : MonoBehaviour {
         {
             Debug.LogWarning("Not initialized, using debug weapon index");
 
-            _weaponContainer.ChangePart(_debugWeaponIndex, partdata);
+            _weaponInventory[_debugWeaponIndex].ChangePart(partdata);
             return;
         }
 #endif
 
-        _weaponContainer.ChangePart(_weaponIndex.Value, partdata);
+        _weaponInventory[_weaponIndex.Value].ChangePart(partdata);
     }
 }

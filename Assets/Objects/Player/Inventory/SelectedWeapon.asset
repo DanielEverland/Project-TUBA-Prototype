@@ -8,6 +8,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb33bce302b716d468c075aa8a07ae14, type: 3}
-  m_Name: Seeker 1
+  m_Script: {fileID: 11500000, guid: 0108f01674caf0a459de6c08958d348e, type: 3}
+  m_Name: SelectedWeapon
   m_EditorClassIdentifier: 
+  DeveloperDescription:
+    _value: 'RAISE: OnWeaponSelectionChanged'
+  _value: {fileID: 0}

@@ -11,4 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0312c675ff5e22d4d9b800480cf64425, type: 3}
   m_Name: Trigger 2
   m_EditorClassIdentifier: 
-  _cooldown: 0.6
+  _cooldown: 2
