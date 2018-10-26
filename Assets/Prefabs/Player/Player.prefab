@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 4419691903540908}
   - component: {fileID: 114819420585879892}
   - component: {fileID: 114111850741108004}
+  - component: {fileID: 114995828028148960}
   m_Layer: 0
   m_Name: WeaponHandler
   m_TagString: Untagged
@@ -190,7 +191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _alignPosition: 1
   _alignRotation: 1
-  _prefab: {fileID: 0}
+  _prefab: {fileID: 1416316717736806, guid: f54225c717587264aba1b8d1a613ce4c, type: 2}
 --- !u!114 &114819420585879892
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -225,9 +226,37 @@ MonoBehaviour:
   _event: {fileID: 11400000, guid: 52f5ff1cbaf5188409485dbb9ef25b05, type: 2}
   _response:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114685026488056694}
+        m_MethodName: Spawn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114995828028148960
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1628267337866814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc313932f2315ff449c0c172fe4d4fc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _selectedWeapon: {fileID: 11400000, guid: fe74e8c13909c9247b202b6ffbaf66fc, type: 2}
+  _weaponInventory: {fileID: 11400000, guid: b06d2ff2f6171314398fc57adfb3bf39, type: 2}
+  _onWeaponSelectionUpdated: {fileID: 11400000, guid: 0198808c642c932418d34b2b4cc66b9e,
+    type: 2}
+  _useScrollWheel: 1
+  _useAlphaNumericKeys: 1
 --- !u!143 &143440246865325354
 CharacterController:
   m_ObjectHideFlags: 1
