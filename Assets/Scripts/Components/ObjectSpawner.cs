@@ -9,7 +9,7 @@ public class ObjectSpawner : MonoBehaviour
     [SerializeField]
     private bool _alignRotation = true;
     [SerializeField]
-    private GameObject _prefab;
+    private GameObject _prefab = null;
 
     public void Spawn()
     {
