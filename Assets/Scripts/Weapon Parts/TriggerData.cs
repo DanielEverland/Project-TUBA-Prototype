@@ -10,21 +10,21 @@ public class TriggerData : PartBase {
     public float Power { get { return _power; } }
     public float Capacity { get { return _capacity; } }
     public float Quantity { get { return _quantity; } }
-    public float Charge
+    public float ChargeTime
     {
         get
         {
             if (!UseCharge)
                 return 0;
 
-            return _charge;
+            return _chargeTime;
         }
     }
 
     [SerializeField]
     private bool _useCharge = false;
     [SerializeField]
-    private float _charge = 0;
+    private float _chargeTime = 0;
     [SerializeField]
     private float _cooldown = 0.3f;
     [SerializeField]

@@ -12,6 +12,8 @@ public class WeaponSelector : MonoBehaviour
     [SerializeField]
     private WeaponGameEvent _onWeaponSelectionUpdated = null;
     [SerializeField]
+    private FloatVariable _chargeTimeVariable = null;
+    [SerializeField]
     private bool _useScrollWheel = true;
     [SerializeField]
     private bool _useAlphaNumericKeys = true;
@@ -101,6 +103,12 @@ public class WeaponSelector : MonoBehaviour
 
         _selectedWeapon.Value = newSelection;
 
+        SetProperties(newSelection);
+
         _onWeaponSelectionUpdated.Raise(_selectedWeapon.Value);
+    }
+    private void SetProperties(Weapon newSelection)
+    {
+        _chargeTimeVariable.Value = newSelection.TriggerData.ChargeTime;
     }
 }

@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 114819420585879892}
   - component: {fileID: 114111850741108004}
   - component: {fileID: 114995828028148960}
+  - component: {fileID: 114168640975307782}
   m_Layer: 0
   m_Name: WeaponHandler
   m_TagString: Untagged
@@ -162,6 +163,24 @@ MonoBehaviour:
   _onFire: {fileID: 11400000, guid: 52f5ff1cbaf5188409485dbb9ef25b05, type: 2}
   _selectedWeapon: {fileID: 11400000, guid: fe74e8c13909c9247b202b6ffbaf66fc, type: 2}
   _weaponTransform: {fileID: 4399202113731928}
+  _chargeTime:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: 45a3f61b727989f48bf1addac9a9e55d, type: 2}
+--- !u!114 &114168640975307782
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1628267337866814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a6173e52fe23fb4e87360c5ab27453e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _target: {fileID: 11400000, guid: 45a3f61b727989f48bf1addac9a9e55d, type: 2}
+  _source: {fileID: 11400000, guid: ac05df9cb2096404eafa824d404b66a5, type: 2}
+  _resetCallback: 0
 --- !u!114 &114554613205426316
 MonoBehaviour:
   m_ObjectHideFlags: 1

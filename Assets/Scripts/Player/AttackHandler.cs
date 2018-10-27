@@ -10,6 +10,8 @@ public class AttackHandler : MonoBehaviour {
     private WeaponVariable _selectedWeapon;
     [SerializeField]
     private Transform _weaponTransform;
+    [SerializeField]
+    private FloatReference _chargeTime;
 
     private bool CanFire
     {
@@ -20,11 +22,14 @@ public class AttackHandler : MonoBehaviour {
     }
 
     private float _lastFireTime = float.MinValue;
+    private float? _fireDownTime = null;
 
     private void Update()
     {
         InputResponse response = PollInput();
 
+        HandleCharge(response);
+        
         if (response.HasInput)
         {
             Vector3 targetPosition = transform.position + (Vector3)(response.InputDirection.normalized * 10);
@@ -37,7 +42,28 @@ public class AttackHandler : MonoBehaviour {
             {
                 Fire();
             }
-        }        
+        }
+        else
+        {
+            _fireDownTime = null;
+        }
+    }
+    private void HandleCharge(InputResponse response)
+    {
+        if (!_selectedWeapon.Value.TriggerData.UseCharge)
+        {
+            _chargeTime.Value = 0;
+            return;
+        }
+        else if (response.HasInput)
+        {
+            float desiredValue = response.HasInput ? Time.time - _fireDownTime.Value : 0;
+            _chargeTime.Value = Mathf.Clamp(desiredValue, 0, _selectedWeapon.Value.TriggerData.ChargeTime);
+        }
+        else
+        {
+            _chargeTime.Value = 0;
+        }
     }
     private void AngleWeapon(InputResponse response)
     {
@@ -58,6 +84,9 @@ public class AttackHandler : MonoBehaviour {
 
         PollControllerInput(ref response);
         PollMouseInput(ref response);
+
+        if (response.HasInput && _fireDownTime == null)
+            _fireDownTime = Time.time;
 
         return response;
     }
