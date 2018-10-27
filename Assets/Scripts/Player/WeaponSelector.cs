@@ -18,6 +18,14 @@ public class WeaponSelector : MonoBehaviour
     [SerializeField]
     private bool _useAlphaNumericKeys = true;
     
+    private void Start()
+    {
+        if(_weaponInventory.Count > 0)
+        {
+            _selectedWeapon.Value = null;
+            SelectWeapon(0);
+        }            
+    }
     private void Update()
     {
         if (_useScrollWheel)
