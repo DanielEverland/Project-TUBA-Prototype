@@ -167,6 +167,10 @@ MonoBehaviour:
     _useConstant: 0
     _constantValue: 0
     _variable: {fileID: 11400000, guid: 45a3f61b727989f48bf1addac9a9e55d, type: 2}
+  _cooldownTime:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 0}
 --- !u!114 &114168640975307782
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -274,6 +278,13 @@ MonoBehaviour:
   _weaponInventory: {fileID: 11400000, guid: b06d2ff2f6171314398fc57adfb3bf39, type: 2}
   _onWeaponSelectionUpdated: {fileID: 11400000, guid: 0198808c642c932418d34b2b4cc66b9e,
     type: 2}
+  _chargeTimeVariable: {fileID: 11400000, guid: 21a5b1daf7ed1a24b9e35f7e6ec32cd2,
+    type: 2}
+  _capacityVariable: {fileID: 11400000, guid: 67f211b93f6f5354390bbb52bfb99209, type: 2}
+  _cooldownTimeVariable: {fileID: 11400000, guid: c5fd77dcb9a17c943ba72e5cfba852bd,
+    type: 2}
+  _quantityVariable: {fileID: 11400000, guid: a753a20473e3c4c4cb83ee8398b01d4e, type: 2}
+  _powerVariable: {fileID: 11400000, guid: 764809a0e81478b45a7bebeee837db3c, type: 2}
   _useScrollWheel: 1
   _useAlphaNumericKeys: 1
 --- !u!143 &143440246865325354

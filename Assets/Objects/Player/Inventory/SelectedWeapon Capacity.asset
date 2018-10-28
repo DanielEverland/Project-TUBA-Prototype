@@ -8,12 +8,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0312c675ff5e22d4d9b800480cf64425, type: 3}
-  m_Name: Trigger 1
+  m_Script: {fileID: 11500000, guid: f9377ffeb64ba30478a995a8ffc78ae8, type: 3}
+  m_Name: SelectedWeapon Capacity
   m_EditorClassIdentifier: 
-  _useCharge: 1
-  _chargeTime: 1
-  _cooldown: 0
-  _power: 10
-  _capacity: 10
-  _quantity: 1
+  DeveloperDescription:
+    _value: 
+  _value: 0

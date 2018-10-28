@@ -742,11 +742,23 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114995828028148960, guid: bc71f2cb096a4ab47974bfbe4e79116d,
+    - target: {fileID: 114111850741108004, guid: bc71f2cb096a4ab47974bfbe4e79116d,
         type: 2}
-      propertyPath: _chargeTimeVariable
+      propertyPath: _cooldownTime._variable
+      value: 
+      objectReference: {fileID: 11400000, guid: c5fd77dcb9a17c943ba72e5cfba852bd,
+        type: 2}
+    - target: {fileID: 114111850741108004, guid: bc71f2cb096a4ab47974bfbe4e79116d,
+        type: 2}
+      propertyPath: _weaponChargeTime._variable
       value: 
       objectReference: {fileID: 11400000, guid: 21a5b1daf7ed1a24b9e35f7e6ec32cd2,
+        type: 2}
+    - target: {fileID: 114111850741108004, guid: bc71f2cb096a4ab47974bfbe4e79116d,
+        type: 2}
+      propertyPath: _currentCharge._variable
+      value: 
+      objectReference: {fileID: 11400000, guid: 45a3f61b727989f48bf1addac9a9e55d,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc71f2cb096a4ab47974bfbe4e79116d, type: 2}
@@ -829,7 +841,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1659526119}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []

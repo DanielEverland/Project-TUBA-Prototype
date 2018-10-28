@@ -11,59 +11,103 @@ public class AttackHandler : MonoBehaviour {
     [SerializeField]
     private Transform _weaponTransform;
     [SerializeField]
-    private FloatReference _chargeTime;
+    private FloatReference _weaponChargeTime;
+    [SerializeField]
+    private FloatReference _currentCharge;
+    [SerializeField]
+    private FloatReference _cooldownTime;
 
-    private bool CanFire
+    private float CurrentCharge { get { return _currentCharge.Value; } set { _currentCharge.Value = value; } }
+    private float CooldownTime { get { return _cooldownTime.Value; } }
+    private float ChargeTime { get { return _weaponChargeTime.Value; } }
+    private bool OnCooldown
     {
         get
         {
-            return Time.time - _lastFireTime > _selectedWeapon.Value.TriggerData.Cooldown;
-        }        
+            return Time.time - _lastFireTime < CooldownTime;
+        }
     }
 
     private float _lastFireTime = float.MinValue;
     private float? _fireDownTime = null;
+    private Vector2 _direction = default(Vector2);
+    private InputResponse _previousResponse = default(InputResponse);
+
+    private const float DEBUG_RAY_LENGTH = 3;
 
     private void Update()
     {
         InputResponse response = PollInput();
-
-        HandleCharge(response);
+                
+        PollWeaponFire(response);
+        ToggleFireDown(response);
         
-        if (response.HasInput)
+        _previousResponse = response;
+    }
+    private void LateUpdate()
+    {
+        DrawDebug();
+    }
+    private void DrawDebug()
+    {
+        Debug.DrawRay(transform.position, _direction * DEBUG_RAY_LENGTH, Color.cyan);
+    }
+    private void PollWeaponFire(InputResponse response)
+    {
+        if (_selectedWeapon.Value.TriggerData.UseCharge)
         {
-            Vector3 targetPosition = transform.position + (Vector3)(response.InputDirection.normalized * 10);
+            PollChargeWeapon(response);
+        }
+        else
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+    private void PollChargeWeapon(InputResponse response)
+    {        
+        if(CurrentCharge >= ChargeTime && response.FireButtonUp)
+        {
+            Fire();
+        }
 
-            Debug.DrawLine(transform.position, targetPosition, Color.red);
-
-            AngleWeapon(response);
-
-            if (CanFire)
-            {
-                Fire();
-            }
+        if (response.FireButtonDown && !OnCooldown)
+        {
+            ChargeWeapon();
+        }
+        else
+        {
+            ResetCharge();
+        }
+    }
+    private void ChargeWeapon()
+    {
+        float desiredCharge = CurrentCharge + Time.deltaTime;
+        CurrentCharge = Mathf.Clamp(desiredCharge, 0, ChargeTime);
+    }
+    private void ToggleFireDown(InputResponse response)
+    {
+        if (response.FireButtonDown && _fireDownTime == null)
+        {
+            _fireDownTime = Time.time;
         }
         else
         {
             _fireDownTime = null;
         }
     }
-    private void HandleCharge(InputResponse response)
+    private InputResponse PollInput()
     {
-        if (!_selectedWeapon.Value.TriggerData.UseCharge)
+        InputResponse response = InputResponse.Create(_previousResponse, gameObject);
+
+        if (response.FireButtonDown && _fireDownTime == null)
+            _fireDownTime = Time.time;
+
+        if (response.HasDirection)
         {
-            _chargeTime.Value = 0;
-            return;
-        }
-        else if (response.HasInput)
-        {
-            float desiredValue = response.HasInput ? Time.time - _fireDownTime.Value : 0;
-            _chargeTime.Value = Mathf.Clamp(desiredValue, 0, _selectedWeapon.Value.TriggerData.ChargeTime);
-        }
-        else
-        {
-            _chargeTime.Value = 0;
-        }
+            _direction = response.InputDirection;
+        }            
+
+        return response;
     }
     private void AngleWeapon(InputResponse response)
     {
@@ -72,51 +116,24 @@ public class AttackHandler : MonoBehaviour {
 
         _weaponTransform.transform.eulerAngles = new Vector3(0, 0, angle);
     }
+    private void ResetCharge()
+    {
+        CurrentCharge = 0;
+    }
     private void Fire()
     {
-        _lastFireTime = Time.time;
+        _lastFireTime = Time.time;        
 
         _onFire.Raise();
     }
-    private InputResponse PollInput()
-    {
-        InputResponse response = default(InputResponse);
-
-        PollControllerInput(ref response);
-        PollMouseInput(ref response);
-
-        if (response.HasInput && _fireDownTime == null)
-            _fireDownTime = Time.time;
-
-        return response;
-    }
-    private void PollControllerInput(ref InputResponse response)
-    {
-        Vector2 rightAnalogue = new Vector2()
-        {
-            x = Input.GetAxis("Right Horizontal"),
-            y = Input.GetAxis("Right Vertical"),
-        };
-
-        if(rightAnalogue != default(Vector2))
-        {
-            response.InputDirection = rightAnalogue.normalized;
-        }
-    }
-    private void PollMouseInput(ref InputResponse response)
-    {
-        if (Input.GetKey(KeyCode.Mouse0))
-        {
-            Vector2 playerScreenSpace = Camera.main.WorldToScreenPoint(transform.position);
-            Vector2 mouseDelta = (Vector2)Input.mousePosition - playerScreenSpace;
-
-            response.InputDirection = mouseDelta.normalized;
-        }
-    }
+    
 
     private struct InputResponse
     {
-        public bool HasInput { get { return _hasInput; } }
+        public bool FireButtonDown { get { return _controllerFireButtonDown || _keyboardFireButtonDown; } }
+        public bool FireButtonUp { get { return _controllerFireButtonUp || _keyboardFireButtonUp; } }
+        public bool HasDirection { get; private set; }
+        public Vector2 MousePosition { get; private set; }
         public Vector2 InputDirection
         {
             get
@@ -126,16 +143,71 @@ public class AttackHandler : MonoBehaviour {
             set
             {
                 _inputDirection = value;
-                _hasInput = true;
+                HasDirection = true;
             }
         }
 
-        private bool _hasInput;
         private Vector2 _inputDirection;
+        private bool _controllerFireButtonDown;
+        private bool _controllerFireButtonUp;
+        private bool _keyboardFireButtonDown;
+        private bool _keyboardFireButtonUp;
 
-        public static implicit operator bool(InputResponse response)
+        private const KeyCode FIRE_BUTTON_KEYBOARD = KeyCode.Mouse0;
+
+        public static InputResponse Create(InputResponse previous, GameObject player)
         {
-            return response.HasInput;
+            InputResponse response = default(InputResponse);
+
+            response.PollControllerInput(previous);
+            response.PollMouseInput(previous, player);
+
+            return response;
+        }
+        private void PollControllerInput(InputResponse previous)
+        {
+            // Direction.
+            Vector2 rightAnalogue = new Vector2()
+            {
+                x = Input.GetAxis("Right Horizontal"),
+                y = Input.GetAxis("Right Vertical"),
+            };
+
+            if (rightAnalogue != default(Vector2))
+            {
+                InputDirection = rightAnalogue.normalized;
+            }
+
+            // Fire button.
+            if (ControllerFireButtonDown())
+                _controllerFireButtonDown = true;
+
+            if(previous._controllerFireButtonDown && !_controllerFireButtonDown)
+                _controllerFireButtonUp = true;
+        }
+        private void PollMouseInput(InputResponse previous, GameObject player)
+        {
+            MousePosition = Input.mousePosition;
+
+            // Fire button.
+            if(Input.GetKey(FIRE_BUTTON_KEYBOARD) || Input.GetKeyDown(FIRE_BUTTON_KEYBOARD))
+                _keyboardFireButtonDown = true;
+
+            if(Input.GetKeyUp(FIRE_BUTTON_KEYBOARD))
+                _keyboardFireButtonUp = true;
+
+            // Direction.
+            if (MousePosition != previous.MousePosition)
+            {
+                Vector2 playerScreenSpace = Camera.main.WorldToScreenPoint(player.transform.position);
+                Vector2 mouseDelta = (Vector2)Input.mousePosition - playerScreenSpace;
+
+                InputDirection = mouseDelta.normalized;
+            }
+        }
+        private static bool ControllerFireButtonDown()
+        {
+            return Input.GetAxis("Right Trigger") > 0;
         }
     }
 }
