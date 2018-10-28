@@ -20,6 +20,10 @@ public class AttackHandler : MonoBehaviour {
     private FloatReference _currentCooldown;
     [SerializeField]
     private BoolReference _useCharge;
+    [SerializeField]
+    private Transform _weaponDirection;
+    [SerializeField]
+    private ProjectileBase _projectile;
 
     private bool UseCharge { get { return _useCharge.Value; } }
     private float CurrentCooldown { get { return _currentCooldown.Value; } set { _currentCooldown.Value = value; } }
@@ -138,7 +142,13 @@ public class AttackHandler : MonoBehaviour {
     }
     private void Fire()
     {
-        _lastFireTime = Time.time;        
+        _lastFireTime = Time.time;
+
+        ProjectileBase instance = Instantiate(_projectile);
+        instance.Initialize(_selectedWeapon.Value);
+
+        instance.transform.position = _weaponDirection.position;
+        instance.transform.rotation = _weaponDirection.rotation;
 
         _onFire.Raise();
     }

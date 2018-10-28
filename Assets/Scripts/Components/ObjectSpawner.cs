@@ -11,7 +11,7 @@ public class ObjectSpawner : MonoBehaviour
     [SerializeField]
     private GameObject _prefab = null;
 
-    public void Spawn()
+    public GameObject Spawn()
     {
         GameObject instance = GameObject.Instantiate(_prefab);
 
@@ -20,5 +20,7 @@ public class ObjectSpawner : MonoBehaviour
 
         if (_alignRotation)
             instance.transform.rotation = transform.rotation;
+
+        return instance;
     }
 }

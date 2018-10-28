@@ -11,4 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb33bce302b716d468c075aa8a07ae14, type: 3}
   m_Name: Seeker 1
   m_EditorClassIdentifier: 
-  _color: {r: 1, g: 1, b: 1, a: 1}
+  _color: {r: 0.10091456, g: 1, b: 0.023584902, a: 1}
