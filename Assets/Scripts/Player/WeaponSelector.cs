@@ -22,6 +22,8 @@ public class WeaponSelector : MonoBehaviour
     [SerializeField]
     private FloatVariable _powerVariable = null;
     [SerializeField]
+    private BoolVariable _useChargeVariable = null;
+    [SerializeField]
     private bool _useScrollWheel = true;
     [SerializeField]
     private bool _useAlphaNumericKeys = true;
@@ -130,5 +132,6 @@ public class WeaponSelector : MonoBehaviour
         _cooldownTimeVariable.Value = newSelection.TriggerData.Cooldown;
         _quantityVariable.Value = newSelection.TriggerData.Quantity;
         _powerVariable.Value = newSelection.TriggerData.Power;
+        _useChargeVariable.Value = newSelection.TriggerData.UseCharge;
     }
 }

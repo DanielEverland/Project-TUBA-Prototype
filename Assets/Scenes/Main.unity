@@ -742,6 +742,18 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114995828028148960, guid: bc71f2cb096a4ab47974bfbe4e79116d,
+        type: 2}
+      propertyPath: _useChargeVariable
+      value: 
+      objectReference: {fileID: 11400000, guid: 4a0f4aa5c1a1cfc4982ce5f9bf35eb4f,
+        type: 2}
+    - target: {fileID: 114111850741108004, guid: bc71f2cb096a4ab47974bfbe4e79116d,
+        type: 2}
+      propertyPath: _useCharge._variable
+      value: 
+      objectReference: {fileID: 11400000, guid: 4a0f4aa5c1a1cfc4982ce5f9bf35eb4f,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc71f2cb096a4ab47974bfbe4e79116d, type: 2}
   m_IsPrefabAsset: 0

@@ -18,7 +18,10 @@ public class AttackHandler : MonoBehaviour {
     private FloatReference _cooldownTime;
     [SerializeField]
     private FloatReference _currentCooldown;
+    [SerializeField]
+    private BoolReference _useCharge;
 
+    private bool UseCharge { get { return _useCharge.Value; } }
     private float CurrentCooldown { get { return _currentCooldown.Value; } set { _currentCooldown.Value = value; } }
     private float CurrentCharge { get { return _currentCharge.Value; } set { _currentCharge.Value = value; } }
     private float CooldownTime { get { return _cooldownTime.Value; } }
@@ -58,23 +61,11 @@ public class AttackHandler : MonoBehaviour {
     private void PollWeaponFire(InputResponse response)
     {
         CalculateCooldown();
-
-        if (_selectedWeapon.Value.TriggerData.UseCharge)
-        {
-            PollChargeWeapon(response);
-        }
-        else
-        {
-            throw new System.NotImplementedException();
-        }
-    }
-    private void CalculateCooldown()
-    {
-        CurrentCooldown = Mathf.Clamp(Time.time - _lastFireTime, 0, CooldownTime);
-    }
-    private void PollChargeWeapon(InputResponse response)
+        PollFireWeapon(response);
+    }    
+    private void PollFireWeapon(InputResponse response)
     {        
-        if(CurrentCharge >= ChargeTime && response.FireButtonUp)
+        if(CurrentCharge >= ChargeTime && !OnCooldown && IsFireButtonPressed(response))
         {
             Fire();
         }
@@ -87,6 +78,21 @@ public class AttackHandler : MonoBehaviour {
         {
             ResetCharge();
         }
+    }
+    private bool IsFireButtonPressed(InputResponse response)
+    {
+        if (UseCharge)
+        {
+            return response.FireButtonUp;
+        }
+        else
+        {
+            return response.FireButtonDown;
+        }
+    }
+    private void CalculateCooldown()
+    {
+        CurrentCooldown = Mathf.Clamp(Time.time - _lastFireTime, 0, CooldownTime);
     }
     private void ChargeWeapon()
     {
