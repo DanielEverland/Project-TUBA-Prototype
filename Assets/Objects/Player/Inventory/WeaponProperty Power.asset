@@ -9,8 +9,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9377ffeb64ba30478a995a8ffc78ae8, type: 3}
-  m_Name: SelectedWeapon CooldownTime
+  m_Name: WeaponProperty Power
   m_EditorClassIdentifier: 
   DeveloperDescription:
     _value: 
-  _value: 0
+  _value: 10
