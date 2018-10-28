@@ -8,5 +8,5 @@ public class SeekerData : PartBase
     public Color Color { get { return _color; } }
 
     [SerializeField]
-    private Color _color;
+    private Color _color = Color.white;
 }
