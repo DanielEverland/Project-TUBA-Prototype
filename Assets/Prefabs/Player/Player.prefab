@@ -246,14 +246,13 @@ MonoBehaviour:
   _weaponInventory: {fileID: 11400000, guid: b06d2ff2f6171314398fc57adfb3bf39, type: 2}
   _onWeaponSelectionUpdated: {fileID: 11400000, guid: 0198808c642c932418d34b2b4cc66b9e,
     type: 2}
-  _chargeTimeVariable: {fileID: 11400000, guid: 21a5b1daf7ed1a24b9e35f7e6ec32cd2,
-    type: 2}
-  _capacityVariable: {fileID: 11400000, guid: 67f211b93f6f5354390bbb52bfb99209, type: 2}
-  _cooldownTimeVariable: {fileID: 11400000, guid: c5fd77dcb9a17c943ba72e5cfba852bd,
-    type: 2}
-  _quantityVariable: {fileID: 11400000, guid: a753a20473e3c4c4cb83ee8398b01d4e, type: 2}
-  _powerVariable: {fileID: 11400000, guid: 764809a0e81478b45a7bebeee837db3c, type: 2}
-  _useChargeVariable: {fileID: 11400000, guid: 4a0f4aa5c1a1cfc4982ce5f9bf35eb4f, type: 2}
+  _ammoCapacity: {fileID: 11400000, guid: 7dea702673ad53c469a345b3101a1a8e, type: 2}
+  _chargeTime: {fileID: 11400000, guid: 21a5b1daf7ed1a24b9e35f7e6ec32cd2, type: 2}
+  _cooldownTime: {fileID: 11400000, guid: c5fd77dcb9a17c943ba72e5cfba852bd, type: 2}
+  _power: {fileID: 11400000, guid: 764809a0e81478b45a7bebeee837db3c, type: 2}
+  _reloadTime: {fileID: 11400000, guid: d91e029b64994714c8e749cd304091fc, type: 2}
+  _seekersToFire: {fileID: 11400000, guid: 65de6590d8c66c64fab97507e32c20dc, type: 2}
+  _useCharge: {fileID: 11400000, guid: 4a0f4aa5c1a1cfc4982ce5f9bf35eb4f, type: 2}
   _useScrollWheel: 1
   _useAlphaNumericKeys: 1
 --- !u!143 &143440246865325354

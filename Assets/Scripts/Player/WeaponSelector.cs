@@ -12,17 +12,19 @@ public class WeaponSelector : MonoBehaviour
     [SerializeField]
     private WeaponGameEvent _onWeaponSelectionUpdated = null;
     [SerializeField]
-    private FloatVariable _chargeTimeVariable = null;
+    private IntVariable _ammoCapacity;
     [SerializeField]
-    private FloatVariable _capacityVariable = null;
+    private FloatVariable _chargeTime;
     [SerializeField]
-    private FloatVariable _cooldownTimeVariable = null;
+    private FloatVariable _cooldownTime;
     [SerializeField]
-    private FloatVariable _quantityVariable = null;
+    private FloatVariable _power;
     [SerializeField]
-    private FloatVariable _powerVariable = null;
+    private FloatVariable _reloadTime;
     [SerializeField]
-    private BoolVariable _useChargeVariable = null;
+    private IntVariable _seekersToFire;
+    [SerializeField]
+    private BoolVariable _useCharge;
     [SerializeField]
     private bool _useScrollWheel = true;
     [SerializeField]
@@ -127,11 +129,12 @@ public class WeaponSelector : MonoBehaviour
     }
     private void SetProperties(Weapon newSelection)
     {
-        _chargeTimeVariable.Value = newSelection.TriggerData.ChargeTime;
-        _capacityVariable.Value = newSelection.TriggerData.Capacity;
-        _cooldownTimeVariable.Value = newSelection.TriggerData.Cooldown;
-        _quantityVariable.Value = newSelection.TriggerData.Quantity;
-        _powerVariable.Value = newSelection.TriggerData.Power;
-        _useChargeVariable.Value = newSelection.TriggerData.UseCharge;
+        _ammoCapacity.Value = newSelection.TriggerData.AmmoCapacity;
+        _chargeTime.Value = newSelection.TriggerData.ChargeTime;
+        _cooldownTime.Value = newSelection.TriggerData.Cooldown;
+        _power.Value = newSelection.TriggerData.Power;
+        _reloadTime.Value = newSelection.TriggerData.ReloadTime;
+        _seekersToFire.Value = newSelection.TriggerData.SeekersToFire;
+        _useCharge.Value = newSelection.TriggerData.UseCharge;
     }
 }

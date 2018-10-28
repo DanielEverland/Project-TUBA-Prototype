@@ -8,8 +8,9 @@ public class TriggerData : PartBase {
     public float Cooldown { get { return _cooldown; } }
     public bool UseCharge { get { return _useCharge; } }
     public float Power { get { return _power; } }
-    public float Capacity { get { return _capacity; } }
-    public float Quantity { get { return _quantity; } }
+    public int AmmoCapacity { get { return _ammoCapacity; } }
+    public float ReloadTime { get { return _reloadTime; } }
+    public int SeekersToFire { get { return _seekersToFire; } }
     public float ChargeTime
     {
         get
@@ -30,7 +31,9 @@ public class TriggerData : PartBase {
     [SerializeField]
     private float _power = 10;
     [SerializeField]
-    private int _capacity = 10;
+    private int _ammoCapacity = 10;
     [SerializeField]
-    private int _quantity = 1;
+    private float _reloadTime = 1;
+    [SerializeField]
+    private int _seekersToFire = 1;
 }

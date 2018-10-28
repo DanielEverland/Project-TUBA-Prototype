@@ -742,6 +742,48 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114995828028148960, guid: bc71f2cb096a4ab47974bfbe4e79116d,
+        type: 2}
+      propertyPath: _ammoCapacity
+      value: 
+      objectReference: {fileID: 11400000, guid: 7dea702673ad53c469a345b3101a1a8e,
+        type: 2}
+    - target: {fileID: 114995828028148960, guid: bc71f2cb096a4ab47974bfbe4e79116d,
+        type: 2}
+      propertyPath: _chargeTime
+      value: 
+      objectReference: {fileID: 11400000, guid: 21a5b1daf7ed1a24b9e35f7e6ec32cd2,
+        type: 2}
+    - target: {fileID: 114995828028148960, guid: bc71f2cb096a4ab47974bfbe4e79116d,
+        type: 2}
+      propertyPath: _cooldownTime
+      value: 
+      objectReference: {fileID: 11400000, guid: c5fd77dcb9a17c943ba72e5cfba852bd,
+        type: 2}
+    - target: {fileID: 114995828028148960, guid: bc71f2cb096a4ab47974bfbe4e79116d,
+        type: 2}
+      propertyPath: _power
+      value: 
+      objectReference: {fileID: 11400000, guid: 764809a0e81478b45a7bebeee837db3c,
+        type: 2}
+    - target: {fileID: 114995828028148960, guid: bc71f2cb096a4ab47974bfbe4e79116d,
+        type: 2}
+      propertyPath: _reloadTime
+      value: 
+      objectReference: {fileID: 11400000, guid: d91e029b64994714c8e749cd304091fc,
+        type: 2}
+    - target: {fileID: 114995828028148960, guid: bc71f2cb096a4ab47974bfbe4e79116d,
+        type: 2}
+      propertyPath: _seekersToFire
+      value: 
+      objectReference: {fileID: 11400000, guid: 65de6590d8c66c64fab97507e32c20dc,
+        type: 2}
+    - target: {fileID: 114995828028148960, guid: bc71f2cb096a4ab47974bfbe4e79116d,
+        type: 2}
+      propertyPath: _useCharge
+      value: 
+      objectReference: {fileID: 11400000, guid: 4a0f4aa5c1a1cfc4982ce5f9bf35eb4f,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc71f2cb096a4ab47974bfbe4e79116d, type: 2}
   m_IsPrefabAsset: 0
