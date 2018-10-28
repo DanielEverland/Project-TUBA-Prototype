@@ -13,6 +13,8 @@ public class FillSetter : MonoBehaviour
     private FloatVariable _max;
     [SerializeField]
     private AnimationCurve _curve = AnimationCurve.Linear(0, 0, 1, 1);
+    [SerializeField]
+    private bool _inverse = false;
 
     private void Update()
     {
@@ -24,7 +26,15 @@ public class FillSetter : MonoBehaviour
             return 0;
 
         float value = Mathf.Clamp(_value.Value / _max.Value, 0, 1);
+        float curveValue = _curve.Evaluate(value);
 
-        return _curve.Evaluate(value);
+        if (_inverse)
+        {
+            return 1 - curveValue;
+        }
+        else
+        {
+            return curveValue;
+        }
     }
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useCharge: 1
   _chargeTime: 1
-  _cooldown: 0
+  _cooldown: 3
   _power: 10
   _capacity: 10
   _quantity: 1

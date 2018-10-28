@@ -742,24 +742,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114111850741108004, guid: bc71f2cb096a4ab47974bfbe4e79116d,
-        type: 2}
-      propertyPath: _cooldownTime._variable
-      value: 
-      objectReference: {fileID: 11400000, guid: c5fd77dcb9a17c943ba72e5cfba852bd,
-        type: 2}
-    - target: {fileID: 114111850741108004, guid: bc71f2cb096a4ab47974bfbe4e79116d,
-        type: 2}
-      propertyPath: _weaponChargeTime._variable
-      value: 
-      objectReference: {fileID: 11400000, guid: 21a5b1daf7ed1a24b9e35f7e6ec32cd2,
-        type: 2}
-    - target: {fileID: 114111850741108004, guid: bc71f2cb096a4ab47974bfbe4e79116d,
-        type: 2}
-      propertyPath: _currentCharge._variable
-      value: 
-      objectReference: {fileID: 11400000, guid: 45a3f61b727989f48bf1addac9a9e55d,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc71f2cb096a4ab47974bfbe4e79116d, type: 2}
   m_IsPrefabAsset: 0

@@ -163,14 +163,22 @@ MonoBehaviour:
   _onFire: {fileID: 11400000, guid: 52f5ff1cbaf5188409485dbb9ef25b05, type: 2}
   _selectedWeapon: {fileID: 11400000, guid: fe74e8c13909c9247b202b6ffbaf66fc, type: 2}
   _weaponTransform: {fileID: 4399202113731928}
-  _chargeTime:
+  _weaponChargeTime:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: 21a5b1daf7ed1a24b9e35f7e6ec32cd2, type: 2}
+  _currentCharge:
     _useConstant: 0
     _constantValue: 0
     _variable: {fileID: 11400000, guid: 45a3f61b727989f48bf1addac9a9e55d, type: 2}
   _cooldownTime:
     _useConstant: 0
     _constantValue: 0
-    _variable: {fileID: 0}
+    _variable: {fileID: 11400000, guid: c5fd77dcb9a17c943ba72e5cfba852bd, type: 2}
+  _currentCooldown:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: 934101feb25a62744aa6fc66ad505234, type: 2}
 --- !u!114 &114168640975307782
 MonoBehaviour:
   m_ObjectHideFlags: 1

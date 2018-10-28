@@ -16,7 +16,10 @@ public class AttackHandler : MonoBehaviour {
     private FloatReference _currentCharge;
     [SerializeField]
     private FloatReference _cooldownTime;
+    [SerializeField]
+    private FloatReference _currentCooldown;
 
+    private float CurrentCooldown { get { return _currentCooldown.Value; } set { _currentCooldown.Value = value; } }
     private float CurrentCharge { get { return _currentCharge.Value; } set { _currentCharge.Value = value; } }
     private float CooldownTime { get { return _cooldownTime.Value; } }
     private float ChargeTime { get { return _weaponChargeTime.Value; } }
@@ -24,7 +27,7 @@ public class AttackHandler : MonoBehaviour {
     {
         get
         {
-            return Time.time - _lastFireTime < CooldownTime;
+            return CurrentCooldown < CooldownTime;
         }
     }
 
@@ -54,6 +57,8 @@ public class AttackHandler : MonoBehaviour {
     }
     private void PollWeaponFire(InputResponse response)
     {
+        CalculateCooldown();
+
         if (_selectedWeapon.Value.TriggerData.UseCharge)
         {
             PollChargeWeapon(response);
@@ -62,6 +67,10 @@ public class AttackHandler : MonoBehaviour {
         {
             throw new System.NotImplementedException();
         }
+    }
+    private void CalculateCooldown()
+    {
+        CurrentCooldown = Mathf.Clamp(Time.time - _lastFireTime, 0, CooldownTime);
     }
     private void PollChargeWeapon(InputResponse response)
     {        
