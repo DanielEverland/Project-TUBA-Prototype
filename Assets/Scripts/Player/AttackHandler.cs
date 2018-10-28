@@ -47,7 +47,8 @@ public class AttackHandler : MonoBehaviour {
                 
         PollWeaponFire(response);
         ToggleFireDown(response);
-        
+        AngleWeapon(response);
+
         _previousResponse = response;
     }
     private void LateUpdate()
@@ -126,7 +127,7 @@ public class AttackHandler : MonoBehaviour {
     }
     private void AngleWeapon(InputResponse response)
     {
-        Vector3 direction = response.InputDirection.normalized;
+        Vector3 direction = _direction.normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         _weaponTransform.transform.eulerAngles = new Vector3(0, 0, angle);
