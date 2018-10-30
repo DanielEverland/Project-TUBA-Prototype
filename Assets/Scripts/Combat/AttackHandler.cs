@@ -64,13 +64,13 @@ public class AttackHandler : MonoBehaviour {
     private float _lastFireTime = float.MinValue;
     private float? _fireDownTime = null;
     private Vector2 _direction = default(Vector2);
-    private InputResponse _previousResponse = default(InputResponse);
+    private CombatInputResponse _previousResponse = default(CombatInputResponse);
 
     private const float DEBUG_RAY_LENGTH = 3;
 
     private void Update()
     {
-        InputResponse response = PollInput();
+        CombatInputResponse response = PollInput();
                 
         if(ShouldReload(response) || _isReloading)
         {
@@ -100,7 +100,7 @@ public class AttackHandler : MonoBehaviour {
         if (CurrentAmmo == _maxAmmoCount.Value)
             OnReloadStopped();
     }
-    private bool ShouldReload(InputResponse response)
+    private bool ShouldReload(CombatInputResponse response)
     {
         if (response.ReloadButtonDown && CurrentAmmo != _maxAmmoCount.Value)
         {
@@ -125,12 +125,12 @@ public class AttackHandler : MonoBehaviour {
         _isReloading = true;
         _reloadTimePassed = 0;
     }
-    private void PollWeaponFire(InputResponse response)
+    private void PollWeaponFire(CombatInputResponse response)
     {
         CalculateCooldown();
         PollFireWeapon(response);
     }    
-    private void PollFireWeapon(InputResponse response)
+    private void PollFireWeapon(CombatInputResponse response)
     {        
         if(CurrentCharge >= ChargeTime && CanFire() && IsFireButtonPressed(response))
         {
@@ -146,7 +146,7 @@ public class AttackHandler : MonoBehaviour {
             ResetCharge();
         }
     }
-    private bool IsFireButtonPressed(InputResponse response)
+    private bool IsFireButtonPressed(CombatInputResponse response)
     {
         if (UseCharge)
         {
@@ -166,7 +166,7 @@ public class AttackHandler : MonoBehaviour {
         float desiredCharge = CurrentCharge + Time.deltaTime;
         CurrentCharge = Mathf.Clamp(desiredCharge, 0, ChargeTime);
     }
-    private void ToggleFireDown(InputResponse response)
+    private void ToggleFireDown(CombatInputResponse response)
     {
         if (response.FireButtonDown && _fireDownTime == null)
         {
@@ -177,9 +177,9 @@ public class AttackHandler : MonoBehaviour {
             _fireDownTime = null;
         }
     }
-    private InputResponse PollInput()
+    private CombatInputResponse PollInput()
     {
-        InputResponse response = InputResponse.Create(_previousResponse, gameObject);
+        CombatInputResponse response = CombatInputResponse.Create(_previousResponse, gameObject);
 
         if (response.FireButtonDown && _fireDownTime == null)
             _fireDownTime = Time.time;
@@ -191,7 +191,7 @@ public class AttackHandler : MonoBehaviour {
 
         return response;
     }
-    private void AngleWeapon(InputResponse response)
+    private void AngleWeapon(CombatInputResponse response)
     {
         Vector3 direction = _direction.normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -231,100 +231,5 @@ public class AttackHandler : MonoBehaviour {
     private void DrawDebug()
     {
         Debug.DrawRay(transform.position, _direction * DEBUG_RAY_LENGTH, Color.cyan);
-    }
-
-
-    private struct InputResponse
-    {
-        public bool ReloadButtonDown { get; private set; }
-        public bool FireButtonDown { get { return _controllerFireButtonDown || _keyboardFireButtonDown; } }
-        public bool FireButtonUp { get { return _controllerFireButtonUp || _keyboardFireButtonUp; } }
-        public bool HasDirection { get; private set; }
-        public Vector2 MousePosition { get; private set; }
-        public Vector2 InputDirection
-        {
-            get
-            {
-                return _inputDirection;
-            }
-            set
-            {
-                _inputDirection = value;
-                HasDirection = true;
-            }
-        }
-
-        private Vector2 _inputDirection;
-        private bool _controllerFireButtonDown;
-        private bool _controllerFireButtonUp;
-        private bool _keyboardFireButtonDown;
-        private bool _keyboardFireButtonUp;
-
-        private const KeyCode FIRE_BUTTON_KEYBOARD = KeyCode.Mouse0;
-        private const KeyCode RELOAD_BUTTON_KEYBOARD = KeyCode.R;
-        private const KeyCode RELOAD_BUTTON_CONTROLLER = KeyCode.Joystick1Button2;
-
-        public static InputResponse Create(InputResponse previous, GameObject player)
-        {
-            InputResponse response = default(InputResponse);
-
-            response.PollControllerInput(previous);
-            response.PollMouseInput(previous, player);
-
-            return response;
-        }
-        private void PollControllerInput(InputResponse previous)
-        {
-            // Direction.
-            Vector2 rightAnalogue = new Vector2()
-            {
-                x = Input.GetAxis("Right Horizontal"),
-                y = Input.GetAxis("Right Vertical"),
-            };
-
-            if (rightAnalogue != default(Vector2))
-            {
-                InputDirection = rightAnalogue.normalized;
-            }
-
-            // Fire button.
-            if (ControllerFireButtonDown())
-                _controllerFireButtonDown = true;
-
-            if(previous._controllerFireButtonDown && !_controllerFireButtonDown)
-                _controllerFireButtonUp = true;
-
-            // Reload.
-            if (Input.GetKeyDown(RELOAD_BUTTON_CONTROLLER))
-                ReloadButtonDown = true;
-        }
-        private void PollMouseInput(InputResponse previous, GameObject player)
-        {
-            MousePosition = Input.mousePosition;
-
-            // Fire button.
-            if(Input.GetKey(FIRE_BUTTON_KEYBOARD) || Input.GetKeyDown(FIRE_BUTTON_KEYBOARD))
-                _keyboardFireButtonDown = true;
-
-            if(Input.GetKeyUp(FIRE_BUTTON_KEYBOARD))
-                _keyboardFireButtonUp = true;
-
-            // Direction.
-            if (MousePosition != previous.MousePosition)
-            {
-                Vector2 playerScreenSpace = Camera.main.WorldToScreenPoint(player.transform.position);
-                Vector2 mouseDelta = (Vector2)Input.mousePosition - playerScreenSpace;
-
-                InputDirection = mouseDelta.normalized;
-            }
-
-            // Reload.
-            if (Input.GetKeyDown(RELOAD_BUTTON_KEYBOARD))
-                ReloadButtonDown = true;
-        }
-        private static bool ControllerFireButtonDown()
-        {
-            return Input.GetAxis("Right Trigger") > 0;
-        }
     }
 }
