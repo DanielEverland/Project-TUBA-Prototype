@@ -27,6 +27,8 @@ public class AttackHandler : MonoBehaviour {
     [SerializeField]
     private FloatReference _reloadTime;
     [SerializeField]
+    private Vector3Reference _direction;
+    [SerializeField]
     private GameEvent _onAmmoReloaded;
     [SerializeField]
     private Transform _weaponDirection;
@@ -63,11 +65,8 @@ public class AttackHandler : MonoBehaviour {
     private float _reloadTimePassed;
     private float _lastFireTime = float.MinValue;
     private float? _fireDownTime = null;
-    private Vector2 _direction = default(Vector2);
     private CombatInputResponse _previousResponse = default(CombatInputResponse);
-
-    private const float DEBUG_RAY_LENGTH = 3;
-
+    
     private void Update()
     {
         CombatInputResponse response = PollInput();
@@ -186,14 +185,14 @@ public class AttackHandler : MonoBehaviour {
 
         if (response.HasDirection)
         {
-            _direction = response.InputDirection;
+            _direction.Value = response.InputDirection;
         }            
 
         return response;
     }
     private void AngleWeapon(CombatInputResponse response)
     {
-        Vector3 direction = _direction.normalized;
+        Vector3 direction = _direction.Value.normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         _weaponTransform.transform.eulerAngles = new Vector3(0, 0, angle);
@@ -223,13 +222,5 @@ public class AttackHandler : MonoBehaviour {
 
         instance.transform.position = _weaponDirection.position;
         instance.transform.rotation = _weaponDirection.rotation;
-    }
-    private void LateUpdate()
-    {
-        DrawDebug();
-    }
-    private void DrawDebug()
-    {
-        Debug.DrawRay(transform.position, _direction * DEBUG_RAY_LENGTH, Color.cyan);
     }
 }
