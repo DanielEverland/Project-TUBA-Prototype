@@ -35,5 +35,68 @@ public class TriggerData : PartBase {
     [SerializeField]
     private float _reloadTime = 1;
     [SerializeField]
+    private List<Muzzle> _muzzles;
+    [SerializeField]
+    private bool _randomMuzzle = false;
+    [SerializeField]
     private int _seekersToFire = 1;
+
+    private void Reset()
+    {
+        if(_muzzles == null)
+            _muzzles = new List<Muzzle>();
+        
+        if(_muzzles.Count == 0)
+        {
+            _muzzles.Add(new Muzzle());
+        }
+    }
+
+    [System.Serializable]
+    public class Muzzle : System.IEquatable<Muzzle>
+    {
+        [SerializeField]
+        private Vector3 _direction = Vector3.right;
+        [SerializeField]
+        private Space _space = Space.Self;
+        [SerializeField]
+        private float _fov = 0;
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+
+            if(obj is Muzzle)
+            {
+                return Equals(obj as Muzzle);
+            }
+
+            return false;
+        }
+        public bool Equals(Muzzle other)
+        {
+            if (other == null)
+                return false;
+
+            return
+                other._direction == this._direction &&
+                other._space == this._space &&
+                other._fov == this._fov;
+        }
+        public override int GetHashCode()
+        {
+            int i = 17;
+
+            i += _direction.GetHashCode() * 13;
+            i += _space.GetHashCode() * 13;
+            i += _fov.GetHashCode() * 13;
+
+            return i;
+        }
+        public override string ToString()
+        {
+            return string.Format("({0})\n{1} - ({2})", _direction, _space, _fov);
+        }
+    }
 }
