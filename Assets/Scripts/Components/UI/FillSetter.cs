@@ -24,14 +24,14 @@ public abstract class BaseFillSetter<T> : MonoBehaviour where T : BaseVariable
 
     private void Update()
     {
-        _image.fillAmount = GetValue();
+        _image.fillAmount = GetFillValue();
     }
     protected virtual float GetFillValue()
     {
         if (GetValue() == 0 || GetMaxValue() == 0)
             return 0;
-
-        float value = Mathf.Clamp(GetValue() / GetMaxValue(), 0, 1);
+        
+        float value = Mathf.Clamp(GetValue() / GetMaxValue(), 0f, 1f);
         float curveValue = _curve.Evaluate(value);
 
         if (_inverse)
@@ -49,6 +49,6 @@ public abstract class BaseFillSetter<T> : MonoBehaviour where T : BaseVariable
     }
     protected virtual float GetMaxValue()
     {
-        return System.Convert.ToSingle(_value.BaseValue);
+        return System.Convert.ToSingle(_max.BaseValue);
     }
 }
