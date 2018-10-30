@@ -762,6 +762,18 @@ Prefab:
       value: 
       objectReference: {fileID: 11400000, guid: 4baf470a20a2a0147aa81a8c8ef79e25,
         type: 2}
+    - target: {fileID: 114111850741108004, guid: bc71f2cb096a4ab47974bfbe4e79116d,
+        type: 2}
+      propertyPath: _reloadTime._variable
+      value: 
+      objectReference: {fileID: 11400000, guid: d91e029b64994714c8e749cd304091fc,
+        type: 2}
+    - target: {fileID: 114111850741108004, guid: bc71f2cb096a4ab47974bfbe4e79116d,
+        type: 2}
+      propertyPath: _onAmmoReloaded
+      value: 
+      objectReference: {fileID: 11400000, guid: 54eeec7dc3b086545895120235eb5ec1,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc71f2cb096a4ab47974bfbe4e79116d, type: 2}
   m_IsPrefabAsset: 0

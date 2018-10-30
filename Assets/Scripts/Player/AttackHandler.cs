@@ -25,6 +25,10 @@ public class AttackHandler : MonoBehaviour {
     [SerializeField]
     private IntReference _maxAmmoCount;
     [SerializeField]
+    private FloatReference _reloadTime;
+    [SerializeField]
+    private GameEvent _onAmmoReloaded;
+    [SerializeField]
     private Transform _weaponDirection;
     [SerializeField]
     private ProjectileBase _projectile;
@@ -55,6 +59,8 @@ public class AttackHandler : MonoBehaviour {
         }
     }
 
+    private bool _isReloading = false;
+    private float _reloadTimePassed;
     private float _lastFireTime = float.MinValue;
     private float? _fireDownTime = null;
     private Vector2 _direction = default(Vector2);
@@ -66,19 +72,58 @@ public class AttackHandler : MonoBehaviour {
     {
         InputResponse response = PollInput();
                 
-        PollWeaponFire(response);
-        ToggleFireDown(response);
+        if(ShouldReload(response) || _isReloading)
+        {
+            DoReload();
+            return;
+        }
+        else
+        {
+            PollWeaponFire(response);
+            ToggleFireDown(response);
+        }
+                
         AngleWeapon(response);
 
         _previousResponse = response;
     }
-    private void LateUpdate()
+    private void DoReload()
     {
-        DrawDebug();
+        _reloadTimePassed += Time.deltaTime;
+
+        if(_reloadTimePassed > _reloadTime.Value)
+        {
+            OnAmmoReloaded();
+            _reloadTimePassed -= _reloadTime.Value;
+        }
+
+        if (CurrentAmmo == _maxAmmoCount.Value)
+            OnReloadStopped();
     }
-    private void DrawDebug()
+    private bool ShouldReload(InputResponse response)
     {
-        Debug.DrawRay(transform.position, _direction * DEBUG_RAY_LENGTH, Color.cyan);
+        if (response.ReloadButtonDown && CurrentAmmo != _maxAmmoCount.Value)
+        {
+            OnStartReload();
+            return true;
+        }            
+
+        return false;
+    }
+    private void OnAmmoReloaded()
+    {
+        CurrentAmmo = Mathf.Clamp(CurrentAmmo + 1, 0, _maxAmmoCount.Value);       
+
+        _onAmmoReloaded.Raise();
+    }
+    private void OnReloadStopped()
+    {
+        _isReloading = false;
+    }
+    private void OnStartReload()
+    {
+        _isReloading = true;
+        _reloadTimePassed = 0;
     }
     private void PollWeaponFire(InputResponse response)
     {
@@ -179,10 +224,19 @@ public class AttackHandler : MonoBehaviour {
         instance.transform.position = _weaponDirection.position;
         instance.transform.rotation = _weaponDirection.rotation;
     }
-    
+    private void LateUpdate()
+    {
+        DrawDebug();
+    }
+    private void DrawDebug()
+    {
+        Debug.DrawRay(transform.position, _direction * DEBUG_RAY_LENGTH, Color.cyan);
+    }
+
 
     private struct InputResponse
     {
+        public bool ReloadButtonDown { get; private set; }
         public bool FireButtonDown { get { return _controllerFireButtonDown || _keyboardFireButtonDown; } }
         public bool FireButtonUp { get { return _controllerFireButtonUp || _keyboardFireButtonUp; } }
         public bool HasDirection { get; private set; }
@@ -207,6 +261,8 @@ public class AttackHandler : MonoBehaviour {
         private bool _keyboardFireButtonUp;
 
         private const KeyCode FIRE_BUTTON_KEYBOARD = KeyCode.Mouse0;
+        private const KeyCode RELOAD_BUTTON_KEYBOARD = KeyCode.R;
+        private const KeyCode RELOAD_BUTTON_CONTROLLER = KeyCode.Joystick1Button2;
 
         public static InputResponse Create(InputResponse previous, GameObject player)
         {
@@ -237,6 +293,10 @@ public class AttackHandler : MonoBehaviour {
 
             if(previous._controllerFireButtonDown && !_controllerFireButtonDown)
                 _controllerFireButtonUp = true;
+
+            // Reload.
+            if (Input.GetKeyDown(RELOAD_BUTTON_CONTROLLER))
+                ReloadButtonDown = true;
         }
         private void PollMouseInput(InputResponse previous, GameObject player)
         {
@@ -257,6 +317,10 @@ public class AttackHandler : MonoBehaviour {
 
                 InputDirection = mouseDelta.normalized;
             }
+
+            // Reload.
+            if (Input.GetKeyDown(RELOAD_BUTTON_KEYBOARD))
+                ReloadButtonDown = true;
         }
         private static bool ControllerFireButtonDown()
         {
