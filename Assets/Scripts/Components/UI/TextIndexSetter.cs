@@ -11,7 +11,7 @@ public class TextIndexSetter : MonoBehaviour
     [SerializeField]
     private BaseVariable _variable = null;
     [SerializeField]
-    private BaseRuntimeSet _collection = null;
+    private BaseCollection _collection = null;
     [SerializeField, EnumFlags]
     private UpdateState _updateState = UpdateState.Start;
 
@@ -40,7 +40,7 @@ public class TextIndexSetter : MonoBehaviour
     }
     public void UpdateText()
     {
-        _targetText.text = _collection.Items.IndexOf(_variable.BaseValue).ToString();
+        _targetText.text = _collection.List.IndexOf(_variable.BaseValue).ToString();
     }
 
     [System.Flags, System.Serializable]

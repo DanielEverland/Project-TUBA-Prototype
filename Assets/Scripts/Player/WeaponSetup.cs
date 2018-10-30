@@ -16,7 +16,7 @@ public class WeaponSetup : MonoBehaviour
 
     private void Awake()
     {
-        _weaponInventory.Items.Clear();
+        _weaponInventory.List.Clear();
 
         for (int i = 0; i < _weaponSlots.Value; i++)
         {

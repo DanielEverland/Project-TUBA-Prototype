@@ -10,10 +10,10 @@ public class EventData : EventDataBase, IGameEventListener
     public virtual void OnEventRaised() { }
     public override void OnEquipped()
     {
-        _gameEvent.RegisterListener(this);
+        _gameEvent.AddListener(this);
     }
     public override void OnUneqipped()
     {
-        _gameEvent.UnregisterListener(this);
+        _gameEvent.RemoveListener(this);
     }
 }

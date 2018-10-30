@@ -110,7 +110,7 @@ public class WeaponSelector : MonoBehaviour
     }
     private int GetIndex()
     {
-        return _weaponInventory.Items.IndexOf(_selectedWeapon.Value);
+        return _weaponInventory.IndexOf(_selectedWeapon.Value);
     }
     private void SelectWeapon(int index)
     {
