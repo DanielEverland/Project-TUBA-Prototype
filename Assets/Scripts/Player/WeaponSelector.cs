@@ -26,6 +26,8 @@ public class WeaponSelector : MonoBehaviour
     [SerializeField]
     private BoolVariable _useCharge;
     [SerializeField]
+    private IntVariable _currentAmmo;
+    [SerializeField]
     private bool _useScrollWheel = true;
     [SerializeField]
     private bool _useAlphaNumericKeys = true;
@@ -136,5 +138,6 @@ public class WeaponSelector : MonoBehaviour
         _reloadTime.Value = newSelection.TriggerData.ReloadTime;
         _seekersToFire.Value = newSelection.TriggerData.SeekersToFire;
         _useCharge.Value = newSelection.TriggerData.UseCharge;
+        _currentAmmo.Value = newSelection.CurrentAmmo;
     }
 }

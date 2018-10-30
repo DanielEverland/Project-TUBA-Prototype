@@ -21,6 +21,10 @@ public class AttackHandler : MonoBehaviour {
     [SerializeField]
     private BoolReference _useCharge;
     [SerializeField]
+    private IntReference _currentAmmoCount;
+    [SerializeField]
+    private IntReference _maxAmmoCount;
+    [SerializeField]
     private Transform _weaponDirection;
     [SerializeField]
     private ProjectileBase _projectile;
@@ -30,11 +34,24 @@ public class AttackHandler : MonoBehaviour {
     private float CurrentCharge { get { return _currentCharge.Value; } set { _currentCharge.Value = value; } }
     private float CooldownTime { get { return _cooldownTime.Value; } }
     private float ChargeTime { get { return _weaponChargeTime.Value; } }
+
     private bool OnCooldown
     {
         get
         {
             return CurrentCooldown < CooldownTime;
+        }
+    }
+    public int CurrentAmmo
+    {
+        get
+        {
+            return _selectedWeapon.Value.CurrentAmmo;
+        }
+        set
+        {
+            _selectedWeapon.Value.CurrentAmmo = value;
+            _currentAmmoCount.Value = _selectedWeapon.Value.CurrentAmmo;
         }
     }
 
@@ -144,13 +161,19 @@ public class AttackHandler : MonoBehaviour {
     {
         _lastFireTime = Time.time;
 
+        CurrentAmmo = Mathf.Clamp(CurrentAmmo - 1, 0, _maxAmmoCount.Value);
+
+        SpawnProjectile();
+
+        _onFire.Raise();
+    }
+    private void SpawnProjectile()
+    {
         ProjectileBase instance = Instantiate(_projectile);
         instance.Initialize(_selectedWeapon.Value);
 
         instance.transform.position = _weaponDirection.position;
         instance.transform.rotation = _weaponDirection.rotation;
-
-        _onFire.Raise();
     }
     
 

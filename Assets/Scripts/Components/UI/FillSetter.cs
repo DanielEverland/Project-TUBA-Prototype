@@ -3,29 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FillSetter : MonoBehaviour
+public class FillSetter : BaseFillSetter<BaseVariable>
+{
+}
+public abstract class BaseFillSetter<T> : MonoBehaviour where T : BaseVariable
 {
     [SerializeField]
     private Image _image;
     [SerializeField]
-    private FloatVariable _value;
+    private T _value;
     [SerializeField]
-    private FloatVariable _max;
+    private T _max;
     [SerializeField]
     private AnimationCurve _curve = AnimationCurve.Linear(0, 0, 1, 1);
     [SerializeField]
     private bool _inverse = false;
 
+    protected T Value { get { return _value; } }
+    protected T Max { get { return _max; } }
+
     private void Update()
     {
         _image.fillAmount = GetValue();
     }
-    private float GetValue()
+    protected virtual float GetFillValue()
     {
-        if (_value.Value == 0 || _max.Value == 0)
+        if (GetValue() == 0 || GetMaxValue() == 0)
             return 0;
 
-        float value = Mathf.Clamp(_value.Value / _max.Value, 0, 1);
+        float value = Mathf.Clamp(GetValue() / GetMaxValue(), 0, 1);
         float curveValue = _curve.Evaluate(value);
 
         if (_inverse)
@@ -36,5 +42,13 @@ public class FillSetter : MonoBehaviour
         {
             return curveValue;
         }
+    }
+    protected virtual float GetValue()
+    {
+        return System.Convert.ToSingle(_value.BaseValue);
+    }
+    protected virtual float GetMaxValue()
+    {
+        return System.Convert.ToSingle(_value.BaseValue);
     }
 }

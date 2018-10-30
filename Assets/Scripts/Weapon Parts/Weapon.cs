@@ -14,18 +14,22 @@ public class Weapon : ScriptableObject {
     public EventData EventData { get { return _eventData; } set { _eventData = value; } }
     public SeekerData SeekerData { get { return _seekerData; } set { _seekerData = value; } }
 
+    public int CurrentAmmo { get; set; }
+
     [SerializeField]
     private TriggerData _triggerData;
     [SerializeField]
     private EventData _eventData;
     [SerializeField]
     private SeekerData _seekerData;
-    
+
     public void ChangePart(PartBase part)
     {
         if(part is TriggerData)
         {
             TriggerData = part as TriggerData;
+
+            CurrentAmmo = TriggerData.AmmoCapacity;
         }
         else if(part is EventData)
         {
@@ -42,8 +46,8 @@ public class Weapon : ScriptableObject {
     }
     public void AssignRandomParts()
     {
-        _triggerData = PartLoader.TriggerData.Random();
-        _eventData = PartLoader.EventData.Random();
-        _seekerData = PartLoader.SeekerData.Random();
+        ChangePart(PartLoader.TriggerData.Random());
+        ChangePart(PartLoader.EventData.Random());
+        ChangePart(PartLoader.SeekerData.Random());
     }
 }
