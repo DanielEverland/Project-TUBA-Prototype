@@ -87,12 +87,12 @@ public class AttackHandler : MonoBehaviour {
     }    
     private void PollFireWeapon(InputResponse response)
     {        
-        if(CurrentCharge >= ChargeTime && !OnCooldown && IsFireButtonPressed(response))
+        if(CurrentCharge >= ChargeTime && CanFire() && IsFireButtonPressed(response))
         {
             Fire();
         }
 
-        if (response.FireButtonDown && !OnCooldown)
+        if (response.FireButtonDown && CanFire())
         {
             ChargeWeapon();
         }
@@ -156,6 +156,10 @@ public class AttackHandler : MonoBehaviour {
     private void ResetCharge()
     {
         CurrentCharge = 0;
+    }
+    private bool CanFire()
+    {
+        return !OnCooldown && CurrentAmmo > 0;
     }
     private void Fire()
     {
