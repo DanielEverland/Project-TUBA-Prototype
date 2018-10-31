@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public interface IAttackHandlerComponent
+{
+    void Poll(CombatInputResponse input);
+}
 public class AttackHandler : MonoBehaviour {
 
     [SerializeField]
@@ -9,11 +13,7 @@ public class AttackHandler : MonoBehaviour {
     [SerializeField]
     private WeaponVariable _selectedWeapon;
     [SerializeField]
-    private Transform _weaponTransform;
-    [SerializeField]
-    private FloatReference _weaponChargeTime;
-    [SerializeField]
-    private FloatReference _currentCharge;
+    private Transform _weaponTransform;    
     [SerializeField]
     private FloatReference _cooldownTime;
     [SerializeField]
@@ -34,12 +34,17 @@ public class AttackHandler : MonoBehaviour {
     private Transform _weaponDirection;
     [SerializeField]
     private ProjectileBase _projectile;
+    [SerializeField]
+    private WeaponCharger _weaponCharger;
+    [SerializeField]
+    private BoolReference _weaponCanFire;
+
+    private bool IsFullyCharged { get { return _weaponCharger.IsFullyCharged; } }
 
     private bool UseCharge { get { return _useCharge.Value; } }
-    private float CurrentCooldown { get { return _currentCooldown.Value; } set { _currentCooldown.Value = value; } }
-    private float CurrentCharge { get { return _currentCharge.Value; } set { _currentCharge.Value = value; } }
+    private float CurrentCooldown { get { return _currentCooldown.Value; } set { _currentCooldown.Value = value; } }    
     private float CooldownTime { get { return _cooldownTime.Value; } }
-    private float ChargeTime { get { return _weaponChargeTime.Value; } }
+    
 
     private bool OnCooldown
     {
@@ -128,21 +133,13 @@ public class AttackHandler : MonoBehaviour {
     {
         CalculateCooldown();
         PollFireWeapon(response);
+        _weaponCharger.Poll(response);
     }    
     private void PollFireWeapon(CombatInputResponse response)
     {        
-        if(CurrentCharge >= ChargeTime && CanFire() && IsFireButtonPressed(response))
+        if(IsFullyCharged && CanFire() && IsFireButtonPressed(response))
         {
             Fire();
-        }
-
-        if (response.FireButtonDown && CanFire())
-        {
-            ChargeWeapon();
-        }
-        else
-        {
-            ResetCharge();
         }
     }
     private bool IsFireButtonPressed(CombatInputResponse response)
@@ -159,11 +156,6 @@ public class AttackHandler : MonoBehaviour {
     private void CalculateCooldown()
     {
         CurrentCooldown = Mathf.Clamp(Time.time - _lastFireTime, 0, CooldownTime);
-    }
-    private void ChargeWeapon()
-    {
-        float desiredCharge = CurrentCharge + Time.deltaTime;
-        CurrentCharge = Mathf.Clamp(desiredCharge, 0, ChargeTime);
     }
     private void ToggleFireDown(CombatInputResponse response)
     {
@@ -186,7 +178,9 @@ public class AttackHandler : MonoBehaviour {
         if (response.HasDirection)
         {
             _direction.Value = response.InputDirection;
-        }            
+        }
+
+        _weaponCanFire.Value = CanFire();
 
         return response;
     }
@@ -196,11 +190,7 @@ public class AttackHandler : MonoBehaviour {
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         _weaponTransform.transform.eulerAngles = new Vector3(0, 0, angle);
-    }
-    private void ResetCharge()
-    {
-        CurrentCharge = 0;
-    }
+    }    
     private bool CanFire()
     {
         return !OnCooldown && CurrentAmmo > 0;

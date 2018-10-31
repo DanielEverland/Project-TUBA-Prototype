@@ -46,6 +46,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1307331395688930
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4317851410827530}
+  - component: {fileID: 114870520263738438}
+  m_Layer: 0
+  m_Name: Charger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1628267337866814
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,6 +109,19 @@ Transform:
   m_Father: {fileID: 4419691903540908}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4317851410827530
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1307331395688930}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4419691903540908}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4399202113731928
 Transform:
   m_ObjectHideFlags: 1
@@ -117,6 +146,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4169540065751062}
+  - {fileID: 4317851410827530}
   m_Father: {fileID: 4638067161720332}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -191,14 +221,6 @@ MonoBehaviour:
   _onFire: {fileID: 11400000, guid: 52f5ff1cbaf5188409485dbb9ef25b05, type: 2}
   _selectedWeapon: {fileID: 11400000, guid: fe74e8c13909c9247b202b6ffbaf66fc, type: 2}
   _weaponTransform: {fileID: 4399202113731928}
-  _weaponChargeTime:
-    _useConstant: 0
-    _constantValue: 0
-    _variable: {fileID: 11400000, guid: 21a5b1daf7ed1a24b9e35f7e6ec32cd2, type: 2}
-  _currentCharge:
-    _useConstant: 0
-    _constantValue: 0
-    _variable: {fileID: 11400000, guid: 45a3f61b727989f48bf1addac9a9e55d, type: 2}
   _cooldownTime:
     _useConstant: 0
     _constantValue: 0
@@ -231,6 +253,11 @@ MonoBehaviour:
   _weaponDirection: {fileID: 4399202113731928}
   _projectile: {fileID: 114142216378517668, guid: f54225c717587264aba1b8d1a613ce4c,
     type: 2}
+  _weaponCharger: {fileID: 114870520263738438}
+  _weaponCanFire:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: cf721da4af6bbcf4f95f772450dc0265, type: 2}
 --- !u!114 &114168640975307782
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -293,6 +320,29 @@ MonoBehaviour:
     _useConstant: 0
     _constantValue: 0
     _variable: {fileID: 11400000, guid: d251c8038738759408980be6f44b9d05, type: 2}
+--- !u!114 &114870520263738438
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1307331395688930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23979aa16918e1d48bdc5b268922390d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weaponChargeTime:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: 21a5b1daf7ed1a24b9e35f7e6ec32cd2, type: 2}
+  _currentCharge:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: 45a3f61b727989f48bf1addac9a9e55d, type: 2}
+  _weaponCanFire:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: cf721da4af6bbcf4f95f772450dc0265, type: 2}
 --- !u!114 &114995828028148960
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -11,8 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0312c675ff5e22d4d9b800480cf64425, type: 3}
   m_Name: Trigger
   m_EditorClassIdentifier: 
-  _useCharge: 0
-  _chargeTime: 0
+  _useCharge: 1
+  _chargeTime: 1
   _cooldown: 0.3
   _power: 10
   _ammoCapacity: 10
