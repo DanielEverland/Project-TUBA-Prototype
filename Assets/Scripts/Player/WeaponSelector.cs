@@ -31,6 +31,8 @@ public class WeaponSelector : MonoBehaviour
     private bool _useScrollWheel = true;
     [SerializeField]
     private bool _useAlphaNumericKeys = true;
+    [SerializeField]
+    private bool _useControllerBumpers = true;
     
     private void Start()
     {
@@ -47,6 +49,20 @@ public class WeaponSelector : MonoBehaviour
 
         if (_useAlphaNumericKeys)
             PollKeys();
+
+        if (_useControllerBumpers)
+            PollControllerBumpers();
+    }
+    private void PollControllerBumpers()
+    {
+        if(Input.GetKeyUp(KeyCode.Joystick1Button4))
+        {
+            SelectPrevious();
+        }
+        if(Input.GetKeyUp(KeyCode.Joystick1Button5))
+        {
+            SelectNext();
+        }
     }
     private void PollScrollWheel()
     {
