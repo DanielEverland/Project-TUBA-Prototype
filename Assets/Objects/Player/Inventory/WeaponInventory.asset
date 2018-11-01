@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DeveloperDescription:
     _value: 
-  _items:
+  _list:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

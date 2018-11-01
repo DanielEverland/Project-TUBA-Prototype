@@ -1018,7 +1018,7 @@ MonoBehaviour:
   - {fileID: 114289530773220320}
   - {fileID: 114944173436873260}
   - {fileID: 114072747617177086}
-  _weaponContainer: {fileID: 11400000, guid: 79f084929356c4f4f8a00ef60a5a082c, type: 2}
+  _weaponInventory: {fileID: 11400000, guid: b06d2ff2f6171314398fc57adfb3bf39, type: 2}
   _debugWeaponIndex: 0
 --- !u!114 &114139998097152096
 MonoBehaviour:
