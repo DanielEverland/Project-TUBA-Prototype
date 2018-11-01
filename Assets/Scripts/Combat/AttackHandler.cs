@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IAttackHandlerComponent
 {
-    void Poll(CombatInputResponse input);
+    void Poll(WeaponInputResponse input);
 }
 public class AttackHandler : MonoBehaviour {
     
@@ -52,11 +52,11 @@ public class AttackHandler : MonoBehaviour {
     private float _reloadTimePassed;
     
     private float? _fireDownTime = null;
-    private CombatInputResponse _previousResponse = default(CombatInputResponse);
+    private WeaponInputResponse _previousResponse = default(WeaponInputResponse);
     
     private void Update()
     {
-        CombatInputResponse response = PollInput();
+        WeaponInputResponse response = PollInput();
                 
         if(ShouldReload(response) || _isReloading)
         {
@@ -86,7 +86,7 @@ public class AttackHandler : MonoBehaviour {
         //if (CurrentAmmo == _maxAmmoCount.Value)
         //    OnReloadStopped();
     }
-    private bool ShouldReload(CombatInputResponse response)
+    private bool ShouldReload(WeaponInputResponse response)
     {
         //if (response.ReloadButtonDown && CurrentAmmo != _maxAmmoCount.Value)
         //{
@@ -111,20 +111,20 @@ public class AttackHandler : MonoBehaviour {
         _isReloading = true;
         _reloadTimePassed = 0;
     }
-    private void PollWeaponFire(CombatInputResponse response)
+    private void PollWeaponFire(WeaponInputResponse response)
     {
         CalculateCooldown();
         PollFireWeapon(response);
         _weaponCharger.Poll(response);
     }    
-    private void PollFireWeapon(CombatInputResponse response)
+    private void PollFireWeapon(WeaponInputResponse response)
     {        
         if(IsFullyCharged && CanFire() && IsFireButtonPressed(response))
         {
             _weaponFireHandler.Fire();
         }
     }
-    private bool IsFireButtonPressed(CombatInputResponse response)
+    private bool IsFireButtonPressed(WeaponInputResponse response)
     {
         if (UseCharge)
         {
@@ -139,7 +139,7 @@ public class AttackHandler : MonoBehaviour {
     {
         CurrentCooldown = Mathf.Clamp(Time.time - _weaponFireHandler.WeaponLastFire, 0, CooldownTime);
     }
-    private void ToggleFireDown(CombatInputResponse response)
+    private void ToggleFireDown(WeaponInputResponse response)
     {
         if (response.FireButtonDown && _fireDownTime == null)
         {
@@ -150,9 +150,9 @@ public class AttackHandler : MonoBehaviour {
             _fireDownTime = null;
         }
     }
-    private CombatInputResponse PollInput()
+    private WeaponInputResponse PollInput()
     {
-        CombatInputResponse response = CombatInputResponse.Create(_previousResponse, gameObject);
+        WeaponInputResponse response = WeaponInputResponse.Create(_previousResponse, gameObject);
 
         if (response.FireButtonDown && _fireDownTime == null)
             _fireDownTime = Time.time;

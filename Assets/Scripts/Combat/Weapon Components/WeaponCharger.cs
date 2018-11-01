@@ -17,7 +17,7 @@ public class WeaponCharger : MonoBehaviour, IAttackHandlerComponent
     private float CurrentCharge { get { return _currentCharge.Value; } set { _currentCharge.Value = value; } }
     private bool CanFire { get { return _weaponCanFire.Value; } }
 
-    public void Poll(CombatInputResponse input)
+    public void Poll(WeaponInputResponse input)
     {
         if (input.FireButtonDown && CanFire)
         {

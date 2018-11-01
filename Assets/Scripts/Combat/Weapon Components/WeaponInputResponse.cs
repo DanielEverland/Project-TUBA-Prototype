@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct CombatInputResponse
+public struct WeaponInputResponse
 {
     public bool ReloadButtonDown { get; private set; }
     public bool FireButtonDown { get { return _controllerFireButtonDown || _keyboardFireButtonDown; } }
@@ -32,9 +32,9 @@ public struct CombatInputResponse
     private const KeyCode RELOAD_BUTTON_KEYBOARD = KeyCode.R;
     private const KeyCode RELOAD_BUTTON_CONTROLLER = KeyCode.Joystick1Button2;
 
-    public static CombatInputResponse Create(CombatInputResponse previous, GameObject player)
+    public static WeaponInputResponse Create(WeaponInputResponse previous, GameObject player)
     {
-        CombatInputResponse response = default(CombatInputResponse);
+        WeaponInputResponse response = default(WeaponInputResponse);
 
         response.PollMouseInput();
         response.PollControllerFireButton(previous);
@@ -51,7 +51,7 @@ public struct CombatInputResponse
     {
         MousePosition = Input.mousePosition;
     }
-    private void PollControllerFireButton(CombatInputResponse previous)
+    private void PollControllerFireButton(WeaponInputResponse previous)
     {
         if (ControllerFireButtonDown())
             _controllerFireButtonDown = true;
@@ -85,7 +85,7 @@ public struct CombatInputResponse
             InputDirection = rightAnalogue.normalized;
         }
     }
-    private void PollMouseDirection(CombatInputResponse previous, GameObject player)
+    private void PollMouseDirection(WeaponInputResponse previous, GameObject player)
     {
         if (MousePosition != previous.MousePosition || FireButtonDown)
         {

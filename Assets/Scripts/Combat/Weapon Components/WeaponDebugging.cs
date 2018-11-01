@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CombatDebugging : MonoBehaviour
+public class WeaponDebugging : MonoBehaviour
 {
     [SerializeField]
     private Vector3Reference _direction;
