@@ -62,6 +62,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1289387596855744
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4473707152761908}
+  - component: {fileID: 114339508862635038}
+  m_Layer: 0
+  m_Name: Weapon Angler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1307331395688930
 GameObject:
   m_ObjectHideFlags: 1
@@ -181,8 +197,22 @@ Transform:
   - {fileID: 4317851410827530}
   - {fileID: 4512153676883028}
   - {fileID: 4516093959162080}
+  - {fileID: 4473707152761908}
   m_Father: {fileID: 4638067161720332}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4473707152761908
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1289387596855744}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4419691903540908}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4512153676883028
 Transform:
@@ -303,6 +333,7 @@ MonoBehaviour:
   _weaponDirection: {fileID: 4399202113731928}
   _weaponCharger: {fileID: 114870520263738438}
   _weaponFireHandler: {fileID: 114830557613157448}
+  _weaponAngler: {fileID: 0}
   _weaponCanFire:
     _useConstant: 0
     _constantValue: 0
@@ -336,6 +367,22 @@ MonoBehaviour:
     _useConstant: 0
     _constantValue: {x: 0, y: 0, z: 0}
     _variable: {fileID: 11400000, guid: db7743775b88ff547a35b36d00faef36, type: 2}
+--- !u!114 &114339508862635038
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1289387596855744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bdfe7852fb2e4949b16067df757d3b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _directionVariable:
+    _useConstant: 0
+    _constantValue: {x: 0, y: 0, z: 0}
+    _variable: {fileID: 11400000, guid: db7743775b88ff547a35b36d00faef36, type: 2}
+  _weaponTransform: {fileID: 4399202113731928}
 --- !u!114 &114554613205426316
 MonoBehaviour:
   m_ObjectHideFlags: 1

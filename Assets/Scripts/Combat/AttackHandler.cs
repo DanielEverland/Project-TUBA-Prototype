@@ -29,6 +29,8 @@ public class AttackHandler : MonoBehaviour {
     [SerializeField]
     private WeaponFireHandler _weaponFireHandler;
     [SerializeField]
+    private WeaponAngler _weaponAngler;
+    [SerializeField]
     private BoolReference _weaponCanFire;
 
     private bool IsFullyCharged { get { return _weaponCharger.IsFullyCharged; } }
@@ -66,8 +68,8 @@ public class AttackHandler : MonoBehaviour {
             PollWeaponFire(response);
             ToggleFireDown(response);
         }
-                
-        AngleWeapon(response);
+
+        _weaponAngler.Poll(response);
 
         _previousResponse = response;
     }
@@ -164,13 +166,6 @@ public class AttackHandler : MonoBehaviour {
 
         return response;
     }
-    private void AngleWeapon(CombatInputResponse response)
-    {
-        Vector3 direction = _direction.Value.normalized;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-        _weaponTransform.transform.eulerAngles = new Vector3(0, 0, angle);
-    }    
     private bool CanFire()
     {
         return !OnCooldown; /*&& CurrentAmmo > 0;*/
