@@ -10,11 +10,13 @@ public class WeaponFireHandler : MonoBehaviour
     [SerializeField]
     private IntReference _maxAmmoCount;
     [SerializeField]
+    private FloatReference _lastFireTime;
+    [SerializeField]
     private SeekerSpawner _seekerSpawner;
     [SerializeField]
-    private WeaponVariable _selectedWeapon;    
+    private WeaponVariable _selectedWeapon;
 
-    public float WeaponLastFire { get { return _lastFireTime; } }
+    public float WeaponLastFire { get { return _lastFireTime.Value; } set { _lastFireTime.Value = value; } }
     public int CurrentAmmo
     {
         get
@@ -31,11 +33,9 @@ public class WeaponFireHandler : MonoBehaviour
     private IEnumerable<Muzzle> Muzzles { get { return _selectedWeapon.Value.TriggerData.Muzzles; } }
     private int SeekersToFire { get { return _selectedWeapon.Value.TriggerData.SeekersToFire; } }
 
-    private float _lastFireTime = float.MinValue;
-
     public void Fire()
     {
-        _lastFireTime = Time.time;
+        WeaponLastFire = Time.time;
 
         CurrentAmmo = Mathf.Clamp(CurrentAmmo - 1, 0, _maxAmmoCount.Value);
 

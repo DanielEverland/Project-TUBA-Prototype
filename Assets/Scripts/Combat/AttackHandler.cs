@@ -7,19 +7,15 @@ public interface IAttackHandlerComponent
     void Poll(WeaponInputResponse input);
 }
 public class AttackHandler : MonoBehaviour {
-    
+
     [SerializeField]
-    private Transform _weaponTransform;    
+    private BoolReference _canFire;
     [SerializeField]
-    private FloatReference _cooldownTime;
-    [SerializeField]
-    private FloatReference _currentCooldown;
+    private Transform _weaponTransform;
     [SerializeField]
     private BoolReference _useCharge;    
     [SerializeField]
     private FloatReference _reloadTime;
-    [SerializeField]
-    private Vector3Reference _direction;
     [SerializeField]
     private GameEvent _onAmmoReloaded;
     [SerializeField]
@@ -31,32 +27,20 @@ public class AttackHandler : MonoBehaviour {
     [SerializeField]
     private WeaponAngler _weaponAngler;
     [SerializeField]
-    private BoolReference _weaponCanFire;
-
+    private WeaponInputHandler _weaponInputHandler;
+    [SerializeField]
+    private WeaponCooldownHandler _weaponCooldownHandler;
+    
     private bool IsFullyCharged { get { return _weaponCharger.IsFullyCharged; } }
+    private bool CanFire { get { return _canFire.Value; } }
 
     private bool UseCharge { get { return _useCharge.Value; } }
-    private float CurrentCooldown { get { return _currentCooldown.Value; } set { _currentCooldown.Value = value; } }    
-    private float CooldownTime { get { return _cooldownTime.Value; } }
-    
-
-    private bool OnCooldown
-    {
-        get
-        {
-            return CurrentCooldown < CooldownTime;
-        }
-    }    
-
     private bool _isReloading = false;
     private float _reloadTimePassed;
     
-    private float? _fireDownTime = null;
-    private WeaponInputResponse _previousResponse = default(WeaponInputResponse);
-    
     private void Update()
     {
-        WeaponInputResponse response = PollInput();
+        WeaponInputResponse response = _weaponInputHandler.PollInput();
                 
         if(ShouldReload(response) || _isReloading)
         {
@@ -66,12 +50,12 @@ public class AttackHandler : MonoBehaviour {
         else
         {
             PollWeaponFire(response);
-            ToggleFireDown(response);
+            _weaponInputHandler.ToggleFireDown(response);
         }
 
         _weaponAngler.Poll(response);
 
-        _previousResponse = response;
+        
     }
     private void DoReload()
     {
@@ -113,13 +97,13 @@ public class AttackHandler : MonoBehaviour {
     }
     private void PollWeaponFire(WeaponInputResponse response)
     {
-        CalculateCooldown();
         PollFireWeapon(response);
+        _weaponCooldownHandler.CalculateCooldown();
         _weaponCharger.Poll(response);
     }    
     private void PollFireWeapon(WeaponInputResponse response)
     {        
-        if(IsFullyCharged && CanFire() && IsFireButtonPressed(response))
+        if(IsFullyCharged && CanFire && IsFireButtonPressed(response))
         {
             _weaponFireHandler.Fire();
         }
@@ -134,40 +118,5 @@ public class AttackHandler : MonoBehaviour {
         {
             return response.FireButtonDown;
         }
-    }
-    private void CalculateCooldown()
-    {
-        CurrentCooldown = Mathf.Clamp(Time.time - _weaponFireHandler.WeaponLastFire, 0, CooldownTime);
-    }
-    private void ToggleFireDown(WeaponInputResponse response)
-    {
-        if (response.FireButtonDown && _fireDownTime == null)
-        {
-            _fireDownTime = Time.time;
-        }
-        else
-        {
-            _fireDownTime = null;
-        }
-    }
-    private WeaponInputResponse PollInput()
-    {
-        WeaponInputResponse response = WeaponInputResponse.Create(_previousResponse, gameObject);
-
-        if (response.FireButtonDown && _fireDownTime == null)
-            _fireDownTime = Time.time;
-
-        if (response.HasDirection)
-        {
-            _direction.Value = response.InputDirection;
-        }
-
-        _weaponCanFire.Value = CanFire();
-
-        return response;
-    }
-    private bool CanFire()
-    {
-        return !OnCooldown; /*&& CurrentAmmo > 0;*/
     }
 }
