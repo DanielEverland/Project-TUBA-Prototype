@@ -7,10 +7,7 @@ public interface IAttackHandlerComponent
     void Poll(CombatInputResponse input);
 }
 public class AttackHandler : MonoBehaviour {
-
     
-    [SerializeField]
-    private WeaponVariable _selectedWeapon;
     [SerializeField]
     private Transform _weaponTransform;    
     [SerializeField]
@@ -18,11 +15,7 @@ public class AttackHandler : MonoBehaviour {
     [SerializeField]
     private FloatReference _currentCooldown;
     [SerializeField]
-    private BoolReference _useCharge;
-    [SerializeField]
-    private IntReference _currentAmmoCount;
-    [SerializeField]
-    private IntReference _maxAmmoCount;
+    private BoolReference _useCharge;    
     [SerializeField]
     private FloatReference _reloadTime;
     [SerializeField]
@@ -34,7 +27,7 @@ public class AttackHandler : MonoBehaviour {
     [SerializeField]
     private WeaponCharger _weaponCharger;
     [SerializeField]
-    private SeekerSpawner _seekerSpawner;
+    private WeaponFireHandler _weaponFireHandler;
     [SerializeField]
     private BoolReference _weaponCanFire;
 
@@ -51,23 +44,11 @@ public class AttackHandler : MonoBehaviour {
         {
             return CurrentCooldown < CooldownTime;
         }
-    }
-    public int CurrentAmmo
-    {
-        get
-        {
-            return _selectedWeapon.Value.CurrentAmmo;
-        }
-        set
-        {
-            _selectedWeapon.Value.CurrentAmmo = value;
-            _currentAmmoCount.Value = _selectedWeapon.Value.CurrentAmmo;
-        }
-    }
+    }    
 
     private bool _isReloading = false;
     private float _reloadTimePassed;
-    private float _lastFireTime = float.MinValue;
+    
     private float? _fireDownTime = null;
     private CombatInputResponse _previousResponse = default(CombatInputResponse);
     
@@ -100,22 +81,22 @@ public class AttackHandler : MonoBehaviour {
             _reloadTimePassed -= _reloadTime.Value;
         }
 
-        if (CurrentAmmo == _maxAmmoCount.Value)
-            OnReloadStopped();
+        //if (CurrentAmmo == _maxAmmoCount.Value)
+        //    OnReloadStopped();
     }
     private bool ShouldReload(CombatInputResponse response)
     {
-        if (response.ReloadButtonDown && CurrentAmmo != _maxAmmoCount.Value)
-        {
-            OnStartReload();
-            return true;
-        }            
+        //if (response.ReloadButtonDown && CurrentAmmo != _maxAmmoCount.Value)
+        //{
+        //    OnStartReload();
+        //    return true;
+        //}            
 
         return false;
     }
     private void OnAmmoReloaded()
     {
-        CurrentAmmo = Mathf.Clamp(CurrentAmmo + 1, 0, _maxAmmoCount.Value);       
+        //CurrentAmmo = Mathf.Clamp(CurrentAmmo + 1, 0, _maxAmmoCount.Value);       
 
         _onAmmoReloaded.Raise();
     }
@@ -138,7 +119,7 @@ public class AttackHandler : MonoBehaviour {
     {        
         if(IsFullyCharged && CanFire() && IsFireButtonPressed(response))
         {
-            Fire();
+            _weaponFireHandler.Fire();
         }
     }
     private bool IsFireButtonPressed(CombatInputResponse response)
@@ -154,7 +135,7 @@ public class AttackHandler : MonoBehaviour {
     }
     private void CalculateCooldown()
     {
-        CurrentCooldown = Mathf.Clamp(Time.time - _lastFireTime, 0, CooldownTime);
+        CurrentCooldown = Mathf.Clamp(Time.time - _weaponFireHandler.WeaponLastFire, 0, CooldownTime);
     }
     private void ToggleFireDown(CombatInputResponse response)
     {
@@ -192,17 +173,6 @@ public class AttackHandler : MonoBehaviour {
     }    
     private bool CanFire()
     {
-        return !OnCooldown && CurrentAmmo > 0;
-    }
-    private void Fire()
-    {
-        _lastFireTime = Time.time;
-
-        CurrentAmmo = Mathf.Clamp(CurrentAmmo - 1, 0, _maxAmmoCount.Value);
-
-        foreach (Weapon.Muzzle muzzle in _selectedWeapon.Value.TriggerData.Muzzles)
-        {
-            _seekerSpawner.SpawnSeeker(muzzle);
-        }
+        return !OnCooldown; /*&& CurrentAmmo > 0;*/
     }
 }

@@ -46,6 +46,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1227536873336676
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4516093959162080}
+  - component: {fileID: 114830557613157448}
+  m_Layer: 0
+  m_Name: Weapon Fire Handler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1307331395688930
 GameObject:
   m_ObjectHideFlags: 1
@@ -164,6 +180,7 @@ Transform:
   - {fileID: 4169540065751062}
   - {fileID: 4317851410827530}
   - {fileID: 4512153676883028}
+  - {fileID: 4516093959162080}
   m_Father: {fileID: 4638067161720332}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -179,6 +196,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4419691903540908}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4516093959162080
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1227536873336676}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4419691903540908}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4638067161720332
 Transform:
@@ -248,7 +278,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eace08d9fffbaf49a2509927d587c37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _selectedWeapon: {fileID: 11400000, guid: fe74e8c13909c9247b202b6ffbaf66fc, type: 2}
   _weaponTransform: {fileID: 4399202113731928}
   _cooldownTime:
     _useConstant: 0
@@ -262,14 +291,6 @@ MonoBehaviour:
     _useConstant: 0
     _constantValue: 0
     _variable: {fileID: 11400000, guid: 4a0f4aa5c1a1cfc4982ce5f9bf35eb4f, type: 2}
-  _currentAmmoCount:
-    _useConstant: 0
-    _constantValue: 0
-    _variable: {fileID: 11400000, guid: 4baf470a20a2a0147aa81a8c8ef79e25, type: 2}
-  _maxAmmoCount:
-    _useConstant: 0
-    _constantValue: 0
-    _variable: {fileID: 11400000, guid: 7dea702673ad53c469a345b3101a1a8e, type: 2}
   _reloadTime:
     _useConstant: 0
     _constantValue: 0
@@ -281,7 +302,7 @@ MonoBehaviour:
   _onAmmoReloaded: {fileID: 11400000, guid: 54eeec7dc3b086545895120235eb5ec1, type: 2}
   _weaponDirection: {fileID: 4399202113731928}
   _weaponCharger: {fileID: 114870520263738438}
-  _seekerSpawner: {fileID: 114707697089221798}
+  _weaponFireHandler: {fileID: 114830557613157448}
   _weaponCanFire:
     _useConstant: 0
     _constantValue: 0
@@ -363,6 +384,27 @@ MonoBehaviour:
     _useConstant: 0
     _constantValue: 0
     _variable: {fileID: 11400000, guid: d251c8038738759408980be6f44b9d05, type: 2}
+--- !u!114 &114830557613157448
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1227536873336676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd2686b0da6bb3149bac5dda933041d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentAmmoCount:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: 4baf470a20a2a0147aa81a8c8ef79e25, type: 2}
+  _maxAmmoCount:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: 7dea702673ad53c469a345b3101a1a8e, type: 2}
+  _seekerSpawner: {fileID: 114707697089221798}
+  _selectedWeapon: {fileID: 11400000, guid: fe74e8c13909c9247b202b6ffbaf66fc, type: 2}
 --- !u!114 &114870520263738438
 MonoBehaviour:
   m_ObjectHideFlags: 1

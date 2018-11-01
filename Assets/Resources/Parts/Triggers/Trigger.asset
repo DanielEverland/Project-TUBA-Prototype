@@ -23,4 +23,4 @@ MonoBehaviour:
     _intervalStart: 0
     _intervalEnd: 0
   _randomMuzzle: 0
-  _seekersToFire: 1
+  _seekersToFire: 2

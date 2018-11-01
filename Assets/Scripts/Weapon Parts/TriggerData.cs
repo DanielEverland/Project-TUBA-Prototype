@@ -7,6 +7,7 @@ using Muzzle = Weapon.Muzzle;
 public class TriggerData : PartBase {
 
     public IEnumerable<Muzzle> Muzzles { get { return _muzzles; } }
+    public bool RandomMuzzle { get { return _randomMuzzle; } }
     public float Cooldown { get { return _cooldown; } }
     public bool UseCharge { get { return _useCharge; } }
     public float Power { get { return _power; } }
