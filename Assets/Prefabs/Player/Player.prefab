@@ -369,15 +369,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eace08d9fffbaf49a2509927d587c37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isFireButtonPressed:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: 8e2111d0f923c204cac5aa08169104f4, type: 2}
   _canFire:
     _useConstant: 0
     _constantValue: 0
     _variable: {fileID: 11400000, guid: cf721da4af6bbcf4f95f772450dc0265, type: 2}
   _weaponTransform: {fileID: 4399202113731928}
-  _useCharge:
-    _useConstant: 0
-    _constantValue: 0
-    _variable: {fileID: 11400000, guid: 4a0f4aa5c1a1cfc4982ce5f9bf35eb4f, type: 2}
   _reloadTime:
     _useConstant: 0
     _constantValue: 0
@@ -530,6 +530,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ce42579d83b9a245a9efe242cc44bd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _useCharge:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: 4a0f4aa5c1a1cfc4982ce5f9bf35eb4f, type: 2}
+  _fireButtonPressed:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: 8e2111d0f923c204cac5aa08169104f4, type: 2}
   _currentAmmo:
     _useConstant: 0
     _constantValue: 0
