@@ -50,4 +50,61 @@ public class Weapon : ScriptableObject {
         ChangePart(PartLoader.EventData.Random());
         ChangePart(PartLoader.SeekerData.Random());
     }
+
+    [Serializable]
+    public class Muzzle : IEquatable<Muzzle>
+    {
+        public Space Space { get { return _space; } }
+        public float Angle { get { return _angle; } }        
+        public float IntervalStart { get { return _intervalStart; } }
+        public float IntervalEnd { get { return _intervalEnd; } }
+
+        [SerializeField]
+        private float _angle;
+        [SerializeField]
+        private Space _space = Space.Self;
+        [SerializeField]
+        private float _intervalStart = 0;
+        [SerializeField]
+        private float _intervalEnd = 0;
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+
+            if (obj is Muzzle)
+            {
+                return Equals(obj as Muzzle);
+            }
+
+            return false;
+        }
+        public bool Equals(Muzzle other)
+        {
+            if (other == null)
+                return false;
+
+            return
+                other.Angle == Angle &&
+                other.Space == Space &&
+                other.IntervalStart == IntervalStart &&
+                other.IntervalEnd == IntervalEnd;
+        }
+        public override int GetHashCode()
+        {
+            int i = 17;
+
+            i += Angle.GetHashCode() * 13;
+            i += Space.GetHashCode() * 13;
+            i += IntervalStart.GetHashCode() * 13;
+            i += IntervalEnd.GetHashCode() * 13;
+
+            return i;
+        }
+        public override string ToString()
+        {
+            return string.Format("{0} ({1}-{2})\n{3}", _angle, IntervalStart, IntervalEnd, _space);
+        }
+    }
 }

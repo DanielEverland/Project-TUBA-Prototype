@@ -96,6 +96,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1849210265720470
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4512153676883028}
+  - component: {fileID: 114707697089221798}
+  m_Layer: 0
+  m_Name: Seeker Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &4169540065751062
 Transform:
   m_ObjectHideFlags: 1
@@ -147,8 +163,22 @@ Transform:
   m_Children:
   - {fileID: 4169540065751062}
   - {fileID: 4317851410827530}
+  - {fileID: 4512153676883028}
   m_Father: {fileID: 4638067161720332}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4512153676883028
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1849210265720470}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4419691903540908}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4638067161720332
 Transform:
@@ -218,7 +248,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eace08d9fffbaf49a2509927d587c37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onFire: {fileID: 11400000, guid: 52f5ff1cbaf5188409485dbb9ef25b05, type: 2}
   _selectedWeapon: {fileID: 11400000, guid: fe74e8c13909c9247b202b6ffbaf66fc, type: 2}
   _weaponTransform: {fileID: 4399202113731928}
   _cooldownTime:
@@ -251,9 +280,8 @@ MonoBehaviour:
     _variable: {fileID: 11400000, guid: db7743775b88ff547a35b36d00faef36, type: 2}
   _onAmmoReloaded: {fileID: 11400000, guid: 54eeec7dc3b086545895120235eb5ec1, type: 2}
   _weaponDirection: {fileID: 4399202113731928}
-  _projectile: {fileID: 114142216378517668, guid: f54225c717587264aba1b8d1a613ce4c,
-    type: 2}
   _weaponCharger: {fileID: 114870520263738438}
+  _seekerSpawner: {fileID: 114707697089221798}
   _weaponCanFire:
     _useConstant: 0
     _constantValue: 0
@@ -303,6 +331,21 @@ MonoBehaviour:
     _useConstant: 0
     _constantValue: 0
     _variable: {fileID: 11400000, guid: 9e4f43891992a90499e1fc930871c5f5, type: 2}
+--- !u!114 &114707697089221798
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1849210265720470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 385ab31c1ee288f41b09cb26761d3768, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 114142216378517668, guid: f54225c717587264aba1b8d1a613ce4c, type: 2}
+  _selectedWeapon: {fileID: 11400000, guid: fe74e8c13909c9247b202b6ffbaf66fc, type: 2}
+  _weaponDirection: {fileID: 4399202113731928}
+  _onFire: {fileID: 11400000, guid: 52f5ff1cbaf5188409485dbb9ef25b05, type: 2}
 --- !u!114 &114819420585879892
 MonoBehaviour:
   m_ObjectHideFlags: 1

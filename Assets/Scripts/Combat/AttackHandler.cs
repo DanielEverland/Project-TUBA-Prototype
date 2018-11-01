@@ -8,8 +8,7 @@ public interface IAttackHandlerComponent
 }
 public class AttackHandler : MonoBehaviour {
 
-    [SerializeField]
-    private GameEvent _onFire;
+    
     [SerializeField]
     private WeaponVariable _selectedWeapon;
     [SerializeField]
@@ -33,9 +32,9 @@ public class AttackHandler : MonoBehaviour {
     [SerializeField]
     private Transform _weaponDirection;
     [SerializeField]
-    private ProjectileBase _projectile;
-    [SerializeField]
     private WeaponCharger _weaponCharger;
+    [SerializeField]
+    private SeekerSpawner _seekerSpawner;
     [SerializeField]
     private BoolReference _weaponCanFire;
 
@@ -201,16 +200,9 @@ public class AttackHandler : MonoBehaviour {
 
         CurrentAmmo = Mathf.Clamp(CurrentAmmo - 1, 0, _maxAmmoCount.Value);
 
-        SpawnProjectile();
-
-        _onFire.Raise();
-    }
-    private void SpawnProjectile()
-    {
-        ProjectileBase instance = Instantiate(_projectile);
-        instance.Initialize(_selectedWeapon.Value);
-
-        instance.transform.position = _weaponDirection.position;
-        instance.transform.rotation = _weaponDirection.rotation;
+        foreach (Weapon.Muzzle muzzle in _selectedWeapon.Value.TriggerData.Muzzles)
+        {
+            _seekerSpawner.SpawnSeeker(muzzle);
+        }
     }
 }

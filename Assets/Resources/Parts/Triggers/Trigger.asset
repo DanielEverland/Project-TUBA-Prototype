@@ -11,15 +11,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0312c675ff5e22d4d9b800480cf64425, type: 3}
   m_Name: Trigger
   m_EditorClassIdentifier: 
-  _useCharge: 1
+  _useCharge: 0
   _chargeTime: 1
   _cooldown: 0.3
   _power: 10
   _ammoCapacity: 10
   _reloadTime: 1
   _muzzles:
-  - _direction: {x: 1, y: 0, z: 0}
+  - _angle: 0
     _space: 1
-    _fov: 0
+    _intervalStart: 0
+    _intervalEnd: 0
   _randomMuzzle: 0
   _seekersToFire: 1
