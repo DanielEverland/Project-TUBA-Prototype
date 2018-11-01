@@ -87,7 +87,7 @@ public struct WeaponInputResponse
     }
     private void PollMouseDirection(WeaponInputResponse previous, GameObject player)
     {
-        if (MousePosition != previous.MousePosition || FireButtonDown)
+        if (MousePosition != previous.MousePosition || _keyboardFireButtonDown)
         {
             Vector2 playerScreenSpace = Camera.main.WorldToScreenPoint(player.transform.position);
             Vector2 mouseDelta = (Vector2)Input.mousePosition - playerScreenSpace;
