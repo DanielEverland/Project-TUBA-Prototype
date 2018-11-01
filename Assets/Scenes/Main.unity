@@ -152,10 +152,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1726657342680836, guid: bc71f2cb096a4ab47974bfbe4e79116d, type: 2}
-      propertyPath: m_Name
-      value: Weapon Direction
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc71f2cb096a4ab47974bfbe4e79116d, type: 2}
   m_IsPrefabAsset: 0

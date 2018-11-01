@@ -25,6 +25,11 @@ public class Weapon : ScriptableObject {
 
     public void ChangePart(PartBase part)
     {
+        if (IsEquipped(part))
+            return;
+
+        Unequip(part);
+
         if(part is TriggerData)
         {
             TriggerData = part as TriggerData;
@@ -38,6 +43,44 @@ public class Weapon : ScriptableObject {
         else if(part is SeekerData)
         {
             SeekerData = part as SeekerData;
+        }
+        else
+        {
+            throw new NotImplementedException();
+        }
+
+        part.OnEquipped();
+    }
+    private bool IsEquipped(PartBase part)
+    {
+        bool isEquipped = false;
+
+        PerformActionOnParts(x => { isEquipped = x == part;  }, part);
+
+        return isEquipped;
+    }
+    private void Unequip(PartBase part)
+    {
+        PerformActionOnParts(x =>
+        {
+            if(x != null)
+                x.OnUneqipped();
+
+        }, part);
+    }
+    private void PerformActionOnParts(Action<PartBase> callback, PartBase part)
+    {
+        if (part is TriggerData)
+        {
+            callback(TriggerData);
+        }
+        else if (part is EventData)
+        {
+            callback(EventData);
+        }
+        else if (part is SeekerData)
+        {
+            callback(SeekerData);
         }
         else
         {
