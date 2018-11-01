@@ -30,6 +30,8 @@ public class AttackHandler : MonoBehaviour {
     private WeaponInputHandler _weaponInputHandler;
     [SerializeField]
     private WeaponCooldownHandler _weaponCooldownHandler;
+    [SerializeField]
+    private WeaponReloader _weaponReloader;
 
     private bool IsFireButtonPressed { get { return _isFireButtonPressed.Value; } }
     private bool IsFullyCharged { get { return _weaponCharger.IsFullyCharged; } }
@@ -42,56 +44,13 @@ public class AttackHandler : MonoBehaviour {
     {
         WeaponInputResponse response = _weaponInputHandler.PollInput();
                 
-        if(ShouldReload(response) || _isReloading)
-        {
-            DoReload();
-            return;
-        }
-        else
+        if(!_weaponReloader.PollReload(response) || _isReloading)
         {
             PollWeaponFire(response);
             _weaponInputHandler.ToggleFireDown(response);
         }
 
         _weaponAngler.Poll(response);
-    }
-    private void DoReload()
-    {
-        _reloadTimePassed += Time.deltaTime;
-
-        if(_reloadTimePassed > _reloadTime.Value)
-        {
-            OnAmmoReloaded();
-            _reloadTimePassed -= _reloadTime.Value;
-        }
-
-        //if (CurrentAmmo == _maxAmmoCount.Value)
-        //    OnReloadStopped();
-    }
-    private bool ShouldReload(WeaponInputResponse response)
-    {
-        //if (response.ReloadButtonDown && CurrentAmmo != _maxAmmoCount.Value)
-        //{
-        //    OnStartReload();
-        //    return true;
-        //}            
-
-        return false;
-    }
-    private void OnAmmoReloaded()
-    {
-        //CurrentAmmo = Mathf.Clamp(CurrentAmmo + 1, 0, _maxAmmoCount.Value);       
-
-        _onAmmoReloaded.Raise();
-    }
-    private void OnReloadStopped()
-    {
-        _isReloading = false;
-    }
-    private void OnStartReload()
-    {
-        _isReloading = true;
-        _reloadTimePassed = 0;
     }
     private void PollWeaponFire(WeaponInputResponse response)
     {

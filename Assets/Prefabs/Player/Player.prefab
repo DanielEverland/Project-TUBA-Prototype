@@ -161,6 +161,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1841464200723926
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4477191563803064}
+  - component: {fileID: 114887367140494128}
+  m_Layer: 0
+  m_Name: Reloader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1849210265720470
 GameObject:
   m_ObjectHideFlags: 1
@@ -246,6 +262,7 @@ Transform:
   - {fileID: 4473707152761908}
   - {fileID: 4106615925058774}
   - {fileID: 4757242842817050}
+  - {fileID: 4477191563803064}
   m_Father: {fileID: 4638067161720332}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -261,6 +278,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4419691903540908}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4477191563803064
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1841464200723926}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4419691903540908}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4512153676883028
 Transform:
@@ -389,6 +419,7 @@ MonoBehaviour:
   _weaponAngler: {fileID: 114339508862635038}
   _weaponInputHandler: {fileID: 114821760419370140}
   _weaponCooldownHandler: {fileID: 114252622286710696}
+  _weaponReloader: {fileID: 114887367140494128}
 --- !u!114 &114168640975307782
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -606,6 +637,34 @@ MonoBehaviour:
     _useConstant: 0
     _constantValue: 0
     _variable: {fileID: 11400000, guid: cf721da4af6bbcf4f95f772450dc0265, type: 2}
+--- !u!114 &114887367140494128
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1841464200723926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c549f7c0083376e4ca2c89ccaabe3ba3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxAmmoProperty:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: 7dea702673ad53c469a345b3101a1a8e, type: 2}
+  _reloadTimeProperty:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: d91e029b64994714c8e749cd304091fc, type: 2}
+  _isReloading:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: bdb3b074128b17c4580f5a68b29fdd81, type: 2}
+  _currentAmmo:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: 4baf470a20a2a0147aa81a8c8ef79e25, type: 2}
+  _onAmmoReloaded: {fileID: 11400000, guid: 54eeec7dc3b086545895120235eb5ec1, type: 2}
 --- !u!114 &114995828028148960
 MonoBehaviour:
   m_ObjectHideFlags: 1
