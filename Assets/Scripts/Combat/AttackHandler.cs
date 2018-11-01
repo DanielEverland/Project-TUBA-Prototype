@@ -13,14 +13,6 @@ public class AttackHandler : MonoBehaviour {
     [SerializeField]
     private BoolReference _canFire;
     [SerializeField]
-    private Transform _weaponTransform;    
-    [SerializeField]
-    private FloatReference _reloadTime;
-    [SerializeField]
-    private GameEvent _onAmmoReloaded;
-    [SerializeField]
-    private Transform _weaponDirection;
-    [SerializeField]
     private WeaponCharger _weaponCharger;
     [SerializeField]
     private WeaponFireHandler _weaponFireHandler;
@@ -36,15 +28,12 @@ public class AttackHandler : MonoBehaviour {
     private bool IsFireButtonPressed { get { return _isFireButtonPressed.Value; } }
     private bool IsFullyCharged { get { return _weaponCharger.IsFullyCharged; } }
     private bool CanFire { get { return _canFire.Value; } }
-    
-    private bool _isReloading = false;
-    private float _reloadTimePassed;
-    
+        
     private void Update()
     {
         WeaponInputResponse response = _weaponInputHandler.PollInput();
                 
-        if(!_weaponReloader.PollReload(response) || _isReloading)
+        if(!_weaponReloader.PollReload(response))
         {
             PollWeaponFire(response);
             _weaponInputHandler.ToggleFireDown(response);
@@ -54,15 +43,12 @@ public class AttackHandler : MonoBehaviour {
     }
     private void PollWeaponFire(WeaponInputResponse response)
     {
-        PollFireWeapon(response);
-        _weaponCooldownHandler.CalculateCooldown();
-        _weaponCharger.Poll(response);
-    }    
-    private void PollFireWeapon(WeaponInputResponse response)
-    {        
-        if(IsFullyCharged && CanFire && IsFireButtonPressed)
+        if (IsFullyCharged && CanFire && IsFireButtonPressed)
         {
             _weaponFireHandler.Fire();
         }
+
+        _weaponCooldownHandler.CalculateCooldown();
+        _weaponCharger.Poll(response);
     }
 }
