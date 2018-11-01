@@ -97,7 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4399202113731928}
   m_Layer: 0
-  m_Name: WeaponDirection
+  m_Name: Weapon Direction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -233,12 +233,12 @@ MonoBehaviour:
     _useConstant: 0
     _constantValue: 0
     _variable: {fileID: 11400000, guid: cf721da4af6bbcf4f95f772450dc0265, type: 2}
-  _weaponCharger: {fileID: 0}
-  _weaponFireHandler: {fileID: 0}
-  _weaponAngler: {fileID: 0}
-  _weaponInputHandler: {fileID: 0}
-  _weaponCooldownHandler: {fileID: 0}
-  _weaponReloader: {fileID: 0}
+  _weaponCharger: {fileID: 114798123878018216}
+  _weaponFireHandler: {fileID: 114513939234694816}
+  _weaponAngler: {fileID: 114459437911582460}
+  _weaponInputHandler: {fileID: 114966546623832196}
+  _weaponCooldownHandler: {fileID: 114878609834515998}
+  _weaponReloader: {fileID: 114149373127024484}
 --- !u!114 &114149373127024484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -353,7 +353,7 @@ MonoBehaviour:
     _useConstant: 0
     _constantValue: 0
     _variable: {fileID: 11400000, guid: d341dde2333a37b488a7d156b8a0ca85, type: 2}
-  _seekerSpawner: {fileID: 0}
+  _seekerSpawner: {fileID: 114346657072030846}
   _selectedWeapon: {fileID: 11400000, guid: fe74e8c13909c9247b202b6ffbaf66fc, type: 2}
 --- !u!114 &114554613205426316
 MonoBehaviour:
