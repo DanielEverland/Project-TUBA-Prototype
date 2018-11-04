@@ -8,7 +8,7 @@ public class WeaponSelector : MonoBehaviour
     [SerializeField]
     private WeaponVariable _selectedWeapon = null;
     [SerializeField]
-    private WeaponSet _weaponInventory = null;
+    private WeaponCollection _weaponInventory = null;
     [SerializeField]
     private WeaponGameEvent _onWeaponSelectionUpdated = null;
     [SerializeField]

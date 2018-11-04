@@ -10,7 +10,7 @@ public class WeaponSetup : MonoBehaviour
     [SerializeField]
     private WeaponVariable _selectedWeapon;
     [SerializeField]
-    private WeaponSet _weaponInventory;
+    private WeaponCollection _weaponInventory;
     [SerializeField]
     private IntReference _weaponSlots;
 

@@ -7,7 +7,7 @@ public class WeaponSlotElement : MonoBehaviour {
     [SerializeField]
     private List<PartSelectorBase> _triggerSelectors;
     [SerializeField]
-    private WeaponSet _weaponInventory;
+    private WeaponCollection _weaponInventory;
 
 #if UNITY_EDITOR
     [SerializeField]
