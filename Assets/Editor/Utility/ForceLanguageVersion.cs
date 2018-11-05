@@ -9,8 +9,8 @@ using UnityEditor.Callbacks;
 
 public static class ForceLanguageVersion {
 
-    private const string _targetText = "<LangVersion>6</LangVersion>";
-    private const string _replacementText = "<LangVersion>latest</LangVersion>";
+    private const string _targetText = "<LangVersion>7</LangVersion>";
+    private const string _replacementText = "<LangVersion>7.2</LangVersion>";
 
     private static Thread _currentThread;
     private static string[] _targetFiles;
