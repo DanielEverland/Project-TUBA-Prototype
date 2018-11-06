@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using static UnityEngine.Random;
+
 public static class Extensions
 {
     /// <summary>
@@ -35,6 +37,6 @@ public static class Extensions
     }
     public static T Random<T>(this IList<T> list)
     {
-        return list[UnityEngine.Random.Range(0, list.Count)];
+        return list[Range(0, list.Count)];
     }
 }

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public struct WeaponInputResponse
 {
-    public bool ReloadButtonDown { get; private set; }
-    public bool FireButtonDown { get { return _controllerFireButtonDown || _keyboardFireButtonDown; } }
-    public bool FireButtonUp { get { return _controllerFireButtonUp || _keyboardFireButtonUp; } }
+    public bool FireButtonDown => _controllerFireButtonDown || _keyboardFireButtonDown;
+    public bool FireButtonUp => _controllerFireButtonUp || _keyboardFireButtonUp;
+    public bool ReloadButtonDown { get; private set; }    
     public bool HasDirection { get; private set; }
     public Vector2 MousePosition { get; private set; }
     public Vector2 InputDirection
@@ -34,7 +34,7 @@ public struct WeaponInputResponse
 
     public static WeaponInputResponse Create(WeaponInputResponse previous, GameObject player)
     {
-        WeaponInputResponse response = default(WeaponInputResponse);
+        WeaponInputResponse response = default;
 
         response.PollMouseInput();
         response.PollControllerFireButton(previous);
@@ -46,11 +46,7 @@ public struct WeaponInputResponse
         response.PollMouseDirection(previous, player);
 
         return response;
-    }
-    private void PollMouseInput()
-    {
-        MousePosition = Input.mousePosition;
-    }
+    }    
     private void PollControllerFireButton(WeaponInputResponse previous)
     {
         if (ControllerFireButtonDown())
@@ -95,8 +91,6 @@ public struct WeaponInputResponse
             InputDirection = mouseDelta.normalized;
         }
     }
-    private static bool ControllerFireButtonDown()
-    {
-        return Input.GetAxis("Right Trigger") > 0;
-    }
+    private void PollMouseInput() => MousePosition = Input.mousePosition;
+    private static bool ControllerFireButtonDown() => Input.GetAxis("Right Trigger") > 0;
 }

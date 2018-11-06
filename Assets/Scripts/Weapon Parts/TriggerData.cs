@@ -6,14 +6,14 @@ using Muzzle = Weapon.Muzzle;
 [CreateAssetMenu(fileName = "Trigger.asset", menuName = MENU_ROOT + "Trigger", order = MENU_ORDER)]
 public class TriggerData : PartBase {
 
-    public IEnumerable<Muzzle> Muzzles { get { return _muzzles; } }
-    public bool RandomMuzzle { get { return _randomMuzzle; } }
-    public float Cooldown { get { return _cooldown; } }
-    public bool UseCharge { get { return _useCharge; } }
-    public float Power { get { return _power; } }
-    public int AmmoCapacity { get { return _ammoCapacity; } }
-    public float ReloadTime { get { return _reloadTime; } }
-    public int SeekersToFire { get { return _seekersToFire; } }
+    public IEnumerable<Muzzle> Muzzles => _muzzles;
+    public bool RandomMuzzle => _randomMuzzle;
+    public float Cooldown => _cooldown;
+    public bool UseCharge => _useCharge;
+    public float Power => _power;
+    public int AmmoCapacity => _ammoCapacity;
+    public float ReloadTime => _reloadTime;
+    public int SeekersToFire => _seekersToFire;
     public float ChargeTime
     {
         get

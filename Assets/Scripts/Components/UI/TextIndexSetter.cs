@@ -27,21 +27,18 @@ public class TextIndexSetter : MonoBehaviour
     {
         if (_updateState.HasFlag(UpdateState.Start))
             UpdateText();
+    }    
+    private void Update()
+    {
+        if (_updateState.HasFlag(UpdateState.Update))
+            UpdateText();
     }
     private void OnValidate()
     {
         if (_targetText == null)
             _targetText = GetComponent<TMP_Text>();
     }
-    private void Update()
-    {
-        if (_updateState.HasFlag(UpdateState.Update))
-            UpdateText();
-    }
-    public void UpdateText()
-    {
-        _targetText.text = _collection.List.IndexOf(_variable.BaseValue).ToString();
-    }
+    public void UpdateText() => _targetText.text = _collection.List.IndexOf(_variable.BaseValue).ToString();
 
     [System.Flags, System.Serializable]
     private enum UpdateState

@@ -5,5 +5,5 @@ using UnityEngine;
 
 public class EventPartSelector : PartSelectorBase
 {
-    protected override IEnumerable<PartBase> AvailableParts { get { return PartLoader.EventData; } }
+    protected override IEnumerable<PartBase> AvailableParts => PartLoader.EventData;
 }

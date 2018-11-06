@@ -27,15 +27,5 @@ public class ObjectMover : MonoBehaviour
 
         transform.position += GetDirection() * Velocity;
     }
-    private Vector3 GetDirection()
-    {
-        if(Space == Space.Self)
-        {
-            return transform.TransformDirection(Direction);
-        }
-        else
-        {
-            return Direction;
-        }
-    }
+    private Vector3 GetDirection() => Space == Space.Self ? transform.TransformDirection(Direction) : Direction;
 }

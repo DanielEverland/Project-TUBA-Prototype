@@ -16,6 +16,7 @@ public class ValueSetter : MonoBehaviour
     }
     private void OnValidate()
     {
-        _textTarget = GetComponent<TMP_Text>();
+        if(_textTarget == null)
+            _textTarget = GetComponent<TMP_Text>();
     }
 }

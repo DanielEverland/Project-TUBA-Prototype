@@ -6,5 +6,5 @@ using UnityEngine.UI;
 
 public class TriggerPartSelector : PartSelectorBase
 {
-    protected override IEnumerable<PartBase> AvailableParts { get { return PartLoader.TriggerData; } }
+    protected override IEnumerable<PartBase> AvailableParts => PartLoader.TriggerData;
 }

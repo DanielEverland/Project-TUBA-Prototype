@@ -17,9 +17,9 @@ public static class PartLoader {
         LogData();
     }
 
-    public static IEnumerable<TriggerData> TriggerData { get { return _triggerData; } }
-    public static IEnumerable<SeekerData> SeekerData { get { return _seekerData; } }
-    public static IEnumerable<EventData> EventData { get { return _eventData; } }
+    public static IEnumerable<TriggerData> TriggerData => _triggerData;
+    public static IEnumerable<SeekerData> SeekerData =>_seekerData;
+    public static IEnumerable<EventData> EventData => _eventData;
 
     private static List<TriggerData> _triggerData;
     private static List<SeekerData> _seekerData;

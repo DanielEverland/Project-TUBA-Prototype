@@ -11,12 +11,12 @@ public class WeaponCharger : MonoBehaviour, IAttackHandlerComponent
     [SerializeField]
     private BoolReference _weaponCanFire;
 
-    public bool IsFullyCharged { get { return CurrentCharge >= ChargeTime; } }
+    public bool IsFullyCharged => CurrentCharge >= ChargeTime;
 
-    private float ChargeTime { get { return _weaponChargeTime.Value; } }
+    private float ChargeTime => _weaponChargeTime.Value;
+    private bool CanFire => _weaponCanFire.Value;
     private float CurrentCharge { get { return _currentCharge.Value; } set { _currentCharge.Value = value; } }
-    private bool CanFire { get { return _weaponCanFire.Value; } }
-
+    
     public void Poll(WeaponInputResponse input)
     {
         if (input.FireButtonDown && CanFire)
@@ -33,8 +33,5 @@ public class WeaponCharger : MonoBehaviour, IAttackHandlerComponent
         float desiredCharge = CurrentCharge + Time.deltaTime;
         CurrentCharge = Mathf.Clamp(desiredCharge, 0, ChargeTime);
     }
-    private void ResetCharge()
-    {
-        CurrentCharge = 0;
-    }    
+    private void ResetCharge() => CurrentCharge = 0;
 }

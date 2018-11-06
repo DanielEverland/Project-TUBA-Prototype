@@ -50,14 +50,9 @@ public class ElementToggle : MonoBehaviour {
         {
             _target.SetActive(active);
         }
-        catch (System.NullReferenceException)
+        catch (System.NullReferenceException) when (_target == null)
         {
-            if(_target == null)
-            {
-                throw new System.NullReferenceException("Element Toggle Error: Target cannot be null");
-            }
-
-            throw;
+            throw new System.NullReferenceException("Element Toggle Error: Target cannot be null");
         }
     }
 }

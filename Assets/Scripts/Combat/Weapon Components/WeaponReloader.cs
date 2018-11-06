@@ -17,9 +17,9 @@ public class WeaponReloader : MonoBehaviour
     [SerializeField]
     private IntReference _currentAmmo;
 
-    private bool IsReloading { get { return _isReloading.Value; } set { _isReloading.Value = value; } }
-    private int MaxAmmoProperty { get { return _maxAmmoProperty.Value; } }
-    private float ReloadTimeProperty { get { return _reloadTimeProperty.Value; } }
+    private int MaxAmmoProperty => _maxAmmoProperty.Value;
+    private float ReloadTimeProperty => _reloadTimeProperty.Value;
+    private bool IsReloading { get { return _isReloading.Value; } set { _isReloading.Value = value; } }    
 
     public int CurrentAmmo
     {
@@ -75,14 +75,11 @@ public class WeaponReloader : MonoBehaviour
         CurrentAmmo = Mathf.Clamp(CurrentAmmo + 1, 0, MaxAmmoProperty);
 
         _onAmmoReloaded.Raise();
-    }
-    private void OnReloadStopped()
-    {
-        IsReloading = false;
-    }
+    }    
     private void OnStartReload()
     {
         IsReloading = true;
         _reloadTimePassed = 0;
     }
+    private void OnReloadStopped() => IsReloading = false;
 }

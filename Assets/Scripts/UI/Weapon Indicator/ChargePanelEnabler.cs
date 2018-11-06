@@ -13,12 +13,6 @@ public class ChargePanelEnabler : MonoBehaviour
     {
         Toggle(_defaultState);
     }
-    public void PollPanel(Weapon currentWeapon)
-    {
-        Toggle(currentWeapon.TriggerData.UseCharge);
-    }
-    private void Toggle(bool active)
-    {
-        _panel.SetActive(active);
-    }
+    public void PollPanel(Weapon currentWeapon) => Toggle(currentWeapon.TriggerData.UseCharge);
+    private void Toggle(bool active) => _panel.SetActive(active);
 }

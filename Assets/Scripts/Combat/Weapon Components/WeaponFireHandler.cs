@@ -1,7 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 using Muzzle = Weapon.Muzzle;
+
+using static UnityEngine.Mathf;
 
 public class WeaponFireHandler : MonoBehaviour
 {
@@ -30,14 +33,14 @@ public class WeaponFireHandler : MonoBehaviour
         }
     }
 
-    private IEnumerable<Muzzle> Muzzles { get { return _selectedWeapon.Value.TriggerData.Muzzles; } }
-    private int SeekersToFire { get { return _selectedWeapon.Value.TriggerData.SeekersToFire; } }
+    private IEnumerable<Muzzle> Muzzles => _selectedWeapon.Value.TriggerData.Muzzles;
+    private int SeekersToFire => _selectedWeapon.Value.TriggerData.SeekersToFire;
 
     public void Fire()
     {
         WeaponLastFire = Time.time;
 
-        CurrentAmmo = Mathf.Clamp(CurrentAmmo - 1, 0, _maxAmmoCount.Value);
+        CurrentAmmo = Clamp(CurrentAmmo - 1, 0, _maxAmmoCount.Value);
 
         if(_selectedWeapon.Value.TriggerData.RandomMuzzle)
         {
@@ -66,7 +69,7 @@ public class WeaponFireHandler : MonoBehaviour
     }
     private void FireAll()
     {
-        foreach (Weapon.Muzzle muzzle in _selectedWeapon.Value.TriggerData.Muzzles)
+        foreach (Muzzle muzzle in _selectedWeapon.Value.TriggerData.Muzzles)
         {
             _seekerSpawner.SpawnSeeker(muzzle);
         }

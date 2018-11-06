@@ -21,10 +21,7 @@ public class VariableResetter : MonoBehaviour
         if (_resetCallback == CallbackState.Start)
             DoReset();
     }
-    private void DoReset()
-    {
-        _target.BaseValue = _source.BaseValue;
-    }
+    private void DoReset() => _target.BaseValue = _source.BaseValue;
 
     [System.Serializable]
     public enum CallbackState

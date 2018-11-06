@@ -9,12 +9,6 @@ public class WeaponDebugging : MonoBehaviour
 
     private const float DEBUG_RAY_LENGTH = 3;
 
-    private void LateUpdate()
-    {
-        DrawDebug();
-    }
-    private void DrawDebug()
-    {
-        Debug.DrawRay(transform.position, _direction.Value * DEBUG_RAY_LENGTH, Color.cyan);
-    }
+    private void LateUpdate() => DrawDebug();
+    private void DrawDebug() => Debug.DrawRay(transform.position, _direction.Value * DEBUG_RAY_LENGTH, Color.cyan);
 }

@@ -30,23 +30,23 @@ public class Weapon : ScriptableObject {
 
         Unequip(part);
 
-        if(part is TriggerData)
+        switch (part)
         {
-            TriggerData = part as TriggerData;
+            case TriggerData trigger:
+                {
+                    TriggerData = trigger;
 
-            CurrentAmmo = TriggerData.AmmoCapacity;
-        }
-        else if(part is EventData)
-        {
-            EventData = part as EventData;
-        }
-        else if(part is SeekerData)
-        {
-            SeekerData = part as SeekerData;
-        }
-        else
-        {
-            throw new NotImplementedException();
+                    CurrentAmmo = TriggerData.AmmoCapacity;
+                    break;
+                }
+            case EventData eventData:
+                    EventData = eventData;
+                break;
+            case SeekerData seekerData:
+                    SeekerData = seekerData;
+                break;
+            default:
+                throw new NotImplementedException();
         }
 
         part.OnEquipped();
@@ -97,10 +97,10 @@ public class Weapon : ScriptableObject {
     [Serializable]
     public class Muzzle : IEquatable<Muzzle>
     {
-        public Space Space { get { return _space; } }
-        public float Angle { get { return _angle; } }        
-        public float IntervalStart { get { return _intervalStart; } }
-        public float IntervalEnd { get { return _intervalEnd; } }
+        public Space Space => _space;
+        public float Angle => _angle;
+        public float IntervalStart => _intervalStart;
+        public float IntervalEnd => _intervalEnd;
 
         [SerializeField]
         private float _angle;
@@ -145,9 +145,6 @@ public class Weapon : ScriptableObject {
 
             return i;
         }
-        public override string ToString()
-        {
-            return string.Format("{0} ({1}-{2})\n{3}", _angle, IntervalStart, IntervalEnd, _space);
-        }
+        public override string ToString() => $"{_angle} ({IntervalStart}-{IntervalEnd})\n{_space}";
     }
 }

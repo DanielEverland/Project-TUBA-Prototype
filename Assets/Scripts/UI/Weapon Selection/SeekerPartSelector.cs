@@ -5,5 +5,5 @@ using UnityEngine;
 
 public class SeekerPartSelector : PartSelectorBase
 {
-    protected override IEnumerable<PartBase> AvailableParts { get { return PartLoader.SeekerData; } }
+    protected override IEnumerable<PartBase> AvailableParts => PartLoader.SeekerData;
 }

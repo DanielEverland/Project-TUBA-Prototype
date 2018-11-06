@@ -10,8 +10,5 @@ public class ValueAdderEvent : EventData
     [SerializeField]
     private FloatReference _amount;
 
-    public override void OnEventRaised()
-    {
-        _target.Value += _amount.Value;
-    }
+    public override void OnEventRaised() => _target.Value += _amount.Value;
 }

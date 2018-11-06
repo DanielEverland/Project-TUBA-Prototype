@@ -23,10 +23,6 @@ public class WeaponSlotElement : MonoBehaviour {
             _triggerSelectors[i].Initialize(this);
         }
     }
-    public void Initialize(int weaponIndex)
-    {
-        _weaponIndex = weaponIndex;
-    }
     public void ChangePart(PartBase partdata)
     {
 #if UNITY_EDITOR
@@ -41,4 +37,5 @@ public class WeaponSlotElement : MonoBehaviour {
 
         _weaponInventory[_weaponIndex.Value].ChangePart(partdata);
     }
+    public void Initialize(int weaponIndex) => _weaponIndex = weaponIndex;
 }

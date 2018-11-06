@@ -19,13 +19,14 @@ public class WeaponInputHandler : MonoBehaviour
     [SerializeField]
     private Vector3Reference _direction;
 
+    private bool UseCharge => _useCharge.Value;
+    private float CurrentCooldown => _currentCooldown.Value;
+    private float CooldownTime => _cooldownTimeProperty.Value;
+    private int CurrentAmmo => _currentAmmo.Value;
+
     private Vector3 Direction { get { return _direction.Value; } set { _direction.Value = value; } }
     private bool FireButtonPressed { get { return _fireButtonPressed.Value; } set { _fireButtonPressed.Value = value; } }
     private bool WeaponCanFire { get { return _weaponCanFire.Value; } set { _weaponCanFire.Value = value; } }
-    private bool UseCharge { get { return _useCharge.Value; } }
-    private float CurrentCooldown { get { return _currentCooldown.Value; } }
-    private float CooldownTime { get { return _cooldownTimeProperty.Value; } }
-    private int CurrentAmmo { get { return _currentAmmo.Value; } }    
     
     private bool OnCooldown
     {
@@ -35,9 +36,9 @@ public class WeaponInputHandler : MonoBehaviour
         }
     }
 
-    private WeaponInputResponse _previousResponse = default(WeaponInputResponse);
+    private WeaponInputResponse _previousResponse = default;
     private float? _fireDownTime;
-
+    
     public WeaponInputResponse PollInput()
     {
         WeaponInputResponse input = WeaponInputResponse.Create(_previousResponse, gameObject);
@@ -68,19 +69,6 @@ public class WeaponInputHandler : MonoBehaviour
             _fireDownTime = null;
         }
     }
-    private bool CanFire()
-    {
-        return !OnCooldown && CurrentAmmo > 0;
-    }
-    private bool IsFireButtonPressed(WeaponInputResponse input)
-    {
-        if (UseCharge)
-        {
-            return input.FireButtonUp;
-        }
-        else
-        {
-            return input.FireButtonDown;
-        }
-    }
+    private bool CanFire() => !OnCooldown && CurrentAmmo > 0;
+    private bool IsFireButtonPressed(WeaponInputResponse input) => UseCharge ? input.FireButtonUp : input.FireButtonDown;
 }

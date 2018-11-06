@@ -20,8 +20,5 @@ public abstract class PartSelectorBase : MonoBehaviour
         _dropDown.options = new List<Dropdown.OptionData>(AvailableParts.Select(x => new Dropdown.OptionData(x.name)));
         _dropDown.onValueChanged.AddListener(OnSelectionChanged);
     }
-    private void OnSelectionChanged(int index)
-    {
-        _owner.ChangePart(AvailableParts.ElementAt(index));
-    }
+    private void OnSelectionChanged(int index) => _owner.ChangePart(AvailableParts.ElementAt(index));
 }
