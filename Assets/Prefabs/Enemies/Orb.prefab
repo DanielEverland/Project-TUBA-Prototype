@@ -300,6 +300,10 @@ MonoBehaviour:
     _constantValue: {fileID: 0}
     _variable: {fileID: 11400000, guid: ce9bed48b5db97e4ba6459bc11ecd278, type: 2}
   _characterController: {fileID: 143492486311736040}
+  _minDistance:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: 4457a4fd290fd0545924651434f8821c, type: 2}
   _jumpTime:
     _useConstant: 0
     _constantValue: 0

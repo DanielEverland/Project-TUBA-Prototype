@@ -7,7 +7,7 @@ public class JumpChaseMovement : ChaseMovement
     [SerializeField]
     private FloatReference _jumpTime;
     [SerializeField]
-    private FloatReference _pauseBetweenJump;
+    private FloatReference _pauseBetweenJump;    
     [SerializeField]
     private AnimationCurve _jumpPositionAnimation = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
@@ -17,13 +17,16 @@ public class JumpChaseMovement : ChaseMovement
     protected float JumpTime => _jumpTime.Value;
     protected float TimePassedSinceLastJump => Time.time - _lastJumpTime;
     protected float PauseBetweenJumps => _pauseBetweenJump.Value;
-
+    
     private float _lastJumpTime = float.MinValue;
     private Vector3 _currentJumpTarget;
     private Vector3 _currentJumpStartPosition;
 
     protected override void Update()
     {
+        if (IsWithinRange)
+            return;
+
         if(TimePassedSinceLastJump >= JumpTime + PauseBetweenJumps)
         {
             SelectNewJumpPosition();
