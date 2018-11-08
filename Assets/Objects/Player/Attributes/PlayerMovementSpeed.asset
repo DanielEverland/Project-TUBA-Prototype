@@ -11,5 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9377ffeb64ba30478a995a8ffc78ae8, type: 3}
   m_Name: PlayerMovementSpeed
   m_EditorClassIdentifier: 
-  DeveloperDescription: 
+  DeveloperDescription:
+    _value: 
   _value: 10
+  _readOnly: 1
+  _raiseWarning: 1

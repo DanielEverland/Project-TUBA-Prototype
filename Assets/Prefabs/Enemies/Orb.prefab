@@ -183,6 +183,13 @@ MonoBehaviour:
     _useConstant: 0
     _constantValue: 0
     _variable: {fileID: 11400000, guid: f2978ccf2276d234696e1eddffd258e3, type: 2}
+  _health:
+    _useConstant: 1
+    _constantValue: 0
+    _variable: {fileID: 0}
+  _onDamagedEvent: {fileID: 0}
+  _destroyBelowZero: 1
+  _destroyTarget: {fileID: 1640740622036420}
 --- !u!135 &135381447065504876
 SphereCollider:
   m_ObjectHideFlags: 1
