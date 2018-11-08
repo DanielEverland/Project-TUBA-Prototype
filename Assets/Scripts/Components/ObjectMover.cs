@@ -5,27 +5,27 @@ using UnityEngine;
 public class ObjectMover : MonoBehaviour
 {
     [SerializeField]
-    private Space Space = UnityEngine.Space.Self;
+    private Space _space = Space.Self;
     [SerializeField]
-    private Vector3 Direction = Vector3.right;
-    [SerializeField, Range(0, 1000)]
-    private float Velocity = 10;
+    private Vector3 _direction = Vector3.right;
+    [SerializeField]
+    private FloatReference _velocity;
     [SerializeField, Tooltip("Should object be moved in Update or FixedUpdate?")]
-    private bool PhysicsUpdated = false;
+    private bool _physicsUpdated = false;
 
     private void Update()
     {
-        if (PhysicsUpdated)
+        if (_physicsUpdated)
             return;
 
-        transform.position += GetDirection() * Velocity * Time.deltaTime;
+        transform.position += GetDirection() * _velocity.Value * Time.deltaTime;
     }
     private void FixedUpdate()
     {
-        if (!PhysicsUpdated)
+        if (!_physicsUpdated)
             return;
 
-        transform.position += GetDirection() * Velocity;
+        transform.position += GetDirection() * _velocity.Value;
     }
-    private Vector3 GetDirection() => Space == Space.Self ? transform.TransformDirection(Direction) : Direction;
+    private Vector3 GetDirection() => _space == Space.Self ? transform.TransformDirection(_direction) : _direction;
 }
