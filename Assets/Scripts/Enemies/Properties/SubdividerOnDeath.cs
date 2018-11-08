@@ -19,6 +19,7 @@ public class SubdividerOnDeath : MonoBehaviour {
     protected int CurrentLevel => _subdividerElement.CurrentLevel;
     protected int MaxLevel => _subdividerElement.MaxLevel;
     protected float ChildrenToSpawn => _childrenToSpawn.Value;
+    protected string ObjectName => _subdividerElement.Name;
     
     public void OnDamaged()
     {
@@ -46,8 +47,8 @@ public class SubdividerOnDeath : MonoBehaviour {
     private void SpawnChild()
     {
         SubdividerElement spawnedChild = Instantiate(Prefab);
-
-
+        
+        spawnedChild.Initialize(CurrentLevel + 1, ObjectName);
     }
     protected virtual void OnValidate()
     {
