@@ -23,6 +23,8 @@ GameObject:
   - component: {fileID: 23275956322145880}
   - component: {fileID: 143492486311736040}
   - component: {fileID: 114484894485331738}
+  - component: {fileID: 114200270027188154}
+  - component: {fileID: 114426001969407580}
   m_Layer: 0
   m_Name: Orb
   m_TagString: Untagged
@@ -67,7 +69,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1640740622036420}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.399, y: 2.133, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4721462044084290}
@@ -116,6 +118,39 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1640740622036420}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114200270027188154
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1640740622036420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddd39c72a6f52564c9a342dd950032e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxSubdivides:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: f2609be18916d7a4db1f294dc0c54d28, type: 2}
+--- !u!114 &114426001969407580
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1640740622036420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef60e7fe1cee0304b98a1ee91a19ad4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthComponent: {fileID: 114659203584671138}
+  _subdividerElement: {fileID: 114200270027188154}
+  _prefab: {fileID: 114200270027188154}
+  _childrenToSpawn:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: b6036a65b97a2e14ea12c635c0b26aa6, type: 2}
 --- !u!114 &114484894485331738
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -187,9 +222,29 @@ MonoBehaviour:
     _useConstant: 1
     _constantValue: 0
     _variable: {fileID: 0}
-  _onDamagedEvent: {fileID: 0}
   _destroyBelowZero: 1
   _destroyTarget: {fileID: 1640740622036420}
+  _onDamagedEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114426001969407580}
+        m_MethodName: OnDamaged
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  _onDeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!135 &135381447065504876
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9377ffeb64ba30478a995a8ffc78ae8, type: 3}
-  m_Name: Orb Jump Speed
+  m_Name: Orb JumpSpeed
   m_EditorClassIdentifier: 
   DeveloperDescription:
     _value: 'How long does it take to get from the position at the start of a jump,
