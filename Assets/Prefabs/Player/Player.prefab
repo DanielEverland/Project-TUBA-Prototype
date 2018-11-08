@@ -525,7 +525,7 @@ MonoBehaviour:
   _direction:
     _useConstant: 0
     _constantValue: {x: 0, y: 0, z: 0}
-    _variable: {fileID: 11400000, guid: db7743775b88ff547a35b36d00faef36, type: 2}
+    _variable: {fileID: 0}
 --- !u!114 &114969170360994090
 MonoBehaviour:
   m_ObjectHideFlags: 1
