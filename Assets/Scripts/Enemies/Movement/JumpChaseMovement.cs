@@ -5,7 +5,7 @@ using UnityEngine;
 public class JumpChaseMovement : ChaseMovement
 {
     [SerializeField]
-    private FloatReference _jumpInterval;
+    private FloatReference _jumpTime;
     [SerializeField]
     private FloatReference _pauseBetweenJump;
     [SerializeField]
@@ -14,7 +14,7 @@ public class JumpChaseMovement : ChaseMovement
     protected Color CurrentJumpPositionColor => Color.cyan;
     protected Color JumpDeltaColor => Color.blue;
 
-    protected float JumpInterval => _jumpInterval.Value;
+    protected float JumpTime => _jumpTime.Value;
     protected float TimePassedSinceLastJump => Time.time - _lastJumpTime;
     protected float PauseBetweenJumps => _pauseBetweenJump.Value;
 
@@ -24,7 +24,7 @@ public class JumpChaseMovement : ChaseMovement
 
     protected override void Update()
     {
-        if(TimePassedSinceLastJump >= JumpInterval + PauseBetweenJumps)
+        if(TimePassedSinceLastJump >= JumpTime + PauseBetweenJumps)
         {
             SelectNewJumpPosition();
         }
@@ -50,7 +50,7 @@ public class JumpChaseMovement : ChaseMovement
     }
     private void Move()
     {
-        float animationTime = TimePassedSinceLastJump / JumpInterval;
+        float animationTime = TimePassedSinceLastJump / JumpTime;
         float animationValue = Mathf.Clamp(_jumpPositionAnimation.Evaluate(animationTime), 0, 1);
         
         Vector3 framePositionTarget = Vector3.Lerp(_currentJumpStartPosition, _currentJumpTarget, animationValue);

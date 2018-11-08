@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114484894485331738}
   - component: {fileID: 114200270027188154}
   - component: {fileID: 114426001969407580}
+  - component: {fileID: 114473309694695080}
   m_Layer: 0
   m_Name: Orb
   m_TagString: Untagged
@@ -57,6 +58,7 @@ GameObject:
   - component: {fileID: 4721462044084290}
   - component: {fileID: 135381447065504876}
   - component: {fileID: 114659203584671138}
+  - component: {fileID: 114265571335847680}
   m_Layer: 0
   m_Name: Hitbox
   m_TagString: Untagged
@@ -187,6 +189,42 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _sizeTarget: {fileID: 4904880359015734}
+--- !u!114 &114265571335847680
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1741845987504422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d6a8d88d1f517e46a32388fb065ea41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _subdividerElement: {fileID: 114200270027188154}
+  _healthMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -0.8
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0.2
+      inSlope: -0.8
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &114426001969407580
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -205,6 +243,42 @@ MonoBehaviour:
     _useConstant: 0
     _constantValue: 0
     _variable: {fileID: 11400000, guid: b6036a65b97a2e14ea12c635c0b26aa6, type: 2}
+--- !u!114 &114473309694695080
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1640740622036420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18e37105b887074fb5e1bd6b310393b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _subdividerElement: {fileID: 114200270027188154}
+  _movementMutliplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.3
+      inSlope: 0
+      outSlope: 0.7
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.7
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &114484894485331738
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -216,16 +290,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0d65fff5689d5d44a903a8a39450d93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target:
-    _useConstant: 0
-    _constantValue: {fileID: 0}
-    _variable: {fileID: 11400000, guid: ce9bed48b5db97e4ba6459bc11ecd278, type: 2}
   _movementSpeed:
     _useConstant: 0
     _constantValue: 0
     _variable: {fileID: 11400000, guid: 7099c4a0dcae85147a3a8e6860e8d1cb, type: 2}
+  _postProcessor: {fileID: 114473309694695080}
+  _target:
+    _useConstant: 0
+    _constantValue: {fileID: 0}
+    _variable: {fileID: 11400000, guid: ce9bed48b5db97e4ba6459bc11ecd278, type: 2}
   _characterController: {fileID: 143492486311736040}
-  _jumpInterval:
+  _jumpTime:
     _useConstant: 0
     _constantValue: 0
     _variable: {fileID: 11400000, guid: 1e41f0b5579d18e41a3f11781536d854, type: 2}
@@ -278,6 +353,7 @@ MonoBehaviour:
     _variable: {fileID: 0}
   _destroyBelowZero: 1
   _destroyTarget: {fileID: 1640740622036420}
+  _postProcessor: {fileID: 114265571335847680}
   _onDamagedEvent:
     m_PersistentCalls:
       m_Calls:

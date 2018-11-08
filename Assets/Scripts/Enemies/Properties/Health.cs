@@ -13,6 +13,8 @@ public class Health : MonoBehaviour {
     private bool _destroyBelowZero = true;
     [SerializeField]
     private GameObject _destroyTarget;
+    [SerializeField]
+    private HealthPostProcessor _postProcessor;
 
     [Space()]
 
@@ -23,7 +25,7 @@ public class Health : MonoBehaviour {
     
     public float CurrentHealth { get => _health.Value; set => _health.Value = value; }
     public bool DestroyBelowZero { get => _destroyBelowZero; set => _destroyBelowZero = value; }
-    public float StartHealth => _startHealth.Value;
+    public float StartHealth => GetStartHealth();
     
     protected UnityEvent OnDamagedEvent => _onDamagedEvent;
     protected UnityEvent OnDeathEvent => _onDeathEvent;
@@ -31,7 +33,7 @@ public class Health : MonoBehaviour {
 
     private bool _isDying = false;
 
-    protected virtual void Awake()
+    protected virtual void Start()
     {
         CurrentHealth = StartHealth;
     }
@@ -64,4 +66,5 @@ public class Health : MonoBehaviour {
             _destroyTarget = transform.parent == null ? gameObject : transform.parent.gameObject;
         }            
     }
+    private float GetStartHealth() => _postProcessor == null ? _startHealth.Value : _postProcessor.ProcessMaxHealth(_startHealth.Value);
 }
