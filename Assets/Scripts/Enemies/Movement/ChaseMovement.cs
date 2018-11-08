@@ -11,7 +11,7 @@ public class ChaseMovement : EnemyMovementBase
     [SerializeField]
     private CharacterController _characterController;
 
-    protected virtual Color TargetLineColor => Color.red;
+    protected virtual Color TargetLineColor => new Color(1, 0, 0, 0.1f);
 
     protected GameObject Target => _target.Value;
     protected float MovementSpeed => _movementSpeed.Value;
