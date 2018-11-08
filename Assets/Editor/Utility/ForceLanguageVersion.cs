@@ -44,52 +44,42 @@ public static class ForceLanguageVersion {
 
     private static void ForceVersion()
     {
-        try
+        //Debug.Log("Creating process");
+
+        while (true)
         {
-            //Debug.Log("Creating process");
+            Thread.Sleep(10);
 
-            while (true)
+            for (int i = 0; i < _targetFiles.Length; i++)
             {
-                Thread.Sleep(10);
+                string targetFile = _targetFiles[i];
+                bool shouldWrite = false;
 
-                for (int i = 0; i < _targetFiles.Length; i++)
+                if (File.Exists(targetFile))
                 {
-                    string targetFile = _targetFiles[i];
-                    bool shouldWrite = false;
-
-                    if (File.Exists(targetFile))
+                    using (FileStream fileStream = new FileStream(targetFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                     {
-                        using (FileStream fileStream = new FileStream(targetFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                        using (StreamReader streamReader = new StreamReader(fileStream))
                         {
-                            using (StreamReader streamReader = new StreamReader(fileStream))
+                            while (streamReader.Peek() >= 0)
                             {
-                                while (streamReader.Peek() >= 0)
+                                if (streamReader.ReadLine().Contains(_targetText))
                                 {
-                                    if (streamReader.ReadLine().Contains(_targetText))
-                                    {
-                                        shouldWrite = true;
-                                        break;
-                                    }
+                                    shouldWrite = true;
+                                    break;
                                 }
                             }
                         }
+                    }
 
-                        if (shouldWrite)
-                            ReplaceString(targetFile);
-                    }
-                    else
-                    {
-                        //Debug.LogWarning("Couldn't find " + targetFile);
-                    }
+                    if (shouldWrite)
+                        ReplaceString(targetFile);
+                }
+                else
+                {
+                    //Debug.LogWarning("Couldn't find " + targetFile);
                 }
             }
-        }
-        catch (Exception e)
-        {
-            if(!(e is ThreadAbortException))
-                Debug.LogException(e);
-
-            throw;
         }
     }
     private static void ReplaceString(string filePath)

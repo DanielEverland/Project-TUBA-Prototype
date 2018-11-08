@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class ValueSetter : MonoBehaviour
+public class TextValueSetter : MonoBehaviour
 {
     [SerializeField]
     private BaseVariable _variable;

@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 143440246865325354}
   - component: {fileID: 114554613205426316}
   - component: {fileID: 114670560683231732}
+  - component: {fileID: 114361436125282190}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -301,6 +302,20 @@ MonoBehaviour:
   _selectedWeapon: {fileID: 11400000, guid: fe74e8c13909c9247b202b6ffbaf66fc, type: 2}
   _weaponDirection: {fileID: 4399202113731928}
   _onFire: {fileID: 11400000, guid: 52f5ff1cbaf5188409485dbb9ef25b05, type: 2}
+--- !u!114 &114361436125282190
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1001157368404180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f03ddcfbeefa384085a58816f154f80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _callbackState: 1
+  _target: {fileID: 11400000, guid: ce9bed48b5db97e4ba6459bc11ecd278, type: 2}
+  _value: {fileID: 1001157368404180}
 --- !u!114 &114384350300293378
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -312,9 +327,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a6173e52fe23fb4e87360c5ab27453e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _callbackState: 1
   _target: {fileID: 11400000, guid: d341dde2333a37b488a7d156b8a0ca85, type: 2}
   _source: {fileID: 11400000, guid: 8aec489e368edf64b92020a6f6c6731a, type: 2}
-  _resetCallback: 0
 --- !u!114 &114459437911582460
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -383,9 +398,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a6173e52fe23fb4e87360c5ab27453e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _callbackState: 1
   _target: {fileID: 11400000, guid: 45a3f61b727989f48bf1addac9a9e55d, type: 2}
   _source: {fileID: 11400000, guid: ac05df9cb2096404eafa824d404b66a5, type: 2}
-  _resetCallback: 0
 --- !u!114 &114670560683231732
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -397,9 +412,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a6173e52fe23fb4e87360c5ab27453e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _callbackState: 1
   _target: {fileID: 11400000, guid: 5f1fb51f4d1f7df4a89627dc1e8c0b52, type: 2}
   _source: {fileID: 11400000, guid: 567b67b40ad50454197edc8768c8949d, type: 2}
-  _resetCallback: 0
 --- !u!114 &114798123878018216
 MonoBehaviour:
   m_ObjectHideFlags: 1
