@@ -8,11 +8,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edc690a6e84028a488f0c8e94cbc98bd, type: 3}
-  m_Name: Player
+  m_Script: {fileID: 11500000, guid: f9377ffeb64ba30478a995a8ffc78ae8, type: 3}
+  m_Name: Orb AttackDistance
   m_EditorClassIdentifier: 
   DeveloperDescription:
     _value: 
-  _value: {fileID: 0}
+  _value: 3
   _readOnly: 0
   _raiseWarning: 1

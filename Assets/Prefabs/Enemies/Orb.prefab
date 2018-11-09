@@ -19,12 +19,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4904880359015734}
-  - component: {fileID: 143492486311736040}
-  - component: {fileID: 114176047885870102}
+  - component: {fileID: 114032101464939500}
   - component: {fileID: 114484894485331738}
   - component: {fileID: 114200270027188154}
   - component: {fileID: 114426001969407580}
   - component: {fileID: 114473309694695080}
+  - component: {fileID: 50311078206429214}
   m_Layer: 0
   m_Name: Orb
   m_TagString: Untagged
@@ -57,7 +57,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4721462044084290}
-  - component: {fileID: 135381447065504876}
+  - component: {fileID: 58646577255910940}
   - component: {fileID: 114659203584671138}
   - component: {fileID: 114265571335847680}
   m_Layer: 0
@@ -150,7 +150,42 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1681987211159420}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114176047885870102
+--- !u!50 &50311078206429214
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1640740622036420}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!58 &58646577255910940
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1741845987504422}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!114 &114032101464939500
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,14 +193,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 1640740622036420}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 858be7cc36f01ef498ee786212afec30, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e87dabf5e4061f43890878d83a704fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _characterController: {fileID: 143492486311736040}
-  _friction:
+  _drag:
+    _useConstant: 1
+    _constantValue: 0.1
+    _variable: {fileID: 0}
+  _minPushForce:
+    _useConstant: 1
+    _constantValue: 0.1
+    _variable: {fileID: 0}
+  _disableMovementWhenPushed:
     _useConstant: 1
     _constantValue: 1
     _variable: {fileID: 0}
+  _rigidbody: {fileID: 50311078206429214}
 --- !u!114 &114200270027188154
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -316,7 +359,7 @@ MonoBehaviour:
     _useConstant: 0
     _constantValue: {fileID: 0}
     _variable: {fileID: 11400000, guid: ce9bed48b5db97e4ba6459bc11ecd278, type: 2}
-  _characterController: {fileID: 143492486311736040}
+  _characterController: {fileID: 114032101464939500}
   _minDistance:
     _useConstant: 0
     _constantValue: 0
@@ -396,32 +439,3 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!135 &135381447065504876
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1741845987504422}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!143 &143492486311736040
-CharacterController:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1640740622036420}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 1
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
