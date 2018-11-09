@@ -18,7 +18,7 @@ MonoBehaviour:
   _raiseWarning: 1
   _minValue:
     _useConstant: 1
-    _constantValue: 0.2
+    _constantValue: 0.5
     _variable: {fileID: 0}
   _maxValue:
     _useConstant: 1

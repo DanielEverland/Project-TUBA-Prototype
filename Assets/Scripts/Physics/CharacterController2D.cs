@@ -52,5 +52,6 @@ public class CharacterController2D : MonoBehaviour
         _rigidbody.hideFlags |= HideFlags.HideInInspector;
         _rigidbody.gravityScale = 0;
         _rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+        _rigidbody.interpolation = RigidbodyInterpolation2D.Interpolate;
     }
 }

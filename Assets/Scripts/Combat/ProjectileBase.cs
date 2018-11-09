@@ -27,9 +27,9 @@ public class ProjectileBase : ObjectMover {
     {
         Vector3 direction = GetDirection();
 
-        RaycastHit[] hits = Physics.RaycastAll(transform.position, direction.normalized, Velocity * Time.deltaTime);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, direction.normalized, Velocity * Time.deltaTime);
         
-        foreach (RaycastHit hit in hits)
+        foreach (RaycastHit2D hit in hits)
         {
             Health healthComponent = hit.collider.gameObject.GetComponent<Health>();
 
