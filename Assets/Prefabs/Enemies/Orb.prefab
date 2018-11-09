@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114032101464939500}
   - component: {fileID: 114484894485331738}
   - component: {fileID: 114200270027188154}
+  - component: {fileID: 114123822866444684}
   - component: {fileID: 114426001969407580}
   - component: {fileID: 114473309694695080}
   - component: {fileID: 50311078206429214}
@@ -42,6 +43,7 @@ GameObject:
   - component: {fileID: 4430888113883336}
   - component: {fileID: 33963904820199642}
   - component: {fileID: 23850474161146128}
+  - component: {fileID: 114182851212161734}
   m_Layer: 0
   m_Name: Renderer
   m_TagString: Untagged
@@ -209,6 +211,65 @@ MonoBehaviour:
     _constantValue: 1
     _variable: {fileID: 0}
   _rigidbody: {fileID: 50311078206429214}
+--- !u!114 &114123822866444684
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1640740622036420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c78217a727b12374b80e4df87aef9b84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _target:
+    _useConstant: 0
+    _constantValue: {fileID: 0}
+    _variable: {fileID: 11400000, guid: ce9bed48b5db97e4ba6459bc11ecd278, type: 2}
+  _maxDistance:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: 4457a4fd290fd0545924651434f8821c, type: 2}
+  _attackPower:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: b313c1d0be8df8145be6076eb6af3165, type: 2}
+  _cooldownTime:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: 07c57c3cccc32764ebb4982c4a447da0, type: 2}
+  _attackForce:
+    _useConstant: 1
+    _constantValue: 0.5
+    _variable: {fileID: 0}
+  _characterController: {fileID: 114032101464939500}
+  _playerCharacterController: {fileID: 11400000, guid: 6bd41b93da458204b8555b46cb872241,
+    type: 2}
+  _playerHealth: {fileID: 11400000, guid: b1f8f948f1addb843a7472829452db06, type: 2}
+--- !u!114 &114182851212161734
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1681987211159420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b54fa01acca67d41bb950e0d324bfcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DeveloperDescription:
+    _value: 
+  _showDebugFields: 0
+  _enableGizmoDebugging: 1
+  _debugColor: {r: 0, g: 1, b: 1, a: 1}
+  _previouslyRegisteredEvent: {fileID: 0}
+  _event: {fileID: 0}
+  _response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Vector2UnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  _debugValue: {x: 0, y: 0}
 --- !u!114 &114200270027188154
 MonoBehaviour:
   m_ObjectHideFlags: 1
