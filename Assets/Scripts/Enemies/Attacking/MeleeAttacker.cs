@@ -69,9 +69,7 @@ public class MeleeAttacker : MonoBehaviour {
     {
         if (HasDamaged)
             return;
-
-        Debug.Log("Damaging");
-
+        
         HasDamaged = true;
 
         PlayerCharacterController.AddForce(TargetDirection * AttackForce * 2);
