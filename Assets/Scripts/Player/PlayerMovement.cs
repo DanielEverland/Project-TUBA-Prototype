@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CharacterController2D))]
 public class PlayerMovement : MonoBehaviour {
 
     [SerializeField]
-    private CharacterController _characterController;
+    private CharacterController2D _characterController;
     [SerializeField]
     private FloatReference _movementSpeed;
-
+    
     private void Update()
     {
         Vector2 input = PollInput();
@@ -25,5 +26,10 @@ public class PlayerMovement : MonoBehaviour {
             x = Input.GetAxisRaw("Horizontal"),
             y = Input.GetAxisRaw("Vertical"),
         }.normalized;
+    }
+    private void OnValidate()
+    {
+        if (_characterController == null)
+            _characterController = GetComponent<CharacterController2D>();
     }
 }

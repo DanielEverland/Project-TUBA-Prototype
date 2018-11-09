@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33765961903507222}
   - component: {fileID: 23253962864878076}
   - component: {fileID: 143440246865325354}
+  - component: {fileID: 114052015574688112}
   - component: {fileID: 114554613205426316}
   - component: {fileID: 114361436125282190}
   m_Layer: 0
@@ -246,6 +247,22 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1001157368404180}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114052015574688112
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1001157368404180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 858be7cc36f01ef498ee786212afec30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _characterController: {fileID: 143440246865325354}
+  _friction:
+    _useConstant: 1
+    _constantValue: 0.05
+    _variable: {fileID: 0}
 --- !u!114 &114111850741108004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -336,9 +353,19 @@ MonoBehaviour:
     _useConstant: 0
     _constantValue: 0
     _variable: {fileID: 11400000, guid: 5f1fb51f4d1f7df4a89627dc1e8c0b52, type: 2}
-  _onDamagedEvent: {fileID: 11400000, guid: 5db2e0a5b4154f84b96065712bd136fb, type: 2}
   _destroyBelowZero: 0
   _destroyTarget: {fileID: 1001157368404180}
+  _postProcessor: {fileID: 0}
+  _onDamagedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  _onDeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114346657072030846
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -7,14 +7,14 @@ public class ChaseMovement : EnemyMovementBase
     [SerializeField]
     private GameObjectReference _target;    
     [SerializeField]
-    private CharacterController _characterController;
+    private CharacterController2D _characterController;
     [SerializeField]
     private FloatReference _minDistance;
 
     protected virtual Color TargetLineColor => new Color(1, 0, 0, 0.1f);
 
     protected GameObject Target => _target.Value;    
-    protected CharacterController CharacterController => _characterController;
+    protected CharacterController2D CharacterController => _characterController;
     protected Vector3 Direction => (Target.transform.position - transform.position).normalized;
     protected float DistanceToTarget => Vector3.Distance(transform.position, Target.transform.position);
     protected float MinDistance => _minDistance.Value;
