@@ -37,9 +37,8 @@ public class MeleeAttacker : MonoBehaviour {
     protected float LastAttackTime { get; set; } = float.MinValue;
     protected float TimeSinceLastAttack => Time.time - LastAttackTime;
     protected bool CanAttack => TimeSinceLastAttack > Cooldown;
-    protected bool HasDamaged { get; set; }
 
-    protected const float ATTACK_PUSH_MULTIPLIER = 2;
+    protected const float ATTACK_PUSH_MULTIPLIER = 1;
 
     protected virtual void Update()
     {
@@ -53,7 +52,6 @@ public class MeleeAttacker : MonoBehaviour {
     }
     protected virtual void Attack()
     {
-        HasDamaged = false;
         LastAttackTime = Time.time;
 
         JumpTowardsTarget();
@@ -71,11 +69,6 @@ public class MeleeAttacker : MonoBehaviour {
     }
     protected virtual void DamagePlayer()
     {
-        if (HasDamaged)
-            return;
-        
-        HasDamaged = true;
-
         PlayerCharacterController.AddForce(TargetDirection * Force * ATTACK_PUSH_MULTIPLIER);
         PlayerHealth.TakeDamage(Damage);
     }
