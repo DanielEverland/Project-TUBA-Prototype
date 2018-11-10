@@ -200,7 +200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _drag:
     _useConstant: 1
-    _constantValue: 1
+    _constantValue: 3
     _variable: {fileID: 0}
   _mass:
     _useConstant: 1
@@ -425,7 +425,7 @@ MonoBehaviour:
     _variable: {fileID: 0}
   _destroyBelowZero: 1
   _destroyTarget: {fileID: 1640740622036420}
-  _postProcessor: {fileID: 114265571335847680}
+  _renderer: {fileID: 23850474161146128}
   _onDamagedEvent:
     m_PersistentCalls:
       m_Calls:
@@ -447,3 +447,4 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  _postProcessor: {fileID: 114265571335847680}

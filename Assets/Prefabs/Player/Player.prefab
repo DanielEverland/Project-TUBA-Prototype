@@ -351,7 +351,7 @@ MonoBehaviour:
   _response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 114219887883346942}
         m_MethodName: AddForce
         m_Mode: 1
         m_Arguments:
@@ -456,7 +456,7 @@ MonoBehaviour:
     _variable: {fileID: 11400000, guid: 5f1fb51f4d1f7df4a89627dc1e8c0b52, type: 2}
   _destroyBelowZero: 0
   _destroyTarget: {fileID: 1001157368404180}
-  _postProcessor: {fileID: 0}
+  _renderer: {fileID: 23253962864878076}
   _onDamagedEvent:
     m_PersistentCalls:
       m_Calls:
@@ -478,6 +478,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  _postProcessor: {fileID: 0}
 --- !u!114 &114219887883346942
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -495,7 +496,7 @@ MonoBehaviour:
     _variable: {fileID: 0}
   _force:
     _useConstant: 1
-    _constantValue: 10
+    _constantValue: 30
     _variable: {fileID: 0}
   _forceMode: 1
   _ignoreLayer:
