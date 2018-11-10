@@ -54,4 +54,23 @@ public class CharacterController2D : MonoBehaviour
         _rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
         _rigidbody.interpolation = RigidbodyInterpolation2D.Interpolate;
     }
+    protected virtual void OnCollisionStay2D(Collision2D collider)
+    {
+        if(transform.position == collider.transform.position)
+        {
+            Nudge();
+        }
+    }
+    /// <summary>
+    /// Nudge transform a tiny bit
+    /// Used to avoid having objects directly on top of each other
+    /// </summary>
+    protected virtual void Nudge()
+    {
+        transform.position += new Vector3()
+        {
+            x = Random.Range(-0.01f, 0.01f),
+            y = Random.Range(-0.01f, 0.01f),
+        };
+    }
 }
