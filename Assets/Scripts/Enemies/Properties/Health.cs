@@ -35,6 +35,9 @@ public class Health : MonoBehaviour {
     protected GameObject DestroyTarget => _destroyTarget;
     protected Renderer Renderer => _renderer;
     protected bool IsDying { get; set; }
+    protected bool IsInvincible => Time.time - InvincibleStart < InvincibleDuration;
+    protected float InvincibleStart { get; set; }
+    protected float InvincibleDuration { get; set; }
     protected float TimeTookDamage { get; set; }
     protected MaterialData CurrentColorScheme { get; set; }
 
@@ -51,6 +54,9 @@ public class Health : MonoBehaviour {
     }
     public virtual void TakeDamage(float damageAmount)
     {
+        if (IsInvincible)
+            return;
+
         TimeTookDamage = Time.time;
         CurrentHealth -= damageAmount;
         
@@ -64,6 +70,12 @@ public class Health : MonoBehaviour {
         {
             ColorRenderer();
         }
+    }
+    public virtual void AddIFrames(float time)
+    {
+        //If IFrames are already active, we simply add the new time
+        InvincibleDuration = IsInvincible ? InvincibleDuration + time : time;
+        InvincibleStart = Time.time;
     }
     protected virtual void PollRenderer()
     {
