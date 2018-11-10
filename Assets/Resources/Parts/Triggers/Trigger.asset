@@ -16,7 +16,7 @@ MonoBehaviour:
   _cooldown: 0.3
   _power: 10
   _ammoCapacity: 10
-  _reloadTime: 1
+  _reloadTime: 0.1
   _muzzles:
   - _angle: 0
     _space: 1
