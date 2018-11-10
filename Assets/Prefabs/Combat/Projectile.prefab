@@ -153,3 +153,6 @@ MonoBehaviour:
     _variable: {fileID: 11400000, guid: b30288883ca3bdd4b912edcc2e9054a3, type: 2}
   _physicsUpdated: 0
   _renderer: {fileID: 23517339345812306}
+  _ignoreLayer:
+    serializedVersion: 2
+    m_Bits: 256

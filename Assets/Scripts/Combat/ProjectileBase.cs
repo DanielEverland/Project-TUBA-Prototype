@@ -6,6 +6,8 @@ public class ProjectileBase : ObjectMover {
 
     [SerializeField]
     private MeshRenderer _renderer;
+    [SerializeField]
+    private LayerMask _ignoreLayer;
 
     protected MeshRenderer Renderer => _renderer;
     protected float Damage => _damage;
@@ -26,18 +28,23 @@ public class ProjectileBase : ObjectMover {
     protected virtual void PollCollision()
     {
         Vector3 direction = GetDirection();
-
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, direction.normalized, Velocity * Time.deltaTime);
-        
+        bool hitAnything = false;
+
         foreach (RaycastHit2D hit in hits)
         {
-            Health healthComponent = hit.collider.gameObject.GetComponent<Health>();
+            if(_ignoreLayer != (_ignoreLayer | 1 << hit.collider.gameObject.layer))
+            {
+                hitAnything = true;
 
-            if (healthComponent != null)
-                healthComponent.TakeDamage(Damage);
+                Health healthComponent = hit.collider.gameObject.GetComponent<Health>();
+
+                if (healthComponent != null)
+                    healthComponent.TakeDamage(Damage);
+            }
         }
 
-        if(hits.Length > 0)
+        if(hitAnything)
         {
             Destroy(gameObject);
         }

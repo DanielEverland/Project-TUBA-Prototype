@@ -152,6 +152,30 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1001157368404180, guid: bc71f2cb096a4ab47974bfbe4e79116d, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1628267337866814, guid: bc71f2cb096a4ab47974bfbe4e79116d, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1726657342680836, guid: bc71f2cb096a4ab47974bfbe4e79116d, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1667345960256298, guid: bc71f2cb096a4ab47974bfbe4e79116d, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1323847624014072, guid: bc71f2cb096a4ab47974bfbe4e79116d, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1181196162965906, guid: bc71f2cb096a4ab47974bfbe4e79116d, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc71f2cb096a4ab47974bfbe4e79116d, type: 2}
   m_IsPrefabAsset: 0
@@ -194,45 +218,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 114202716929151878, guid: 6627465ed5ccd8a4988a9ba38b5c82dc,
+    - target: {fileID: 114484894485331738, guid: 6627465ed5ccd8a4988a9ba38b5c82dc,
         type: 2}
-      propertyPath: _attackForceCurve.m_Curve.Array.data[0].outSlope
-      value: -0.26271892
-      objectReference: {fileID: 0}
-    - target: {fileID: 114202716929151878, guid: 6627465ed5ccd8a4988a9ba38b5c82dc,
-        type: 2}
-      propertyPath: _attackForceCurve.m_Curve.Array.data[0].inWeight
-      value: 0.33333334
-      objectReference: {fileID: 0}
-    - target: {fileID: 114202716929151878, guid: 6627465ed5ccd8a4988a9ba38b5c82dc,
-        type: 2}
-      propertyPath: _attackForceCurve.m_Curve.Array.data[0].outWeight
-      value: 0.03773585
-      objectReference: {fileID: 0}
-    - target: {fileID: 114202716929151878, guid: 6627465ed5ccd8a4988a9ba38b5c82dc,
-        type: 2}
-      propertyPath: _attackForceCurve.m_Curve.Array.data[1].value
-      value: 0.84998703
-      objectReference: {fileID: 0}
-    - target: {fileID: 114202716929151878, guid: 6627465ed5ccd8a4988a9ba38b5c82dc,
-        type: 2}
-      propertyPath: _attackForceCurve.m_Curve.Array.data[1].inSlope
+      propertyPath: m_Enabled
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114202716929151878, guid: 6627465ed5ccd8a4988a9ba38b5c82dc,
-        type: 2}
-      propertyPath: _attackForceCurve.m_Curve.Array.data[1].inWeight
-      value: 0.33333334
-      objectReference: {fileID: 0}
-    - target: {fileID: 114202716929151878, guid: 6627465ed5ccd8a4988a9ba38b5c82dc,
-        type: 2}
-      propertyPath: _attackForceCurve.m_Curve.Array.data[1].outWeight
-      value: 0.33333334
-      objectReference: {fileID: 0}
-    - target: {fileID: 114202716929151878, guid: 6627465ed5ccd8a4988a9ba38b5c82dc,
-        type: 2}
-      propertyPath: _attackForceCurve.m_Curve.Array.data[0].inSlope
-      value: -0.26271892
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6627465ed5ccd8a4988a9ba38b5c82dc, type: 2}
