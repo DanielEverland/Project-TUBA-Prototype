@@ -30,9 +30,8 @@ public class Health : MonoBehaviour {
     protected UnityEvent OnDamagedEvent => _onDamagedEvent;
     protected UnityEvent OnDeathEvent => _onDeathEvent;
     protected GameObject DestroyTarget => _destroyTarget;
-
-    private bool _isDying = false;
-
+    protected bool IsDying { get; set; }
+    
     protected virtual void Start()
     {
         CurrentHealth = StartHealth;
@@ -50,10 +49,10 @@ public class Health : MonoBehaviour {
     }
     public virtual void Die()
     {
-        if (_isDying)
+        if (IsDying)
             return;
 
-        _isDying = true;
+        IsDying = true;
 
         OnDeathEvent.Invoke();
 
