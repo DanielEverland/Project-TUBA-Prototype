@@ -40,7 +40,10 @@ public class ProjectileBase : ObjectMover {
                 Health healthComponent = hit.collider.gameObject.GetComponent<Health>();
 
                 if (healthComponent != null)
+                {
                     healthComponent.TakeDamage(Damage);
+                    break;
+                }
             }
         }
 

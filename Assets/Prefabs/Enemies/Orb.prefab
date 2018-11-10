@@ -25,8 +25,8 @@ GameObject:
   - component: {fileID: 114426001969407580}
   - component: {fileID: 114473309694695080}
   - component: {fileID: 50311078206429214}
-  - component: {fileID: 114407249557121550}
-  m_Layer: 0
+  - component: {fileID: 114383691392388090}
+  m_Layer: 9
   m_Name: Orb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 33963904820199642}
   - component: {fileID: 23850474161146128}
   - component: {fileID: 114182851212161734}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,7 +62,7 @@ GameObject:
   - component: {fileID: 58646577255910940}
   - component: {fileID: 114659203584671138}
   - component: {fileID: 114265571335847680}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,13 +200,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _drag:
     _useConstant: 1
-    _constantValue: 0.1
+    _constantValue: 1
     _variable: {fileID: 0}
-  _minPushForce:
-    _useConstant: 1
-    _constantValue: 0.1
-    _variable: {fileID: 0}
-  _disableMovementWhenPushed:
+  _mass:
     _useConstant: 1
     _constantValue: 1
     _variable: {fileID: 0}
@@ -336,7 +332,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &114407249557121550
+--- !u!114 &114383691392388090
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -344,13 +340,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1640740622036420}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a7bd50eba8549846a5c70229ab69aff, type: 3}
+  m_Script: {fileID: 11500000, guid: fef3a77442fbfe249ae66068bad3e172, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _damageAmount:
-    _useConstant: 0
-    _constantValue: 0
-    _variable: {fileID: 11400000, guid: 2e64e100433d3704ea93ee5085c4cb9f, type: 2}
+    _useConstant: 1
+    _constantValue: 10
+    _variable: {fileID: 0}
+  _ignorelayer:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!114 &114426001969407580
 MonoBehaviour:
   m_ObjectHideFlags: 1

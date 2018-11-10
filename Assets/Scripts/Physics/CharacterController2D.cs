@@ -9,21 +9,14 @@ public class CharacterController2D : MonoBehaviour
     private FloatReference _drag = new FloatReference(0.1f);
     [SerializeField]
     private FloatReference _mass = new FloatReference(1);
-    [SerializeField, Tooltip("Determines how much force is required to count as being pushed")]
-    private FloatReference _minPushForce = new FloatReference(0.1f);
-    [SerializeField]
-    private BoolReference _disableMovementWhenPushed = new BoolReference(true);
     [SerializeField, HideInInspector]
     private Rigidbody2D _rigidbody;
 
     protected Vector2 MoveDelta { get; private set; }
     protected Vector2 Velocity { get => _rigidbody.velocity; private set => _rigidbody.velocity = value; }
     protected Rigidbody2D Rigidbody => _rigidbody;
-    protected bool DisableMovementWhenPushed => _disableMovementWhenPushed.Value;
     protected float Mass => _mass.Value;
     protected float Drag => _drag.Value;
-    protected float MinPushForce => _minPushForce.Value;
-    protected bool IsBeingPushed => Velocity.magnitude > MinPushForce;
 
     // No fucking idea why this is required.
     private const float MAGIC_FORCE_DIVIDER = 50;
@@ -50,16 +43,12 @@ public class CharacterController2D : MonoBehaviour
     {
         Vector2 targetPosition = transform.position;
         targetPosition += Velocity;
-        
-        if (!DisableMovementWhenPushed || !IsBeingPushed)
-        {
-            targetPosition += MoveDelta;
-            MoveDelta = Vector2.zero;
-        }
+        targetPosition += MoveDelta;
         
         Rigidbody.MovePosition(targetPosition);
 
         Velocity *= Mathf.Clamp01(1f - Drag * Time.fixedDeltaTime);
+        MoveDelta = Vector2.zero;
     }
     protected virtual void OnValidate()
     {

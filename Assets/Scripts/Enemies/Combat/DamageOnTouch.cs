@@ -6,11 +6,15 @@ public class DamageOnTouch : MonoBehaviour {
 
     [SerializeField]
     private FloatReference _damageAmount = new FloatReference(10);
+    [SerializeField]
+    private LayerMask _ignorelayer;
 
     protected float DamageAmount => _damageAmount.Value;
+    protected int LayerMask => _ignorelayer.value;
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        collision.gameObject.GetComponentInChildren<Health>()?.TakeDamage(DamageAmount);
+        if(LayerMask != (LayerMask | 1 << collision.gameObject.layer))
+            collision.gameObject.GetComponentInChildren<Health>()?.TakeDamage(DamageAmount);
     }
 }

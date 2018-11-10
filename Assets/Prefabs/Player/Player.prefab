@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 50745272437507820}
   - component: {fileID: 114718966536960122}
   - component: {fileID: 114362175950756620}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 114196601688615114}
   - component: {fileID: 114018153217322942}
   - component: {fileID: 58608490896169114}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,7 +62,7 @@ GameObject:
   - component: {fileID: 114160086013678036}
   - component: {fileID: 114384350300293378}
   - component: {fileID: 114638024957678112}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Variable Setup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 114966546623832196}
   - component: {fileID: 114878609834515998}
   - component: {fileID: 114149373127024484}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: __WeaponHandler__
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4626818192341496}
   - component: {fileID: 114934838946517950}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Weapon Selector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,13 +117,43 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4399202113731928}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Weapon Direction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1885263181637826
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4062662649747886}
+  - component: {fileID: 114169979416096778}
+  - component: {fileID: 114062271111085560}
+  m_Layer: 8
+  m_Name: Hit Response
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4062662649747886
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1885263181637826}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4638067161720332}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4376826528967630
 Transform:
   m_ObjectHideFlags: 1
@@ -191,6 +221,7 @@ Transform:
   m_Children:
   - {fileID: 4419691903540908}
   - {fileID: 4376826528967630}
+  - {fileID: 4062662649747886}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -298,6 +329,41 @@ MonoBehaviour:
   _callbackState: 1
   _target: {fileID: 11400000, guid: b1f8f948f1addb843a7472829452db06, type: 2}
   _value: {fileID: 114196601688615114}
+--- !u!114 &114062271111085560
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1885263181637826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5758ca93461aeeb4589456a052b07d74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DeveloperDescription:
+    _value: 
+  _showDebugFields: 1
+  _enableGizmoDebugging: 1
+  _debugColor: {r: 0, g: 1, b: 1, a: 1}
+  _previouslyRegisteredEvent: {fileID: 11400000, guid: 5db2e0a5b4154f84b96065712bd136fb,
+    type: 2}
+  _event: {fileID: 11400000, guid: 5db2e0a5b4154f84b96065712bd136fb, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114169979416096778}
+        m_MethodName: AddForce
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114111850741108004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -369,6 +435,26 @@ MonoBehaviour:
     _useConstant: 0
     _constantValue: 0
     _variable: {fileID: 11400000, guid: d251c8038738759408980be6f44b9d05, type: 2}
+--- !u!114 &114169979416096778
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1885263181637826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 795c6cd4f428d4341bf187e765293412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _radius:
+    _useConstant: 1
+    _constantValue: 10
+    _variable: {fileID: 0}
+  _force:
+    _useConstant: 1
+    _constantValue: 10
+    _variable: {fileID: 0}
+  _forceMode: 1
 --- !u!114 &114196601688615114
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -393,7 +479,18 @@ MonoBehaviour:
   _postProcessor: {fileID: 0}
   _onDamagedEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 5db2e0a5b4154f84b96065712bd136fb, type: 2}
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   _onDeathEvent:
@@ -544,11 +641,7 @@ MonoBehaviour:
     _useConstant: 1
     _constantValue: 0.1
     _variable: {fileID: 0}
-  _minPushForce:
-    _useConstant: 1
-    _constantValue: 0.1
-    _variable: {fileID: 0}
-  _disableMovementWhenPushed:
+  _mass:
     _useConstant: 1
     _constantValue: 1
     _variable: {fileID: 0}
