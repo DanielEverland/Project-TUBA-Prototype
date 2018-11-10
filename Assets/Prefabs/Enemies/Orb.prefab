@@ -453,6 +453,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _jumpChaseMovementPostProcessor: {fileID: 0}
 --- !u!114 &114659203584671138
 MonoBehaviour:
   m_ObjectHideFlags: 1

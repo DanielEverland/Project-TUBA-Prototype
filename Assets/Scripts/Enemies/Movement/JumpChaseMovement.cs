@@ -8,12 +8,14 @@ public class JumpChaseMovement : ChaseMovement
     private FloatReference _pauseBetweenJump;    
     [SerializeField]
     private AnimationCurve _jumpPositionAnimation = AnimationCurve.EaseInOut(0, 0, 1, 1);
+    [SerializeField, HideInInspector]
+    private JumpChaseMovementPostProcessor _jumpChaseMovementPostProcessor;
 
     protected Color CurrentJumpPositionColor => Color.cyan;
     protected Color JumpDeltaColor => Color.blue;
     
     protected float TimePassedSinceLastJump => Time.time - _lastJumpTime;
-    protected float PauseBetweenJumps => _pauseBetweenJump.Value;
+    protected float PauseBetweenJumps => GetPauseBetweenJumps();
     
     private float _lastJumpTime = float.MinValue;
 
@@ -29,10 +31,20 @@ public class JumpChaseMovement : ChaseMovement
 
         DrawDebug();
     }
-    private void Jump()
+    protected virtual void Jump()
     {
         _lastJumpTime = Time.time;
         
         CharacterController.AddForce(Direction * MovementSpeed);
+    }
+    protected virtual float GetPauseBetweenJumps()
+    {
+        return _jumpChaseMovementPostProcessor == null ? _pauseBetweenJump.Value : _jumpChaseMovementPostProcessor.ProcessPauseBetweenJumps(_pauseBetweenJump.Value);
+    }
+    protected override void OnValidate()
+    {
+        base.OnValidate();
+
+        _jumpChaseMovementPostProcessor = GetComponent<JumpChaseMovementPostProcessor>();
     }
 }

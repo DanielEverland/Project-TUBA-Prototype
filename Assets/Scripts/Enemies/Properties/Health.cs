@@ -13,7 +13,7 @@ public class Health : MonoBehaviour {
     private bool _destroyBelowZero = true;
     [SerializeField]
     private GameObject _destroyTarget;
-    [SerializeField]
+    [SerializeField, HideInInspector]
     private HealthPostProcessor _postProcessor;
 
     [Space()]
@@ -62,9 +62,10 @@ public class Health : MonoBehaviour {
     protected virtual void OnValidate()
     {
         if (_destroyTarget == null)
-        {
             _destroyTarget = transform.parent == null ? gameObject : transform.parent.gameObject;
-        }            
+
+        if (_postProcessor)
+            _postProcessor = GetComponent<HealthPostProcessor>();
     }
     private float GetStartHealth() => _postProcessor == null ? _startHealth.Value : _postProcessor.ProcessMaxHealth(_startHealth.Value);
 }

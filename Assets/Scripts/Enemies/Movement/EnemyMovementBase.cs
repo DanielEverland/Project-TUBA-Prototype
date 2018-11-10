@@ -6,7 +6,7 @@ public class EnemyMovementBase : MonoBehaviour
 {
     [SerializeField]
     private FloatReference _movementSpeed;
-    [SerializeField]
+    [SerializeField, HideInInspector]
     private MovementPostProcessor _postProcessor;
 
     protected float MovementSpeed => GetMovementSpeed();
@@ -20,7 +20,6 @@ public class EnemyMovementBase : MonoBehaviour
     }
     protected virtual void OnValidate()
     {
-        if (_postProcessor == null)
-            _postProcessor = GetComponent<MovementPostProcessor>();
+        _postProcessor = GetComponent<MovementPostProcessor>();
     }
 }
