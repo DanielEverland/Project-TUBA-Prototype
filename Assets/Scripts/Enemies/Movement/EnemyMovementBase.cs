@@ -5,10 +5,13 @@ using UnityEngine;
 public class EnemyMovementBase : MonoBehaviour
 {
     [SerializeField]
-    private FloatReference _movementSpeed;
+    private CharacterController2D _characterController;
+    [SerializeField]
+    private FloatReference _movementSpeed = new FloatReference(1);
     [SerializeField, HideInInspector]
     private MovementPostProcessor _postProcessor;
 
+    protected CharacterController2D CharacterController => _characterController;
     protected float MovementSpeed => GetMovementSpeed();
 
     private float GetMovementSpeed()
@@ -21,5 +24,8 @@ public class EnemyMovementBase : MonoBehaviour
     protected virtual void OnValidate()
     {
         _postProcessor = GetComponent<MovementPostProcessor>();
+
+        if (_characterController == null)
+            _characterController = GetComponent<CharacterController2D>();
     }
 }

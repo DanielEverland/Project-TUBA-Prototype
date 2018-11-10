@@ -5,16 +5,13 @@ using UnityEngine;
 public class ChaseMovement : EnemyMovementBase
 {
     [SerializeField]
-    private GameObjectReference _target;    
+    private GameObjectReference _target;
     [SerializeField]
-    private CharacterController2D _characterController;
-    [SerializeField]
-    private FloatReference _minDistance;
+    private FloatReference _minDistance = new FloatReference(0);
 
     protected virtual Color TargetLineColor => new Color(1, 0, 0, 0.1f);
 
     protected GameObject Target => _target.Value;    
-    protected CharacterController2D CharacterController => _characterController;
     protected Vector3 Direction => (Target.transform.position - transform.position).normalized;
     protected float DistanceToTarget => Vector3.Distance(transform.position, Target.transform.position);
     protected float MinDistance => _minDistance.Value;
@@ -22,7 +19,7 @@ public class ChaseMovement : EnemyMovementBase
 
     protected virtual void Update()
     {
-        Move(Direction, MovementSpeed);
+        Move(Direction, MovementSpeed * Time.deltaTime);
         DrawDebug();
     }    
     protected virtual void Move(Vector3 direction, float speed) => CharacterController.Move(direction * speed);
