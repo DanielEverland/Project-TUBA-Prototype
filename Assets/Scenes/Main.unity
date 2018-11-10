@@ -194,20 +194,45 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 114473309694695080, guid: 6627465ed5ccd8a4988a9ba38b5c82dc,
+    - target: {fileID: 114202716929151878, guid: 6627465ed5ccd8a4988a9ba38b5c82dc,
         type: 2}
-      propertyPath: _movementMutliplier.m_Curve.Array.data[0].value
-      value: 0.90248144
+      propertyPath: _attackForceCurve.m_Curve.Array.data[0].outSlope
+      value: -0.26271892
       objectReference: {fileID: 0}
-    - target: {fileID: 114484894485331738, guid: 6627465ed5ccd8a4988a9ba38b5c82dc,
+    - target: {fileID: 114202716929151878, guid: 6627465ed5ccd8a4988a9ba38b5c82dc,
         type: 2}
-      propertyPath: _jumpChaseMovementPostProcessor
-      value: 
-      objectReference: {fileID: 1891222092}
-    - target: {fileID: 114473309694695080, guid: 6627465ed5ccd8a4988a9ba38b5c82dc,
+      propertyPath: _attackForceCurve.m_Curve.Array.data[0].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 114202716929151878, guid: 6627465ed5ccd8a4988a9ba38b5c82dc,
         type: 2}
-      propertyPath: _movementMutliplier.m_Curve.Array.data[0].time
+      propertyPath: _attackForceCurve.m_Curve.Array.data[0].outWeight
+      value: 0.03773585
+      objectReference: {fileID: 0}
+    - target: {fileID: 114202716929151878, guid: 6627465ed5ccd8a4988a9ba38b5c82dc,
+        type: 2}
+      propertyPath: _attackForceCurve.m_Curve.Array.data[1].value
+      value: 0.84998703
+      objectReference: {fileID: 0}
+    - target: {fileID: 114202716929151878, guid: 6627465ed5ccd8a4988a9ba38b5c82dc,
+        type: 2}
+      propertyPath: _attackForceCurve.m_Curve.Array.data[1].inSlope
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114202716929151878, guid: 6627465ed5ccd8a4988a9ba38b5c82dc,
+        type: 2}
+      propertyPath: _attackForceCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 114202716929151878, guid: 6627465ed5ccd8a4988a9ba38b5c82dc,
+        type: 2}
+      propertyPath: _attackForceCurve.m_Curve.Array.data[1].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 114202716929151878, guid: 6627465ed5ccd8a4988a9ba38b5c82dc,
+        type: 2}
+      propertyPath: _attackForceCurve.m_Curve.Array.data[0].inSlope
+      value: -0.26271892
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6627465ed5ccd8a4988a9ba38b5c82dc, type: 2}
@@ -1105,50 +1130,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1891222091 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1640740622036420, guid: 6627465ed5ccd8a4988a9ba38b5c82dc,
-    type: 2}
-  m_PrefabInternal: {fileID: 266493147}
---- !u!114 &1891222092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1891222091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9d146210dbd0bd42a3e3ceb5a03dc27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _subdividerElement: {fileID: 1891222096}
-  _pauseBetweenJumpCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0.3331396
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!114 &1891222096 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114200270027188154, guid: 6627465ed5ccd8a4988a9ba38b5c82dc,
-    type: 2}
-  m_PrefabInternal: {fileID: 266493147}
-  m_Script: {fileID: 11500000, guid: ddd39c72a6f52564c9a342dd950032e3, type: 3}

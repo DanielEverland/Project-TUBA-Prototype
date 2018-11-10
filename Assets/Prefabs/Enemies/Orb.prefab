@@ -26,6 +26,8 @@ GameObject:
   - component: {fileID: 114426001969407580}
   - component: {fileID: 114473309694695080}
   - component: {fileID: 50311078206429214}
+  - component: {fileID: 114223293612216502}
+  - component: {fileID: 114202716929151878}
   m_Layer: 0
   m_Name: Orb
   m_TagString: Untagged
@@ -230,7 +232,7 @@ MonoBehaviour:
     _useConstant: 0
     _constantValue: 0
     _variable: {fileID: 11400000, guid: 4457a4fd290fd0545924651434f8821c, type: 2}
-  _attackPower:
+  _damage:
     _useConstant: 0
     _constantValue: 0
     _variable: {fileID: 11400000, guid: b313c1d0be8df8145be6076eb6af3165, type: 2}
@@ -238,14 +240,15 @@ MonoBehaviour:
     _useConstant: 0
     _constantValue: 0
     _variable: {fileID: 11400000, guid: 07c57c3cccc32764ebb4982c4a447da0, type: 2}
-  _attackForce:
-    _useConstant: 1
-    _constantValue: 0.5
-    _variable: {fileID: 0}
+  _force:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: 8b137deeabe9046448b031cb40a8124f, type: 2}
   _characterController: {fileID: 114032101464939500}
   _playerCharacterController: {fileID: 11400000, guid: 6bd41b93da458204b8555b46cb872241,
     type: 2}
   _playerHealth: {fileID: 11400000, guid: b1f8f948f1addb843a7472829452db06, type: 2}
+  _postProcessor: {fileID: 114202716929151878}
 --- !u!114 &114182851212161734
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -310,6 +313,78 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _sizeTarget: {fileID: 4904880359015734}
+--- !u!114 &114202716929151878
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1640740622036420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b621681b0e435464e8db4b3c968693bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _subdividerElement: {fileID: 114200270027188154}
+  _attackForceCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -0.26271892
+      outSlope: -0.26271892
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.03773585
+    - serializedVersion: 3
+      time: 1
+      value: 0.84998703
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &114223293612216502
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1640740622036420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9d146210dbd0bd42a3e3ceb5a03dc27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _subdividerElement: {fileID: 114200270027188154}
+  _pauseBetweenJumpCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0.3331396
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &114265571335847680
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -381,7 +456,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.49998075
+      value: 0.90248144
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -453,7 +528,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _jumpChaseMovementPostProcessor: {fileID: 0}
+  _jumpChaseMovementPostProcessor: {fileID: 114223293612216502}
 --- !u!114 &114659203584671138
 MonoBehaviour:
   m_ObjectHideFlags: 1
