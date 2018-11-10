@@ -20,11 +20,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4904880359015734}
   - component: {fileID: 114032101464939500}
+  - component: {fileID: 114074959718709206}
   - component: {fileID: 114200270027188154}
   - component: {fileID: 114426001969407580}
   - component: {fileID: 114473309694695080}
   - component: {fileID: 50311078206429214}
-  - component: {fileID: 114074959718709206}
   m_Layer: 0
   m_Name: Orb
   m_TagString: Untagged
@@ -365,27 +365,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _subdividerElement: {fileID: 114200270027188154}
-  _movementMutliplier:
+  _movementCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.90248144
+      value: 0.3
       inSlope: 0
-      outSlope: 0
+      outSlope: 0.7
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
+      inSlope: 0.7
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4

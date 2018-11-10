@@ -8,7 +8,7 @@ public class SubdivideMovementPostProcessor : MovementPostProcessor {
     [SerializeField]
     private SubdividerElement _subdividerElement;
     [SerializeField]
-    private AnimationCurve _movementMutliplier = AnimationCurve.Linear(0, 0.3f, 1, 1);
+    private AnimationCurve _movementCurve = AnimationCurve.Linear(0, 0.3f, 1, 1);
 
     protected int CurrentLevel => _subdividerElement.CurrentLevel;
     protected int MaxLevel => _subdividerElement.MaxLevel;
@@ -16,7 +16,7 @@ public class SubdivideMovementPostProcessor : MovementPostProcessor {
 
     public override float ProcessMovementSpeed(float movementSpeed)
     {
-        return _movementMutliplier.Evaluate(CurrentLevelPercentage) * movementSpeed;
+        return _movementCurve.Evaluate(CurrentLevelPercentage) * movementSpeed;
     }
     protected virtual void OnValidate()
     {
