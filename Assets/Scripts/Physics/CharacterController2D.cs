@@ -7,6 +7,8 @@ public class CharacterController2D : MonoBehaviour
 {
     [SerializeField]
     private FloatReference _drag = new FloatReference(0.1f);
+    [SerializeField]
+    private FloatReference _mass = new FloatReference(1);
     [SerializeField, Tooltip("Determines how much force is required to count as being pushed")]
     private FloatReference _minPushForce = new FloatReference(0.1f);
     [SerializeField]
@@ -15,16 +17,30 @@ public class CharacterController2D : MonoBehaviour
     private Rigidbody2D _rigidbody;
 
     protected Vector2 MoveDelta { get; private set; }
-    protected Vector2 CachedForce { get; private set; }
+    protected Vector2 Velocity { get => _rigidbody.velocity; private set => _rigidbody.velocity = value; }
     protected Rigidbody2D Rigidbody => _rigidbody;
     protected bool DisableMovementWhenPushed => _disableMovementWhenPushed.Value;
+    protected float Mass => _mass.Value;
     protected float Drag => _drag.Value;
     protected float MinPushForce => _minPushForce.Value;
-    protected bool IsBeingPushed => CachedForce.magnitude > MinPushForce;
+    protected bool IsBeingPushed => Velocity.magnitude > MinPushForce;
+
+    // No fucking idea why this is required.
+    private const float MAGIC_FORCE_DIVIDER = 50;
     
-    public virtual void AddForce(Vector2 force)
+    public virtual void AddForce(Vector2 force, ForceMode2D forceMode)
     {
-        CachedForce += force;
+        switch (forceMode)
+        {
+            case ForceMode2D.Force:
+                Velocity += force / Mass / MAGIC_FORCE_DIVIDER * Time.fixedDeltaTime;
+                break;
+            case ForceMode2D.Impulse:
+                Velocity += force / Mass / MAGIC_FORCE_DIVIDER;
+                break;
+            default:
+                throw new System.NotImplementedException();
+        }        
     }
     public virtual void Move(Vector2 direction)
     {
@@ -32,9 +48,8 @@ public class CharacterController2D : MonoBehaviour
     }
     protected virtual void FixedUpdate()
     {
-        Vector2 targetPosition = Vector2.zero;
-        targetPosition += (Vector2)transform.position;
-        targetPosition += CachedForce;
+        Vector2 targetPosition = transform.position;
+        targetPosition += Velocity;
         
         if (!DisableMovementWhenPushed || !IsBeingPushed)
         {
@@ -44,7 +59,7 @@ public class CharacterController2D : MonoBehaviour
         
         Rigidbody.MovePosition(targetPosition);
 
-        CachedForce = Vector2.MoveTowards(CachedForce, Vector2.zero, Drag);
+        Velocity *= Mathf.Clamp01(1f - Drag * Time.fixedDeltaTime);
     }
     protected virtual void OnValidate()
     {
