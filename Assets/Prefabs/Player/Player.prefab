@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4062662649747886}
-  - component: {fileID: 114169979416096778}
+  - component: {fileID: 114219887883346942}
   - component: {fileID: 114062271111085560}
   m_Layer: 8
   m_Name: Hit Response
@@ -351,7 +351,7 @@ MonoBehaviour:
   _response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114169979416096778}
+      - m_Target: {fileID: 0}
         m_MethodName: AddForce
         m_Mode: 1
         m_Arguments:
@@ -435,26 +435,6 @@ MonoBehaviour:
     _useConstant: 0
     _constantValue: 0
     _variable: {fileID: 11400000, guid: d251c8038738759408980be6f44b9d05, type: 2}
---- !u!114 &114169979416096778
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1885263181637826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 795c6cd4f428d4341bf187e765293412, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _radius:
-    _useConstant: 1
-    _constantValue: 10
-    _variable: {fileID: 0}
-  _force:
-    _useConstant: 1
-    _constantValue: 10
-    _variable: {fileID: 0}
-  _forceMode: 1
 --- !u!114 &114196601688615114
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -498,6 +478,29 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114219887883346942
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1885263181637826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 795c6cd4f428d4341bf187e765293412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _radius:
+    _useConstant: 1
+    _constantValue: 10
+    _variable: {fileID: 0}
+  _force:
+    _useConstant: 1
+    _constantValue: 10
+    _variable: {fileID: 0}
+  _forceMode: 1
+  _ignoreLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &114346657072030846
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -639,7 +642,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _drag:
     _useConstant: 1
-    _constantValue: 0.1
+    _constantValue: 1
     _variable: {fileID: 0}
   _mass:
     _useConstant: 1
