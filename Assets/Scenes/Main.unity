@@ -1901,6 +1901,10 @@ MonoBehaviour:
     _useConstant: 0
     _constantValue: {fileID: 0}
     _variable: {fileID: 11400000, guid: ce9bed48b5db97e4ba6459bc11ecd278, type: 2}
+  _distance:
+    _useConstant: 1
+    _constantValue: 10
+    _variable: {fileID: 0}
 --- !u!1 &2002755929
 GameObject:
   m_ObjectHideFlags: 0
