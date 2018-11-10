@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114426001969407580}
   - component: {fileID: 114473309694695080}
   - component: {fileID: 50311078206429214}
+  - component: {fileID: 114407249557121550}
   m_Layer: 0
   m_Name: Orb
   m_TagString: Untagged
@@ -335,6 +336,21 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &114407249557121550
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1640740622036420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a7bd50eba8549846a5c70229ab69aff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damageAmount:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: 2e64e100433d3704ea93ee5085c4cb9f, type: 2}
 --- !u!114 &114426001969407580
 MonoBehaviour:
   m_ObjectHideFlags: 1

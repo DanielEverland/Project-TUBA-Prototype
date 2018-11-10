@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4638067161720332}
   - component: {fileID: 33765961903507222}
   - component: {fileID: 23253962864878076}
-  - component: {fileID: 58237060775173908}
   - component: {fileID: 114554613205426316}
   - component: {fileID: 114361436125282190}
   - component: {fileID: 50745272437507820}
@@ -43,8 +42,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4376826528967630}
   - component: {fileID: 114196601688615114}
-  - component: {fileID: 135963006277142646}
   - component: {fileID: 114018153217322942}
+  - component: {fileID: 58608490896169114}
   m_Layer: 0
   m_Name: Hitbox
   m_TagString: Untagged
@@ -270,12 +269,12 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &58237060775173908
+--- !u!58 &58608490896169114
 CircleCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1001157368404180}
+  m_GameObject: {fileID: 1181196162965906}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -680,15 +679,3 @@ MonoBehaviour:
     _useConstant: 0
     _constantValue: {x: 0, y: 0, z: 0}
     _variable: {fileID: 11400000, guid: db7743775b88ff547a35b36d00faef36, type: 2}
---- !u!135 &135963006277142646
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1181196162965906}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
