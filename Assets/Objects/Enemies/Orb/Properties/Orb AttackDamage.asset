@@ -14,5 +14,5 @@ MonoBehaviour:
   DeveloperDescription:
     _value: 
   _value: 10
-  _readOnly: 0
+  _readOnly: 1
   _raiseWarning: 1
