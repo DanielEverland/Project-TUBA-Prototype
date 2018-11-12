@@ -8,8 +8,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9377ffeb64ba30478a995a8ffc78ae8, type: 3}
+  m_Script: {fileID: 11500000, guid: 365b30b3e81c8d94a9b2a548dc39cfed, type: 3}
   m_Name: PlayerCurrentHealth
   m_EditorClassIdentifier: 
-  DeveloperDescription: 
-  _value: 0
+  DeveloperDescription:
+    _value: 
+  _value: 80
+  _readOnly: 0
+  _raiseWarning: 1
+  _minClampedValue:
+    _useConstant: 1
+    _constantValue: 0
+    _variable: {fileID: 0}
+  _maxClampedValue:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: 567b67b40ad50454197edc8768c8949d, type: 2}
