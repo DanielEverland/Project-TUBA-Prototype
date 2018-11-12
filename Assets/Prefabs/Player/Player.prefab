@@ -526,13 +526,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _radius:
     _useConstant: 1
-    _constantValue: 10
+    _constantValue: 20
     _variable: {fileID: 0}
   _force:
     _useConstant: 1
-    _constantValue: 30
+    _constantValue: 50
     _variable: {fileID: 0}
   _forceMode: 1
+  _falloffMode: 2
   _ignoreLayer:
     serializedVersion: 2
     m_Bits: 256
