@@ -255,7 +255,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1640740622036420, guid: 6627465ed5ccd8a4988a9ba38b5c82dc, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6627465ed5ccd8a4988a9ba38b5c82dc, type: 2}
@@ -1816,6 +1816,8 @@ GameObject:
   - component: {fileID: 1659526121}
   - component: {fileID: 1659526120}
   - component: {fileID: 1659526124}
+  - component: {fileID: 1659526125}
+  - component: {fileID: 1659526126}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1909,6 +1911,54 @@ MonoBehaviour:
     _useConstant: 1
     _constantValue: 10
     _variable: {fileID: 0}
+--- !u!114 &1659526125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1659526119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da07f5d1a06768d42a9ac74e03008f7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _duration: 0.1
+  _shakeIntensity: 50
+--- !u!114 &1659526126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1659526119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5758ca93461aeeb4589456a052b07d74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DeveloperDescription:
+    _value: 
+  _showDebugFields: 1
+  _enableGizmoDebugging: 1
+  _debugColor: {r: 0, g: 1, b: 1, a: 1}
+  _previouslyRegisteredEvent: {fileID: 11400000, guid: 5db2e0a5b4154f84b96065712bd136fb,
+    type: 2}
+  _event: {fileID: 11400000, guid: 5db2e0a5b4154f84b96065712bd136fb, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1659526125}
+        m_MethodName: AddForce
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 2
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &2002755929
 GameObject:
   m_ObjectHideFlags: 0
