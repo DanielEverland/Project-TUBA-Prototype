@@ -96,6 +96,18 @@ MonoBehaviour:
     _useConstant: 0
     _constantValue: 0
     _variable: {fileID: 11400000, guid: 76ca2f7562a69324b8e32e48ad15e134, type: 2}
+  _lerpSpeed:
+    _useConstant: 1
+    _constantValue: 10
+    _variable: {fileID: 0}
+  _lerpIncreases:
+    _useConstant: 1
+    _constantValue: 1
+    _variable: {fileID: 0}
+  _lerpDecreases:
+    _useConstant: 1
+    _constantValue: 0
+    _variable: {fileID: 0}
   _segmentElement: {fileID: 114762200264083990, guid: ed165439c1f7d4c4694ffceddd30205e,
     type: 2}
   _layoutParent: {fileID: 224167841538586400}
