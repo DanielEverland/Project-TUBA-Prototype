@@ -6,7 +6,7 @@ using UnityEngine;
 public class CharacterController2D : MonoBehaviour
 {
     [SerializeField]
-    private FloatReference _drag = new FloatReference(0.1f);
+    private FloatReference _drag = new FloatReference(1);
     [SerializeField]
     private FloatReference _mass = new FloatReference(1);
     [SerializeField, HideInInspector]

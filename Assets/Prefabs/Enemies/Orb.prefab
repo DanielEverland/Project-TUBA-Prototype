@@ -45,7 +45,6 @@ GameObject:
   - component: {fileID: 4430888113883336}
   - component: {fileID: 33963904820199642}
   - component: {fileID: 23850474161146128}
-  - component: {fileID: 114182851212161734}
   m_Layer: 9
   m_Name: Renderer
   m_TagString: Untagged
@@ -234,30 +233,6 @@ MonoBehaviour:
     _useConstant: 1
     _constantValue: 0
     _variable: {fileID: 0}
---- !u!114 &114182851212161734
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1681987211159420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b54fa01acca67d41bb950e0d324bfcf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DeveloperDescription:
-    _value: 
-  _showDebugFields: 0
-  _enableGizmoDebugging: 1
-  _debugColor: {r: 0, g: 1, b: 1, a: 1}
-  _previouslyRegisteredEvent: {fileID: 0}
-  _event: {fileID: 0}
-  _response:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: Vector2UnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  _debugValue: {x: 0, y: 0}
 --- !u!114 &114200270027188154
 MonoBehaviour:
   m_ObjectHideFlags: 1
