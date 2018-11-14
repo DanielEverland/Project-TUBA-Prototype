@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMovementBase : MonoBehaviour
+public abstract class EnemyMovementBase : AIComponent
 {
     [SerializeField]
     private CharacterController2D _characterController;
