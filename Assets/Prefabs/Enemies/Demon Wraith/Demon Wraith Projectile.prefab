@@ -146,7 +146,7 @@ MonoBehaviour:
     _variable: {fileID: 11400000, guid: a33e1895d1c933a4f8b601eae132be87, type: 2}
   _ignorelayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   _radius:
     _useConstant: 1
     _constantValue: 0.25
