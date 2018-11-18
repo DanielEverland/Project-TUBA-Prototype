@@ -11,7 +11,7 @@ using UnityEngine;
 using System.Collections;
 using System;
 
-namespace Pixelplacement
+namespace Surge
 {
 	public enum SplineDirection { Forward, Backwards }
 

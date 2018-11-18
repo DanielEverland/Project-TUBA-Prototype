@@ -10,7 +10,7 @@
 using UnityEngine;
 using System.Collections;
 
-namespace Pixelplacement
+namespace Surge
 {
 	[RequireComponent (typeof (Initialization))]
 	public abstract class Singleton<T> : MonoBehaviour 

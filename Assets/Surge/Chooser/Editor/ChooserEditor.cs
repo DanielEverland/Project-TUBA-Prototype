@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-namespace Pixelplacement
+namespace Surge
 {
 	[CustomEditor(typeof(Chooser), true)]
 	[CanEditMultipleObjects]

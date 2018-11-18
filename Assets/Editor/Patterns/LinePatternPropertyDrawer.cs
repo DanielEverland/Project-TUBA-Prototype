@@ -12,21 +12,27 @@ public class LinePatternPropertyDrawer : PropertyDrawer
 
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
-        LinePattern pattern = property.objectReferenceValue as LinePattern;
+        SerializedObject serializedObject = new SerializedObject(property.objectReferenceValue);
         position.height = EditorGUIUtility.singleLineHeight;
         position.y += TOP_PADDING;
 
-        pattern.StartOffset = EditorGUI.Vector2Field(position, new GUIContent("Start"), pattern.StartOffset);
+        SerializedProperty startOffsetProperty = serializedObject.FindProperty("_startOffset");
+        if(startOffsetProperty != null)
+            EditorGUI.PropertyField(position, startOffsetProperty);
 
         position.y += EditorGUIUtility.singleLineHeight;
         position.y += SPACING;
 
-        pattern.EndOffset = EditorGUI.Vector2Field(position, new GUIContent("End"), pattern.EndOffset);
+        SerializedProperty endOffsetProperty = serializedObject.FindProperty("_endOffset");
+        if (endOffsetProperty != null)
+            EditorGUI.PropertyField(position, endOffsetProperty);
 
         position.y += EditorGUIUtility.singleLineHeight;
         position.y += SPACING;
 
-        pattern.Count = EditorGUI.IntField(position, new GUIContent("Count"), pattern.Count);
+        SerializedProperty countProperty = serializedObject.FindProperty("_count");
+        if (countProperty != null)
+            EditorGUI.PropertyField(position, countProperty);
     }
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {

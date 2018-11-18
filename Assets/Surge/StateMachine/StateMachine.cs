@@ -16,7 +16,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine.Events;
 
-namespace Pixelplacement
+namespace Surge
 {
 	[RequireComponent (typeof (Initialization))]
 	public class StateMachine : MonoBehaviour 

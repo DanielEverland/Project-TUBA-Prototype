@@ -12,7 +12,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-namespace Pixelplacement
+namespace Surge
 {
 	[RequireComponent (typeof (Initialization))]
 	public class DisplayObject : MonoBehaviour 

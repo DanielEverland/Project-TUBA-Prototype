@@ -7,9 +7,9 @@
 using UnityEngine;
 using System;
 using UnityEngine.UI;
-using Pixelplacement;
+using Surge;
 
-namespace Pixelplacement.TweenSystem
+namespace Surge.TweenSystem
 {
 	class Size : TweenBase
 	{

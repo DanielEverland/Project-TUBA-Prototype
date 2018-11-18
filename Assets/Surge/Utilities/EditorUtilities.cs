@@ -11,7 +11,7 @@
 using UnityEngine;
 using UnityEditor;
 
-namespace Pixelplacement
+namespace Surge
 {
 	public class EditorUtilities : Editor
 	{

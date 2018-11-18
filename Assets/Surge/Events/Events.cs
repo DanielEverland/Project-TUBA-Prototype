@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Pixelplacement
+namespace Surge
 {
 	[System.Serializable]
 	public class GameObjectEvent : UnityEvent<GameObject> { }

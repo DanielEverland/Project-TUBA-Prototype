@@ -12,14 +12,14 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using System;
-using Pixelplacement.TweenSystem;
+using Surge.TweenSystem;
 #if UNITY_2017_2_OR_NEWER
 using UnityEngine.XR;
 #else
 using UnityEngine.VR;
 #endif
 
-namespace Pixelplacement
+namespace Surge
 {
 	[RequireComponent(typeof(Collider))]
 	[RequireComponent(typeof(Rigidbody))]

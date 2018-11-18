@@ -11,7 +11,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Pixelplacement
+namespace Surge
 {
 	public struct CurveDetail
 	{

@@ -12,7 +12,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 
-namespace Pixelplacement
+namespace Surge
 {
 	[CustomEditor (typeof (StateMachine), true)]
 	public class StateMachineEditor : Editor 

@@ -10,7 +10,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Pixelplacement;
+using Surge;
 
 [ExecuteInEditMode]
 [RequireComponent (typeof (Spline))]
@@ -23,7 +23,7 @@ public class SplineControlledParticleSystem : MonoBehaviour
 
 	#region Private Variables
 	[SerializeField] ParticleSystem _particleSystem;
-	Pixelplacement.Spline _spline;
+	Surge.Spline _spline;
 	ParticleSystem.Particle[] _particles;
 	const float _prviousDiff = .01f;
 	#endregion
@@ -31,7 +31,7 @@ public class SplineControlledParticleSystem : MonoBehaviour
 	#region Init
 	void Awake ()
 	{
-		_spline = GetComponent<Pixelplacement.Spline> ();
+		_spline = GetComponent<Surge.Spline> ();
 	}
 	#endregion
 

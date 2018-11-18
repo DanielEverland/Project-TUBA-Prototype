@@ -8,9 +8,9 @@
 /// </summary>
 
 using UnityEngine;
-using Pixelplacement;
+using Surge;
 
-namespace Pixelplacement.TweenSystem
+namespace Surge.TweenSystem
 {
 	public class TweenUtilities : MonoBehaviour
 	{

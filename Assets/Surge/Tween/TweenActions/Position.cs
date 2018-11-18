@@ -6,9 +6,9 @@
 
 using UnityEngine;
 using System;
-using Pixelplacement;
+using Surge;
 
-namespace Pixelplacement.TweenSystem
+namespace Surge.TweenSystem
 {
 	class Position : TweenBase
 	{

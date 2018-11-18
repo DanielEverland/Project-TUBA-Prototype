@@ -5,9 +5,16 @@ using UnityEngine;
 [System.Serializable]
 public class CirclePattern : PatternComponent
 {
-    public Vector2 Offset { get; set; }
-    public float Radius { get; set; } = 5;
-    public int Count { get; set; } = 10;
+    [SerializeField]
+    private Vector2Reference _offset = new Vector2Reference(Vector2.zero);
+    [SerializeField]
+    private FloatReference _radius = new FloatReference(5);
+    [SerializeField]
+    private IntReference _count = new IntReference(10);
+
+    public Vector2 Offset => _offset.Value;
+    public float Radius => _radius.Value;
+    public int Count => _count.Value;
 
     protected const float RADIANS = 2 * Mathf.PI;
 

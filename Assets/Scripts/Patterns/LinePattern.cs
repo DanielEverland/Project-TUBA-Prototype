@@ -5,9 +5,16 @@ using UnityEngine;
 [System.Serializable]
 public class LinePattern : PatternComponent
 {
-    public Vector2 StartOffset { get; set; } = new Vector2(-5, 0);
-    public Vector2 EndOffset { get; set; } = new Vector2(5, 0);
-    public int Count { get; set; } = 6;
+    [SerializeField]
+    private Vector2Reference _startOffset = new Vector2Reference(new Vector2(-5, 0));
+    [SerializeField]
+    private Vector2Reference _endOffset = new Vector2Reference(new Vector2(5, 0));
+    [SerializeField]
+    private IntReference _count = new IntReference(6);
+
+    public Vector2 StartOffset => _startOffset.Value;
+    public Vector2 EndOffset => _endOffset.Value;
+    public int Count => _count.Value;
 
     public override void CreateChildren(GameObject parent, GameObject prefab, ref PatternObject pattern)
     {

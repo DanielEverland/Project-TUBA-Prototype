@@ -10,7 +10,7 @@
 using UnityEngine;
 using System.Collections;
 
-namespace Pixelplacement
+namespace Surge
 {
 	[SelectionBase]
 	public class SplineTangent : MonoBehaviour

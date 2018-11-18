@@ -10,7 +10,7 @@
 using UnityEngine;
 using System.Collections;
 
-namespace Pixelplacement
+namespace Surge
 {
 	public enum TangentMode {Mirrored, Aligned, Free}
 

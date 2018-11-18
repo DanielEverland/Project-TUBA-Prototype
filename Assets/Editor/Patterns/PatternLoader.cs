@@ -8,61 +8,35 @@ using Type = System.Type;
 
 public static class PatternLoader
 {
-    public static List<Type> Patterns
+    public static List<Type> Components
     {
         get
         {
-            if (_patterns == null)
-                LoadPatterns();
+            if (_components == null)
+                _components = new List<Type>(LoadOfType<PatternComponent>());
 
-            return _patterns;
+            return _components;
         }
     }
-    private static List<Type> _patterns;
+    private static List<Type> _components;
 
-    public static Dictionary<Type, PropertyDrawer> Drawers
+    public static List<Type> Behaviours
     {
         get
         {
-            if (_drawers == null)
-                LoadDrawers();
+            if (_behaviours == null)
+                _behaviours = new List<Type>(LoadOfType<PatternBehaviour>());
 
-            return _drawers;
+            return _behaviours;
         }
     }
-    private static Dictionary<Type, PropertyDrawer> _drawers;
-
-    private static readonly BindingFlags FieldFlags = BindingFlags.Instance | BindingFlags.NonPublic;
-
-    private static void LoadPatterns()
+    private static List<Type> _behaviours;
+    
+    private static IEnumerable<Type> LoadOfType<T>()
     {
-        _patterns = new List<Type>(typeof(PatternComponent).Assembly.GetTypes()
-            .Where(x => typeof(PatternComponent).IsAssignableFrom(x)
+        return typeof(T).Assembly.GetTypes()
+            .Where(x => typeof(T).IsAssignableFrom(x)
                 && !x.IsAbstract
-                && x != typeof(PatternComponent)));
-    }
-    private static void LoadDrawers()
-    {
-        _drawers = new Dictionary<Type, PropertyDrawer>();
-
-        IEnumerable<PropertyDrawer> allDrawers = typeof(PatternLoader).Assembly.GetTypes()
-            .Where(x => typeof(PropertyDrawer).IsAssignableFrom(x))
-            .Select(x => System.Activator.CreateInstance(x) as PropertyDrawer);
-        
-        foreach (PropertyDrawer drawer in allDrawers)
-        {
-            object[] attributes = drawer.GetType().GetCustomAttributes(typeof(CustomPropertyDrawer), false);
-
-            if(attributes.Length != 0)
-            {
-                CustomPropertyDrawer drawerAttribute = attributes[0] as CustomPropertyDrawer;
-                Type targetType = (Type)typeof(CustomPropertyDrawer).GetField("m_Type", FieldFlags).GetValue(drawerAttribute);
-                
-                if(typeof(PatternComponent).IsAssignableFrom(targetType) && targetType.IsAbstract == false)
-                {
-                    _drawers.Add(targetType, drawer);
-                }
-            }
-        }        
+                && x != typeof(T));
     }
 }

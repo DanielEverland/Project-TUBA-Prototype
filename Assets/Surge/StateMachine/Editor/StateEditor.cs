@@ -11,7 +11,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEditor;
 
-namespace Pixelplacement
+namespace Surge
 {
 	[CustomEditor (typeof (State), true)]
 	public class StateEditor : Editor 

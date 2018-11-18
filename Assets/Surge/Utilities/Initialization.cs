@@ -12,7 +12,7 @@ using System.Collections;
 using System;
 using System.Reflection;
 
-namespace Pixelplacement
+namespace Surge
 {
 	public class Initialization : MonoBehaviour
 	{

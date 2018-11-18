@@ -10,7 +10,7 @@
 using UnityEngine;
 using System.Collections;
 
-namespace Pixelplacement
+namespace Surge
 {
 	[System.Serializable]
 	public class SplineFollower

@@ -9,7 +9,7 @@
 
 using UnityEngine;
 
-namespace Pixelplacement
+namespace Surge
 {
 	public class LayerMaskHelper
 	{

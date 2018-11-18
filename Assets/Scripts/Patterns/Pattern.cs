@@ -8,11 +8,18 @@ public class Pattern : ScriptableObject
     [SerializeField]
     private List<PatternComponent> _components;
     [SerializeField]
+    private PatternBehaviour _behaviour;
+    [SerializeField]
     private GameObject _prefab;
-    
-    public List<PatternComponent> Components => _components;
-    public GameObject Prefab => _prefab;
 
+#if UNITY_EDITOR
+    public bool BehaviourFoldoutState = true;
+#endif
+
+    public List<PatternComponent> Components => _components;
+    public PatternBehaviour Behaviour { get => _behaviour; set => _behaviour = value; }
+    public GameObject Prefab => _prefab;
+    
     public PatternObject Spawn()
     {
         GameObject parent = new GameObject();

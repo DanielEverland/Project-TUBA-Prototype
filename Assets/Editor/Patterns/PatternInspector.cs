@@ -10,10 +10,17 @@ public class PatternInspector : Editor
 {
     protected Pattern Target => (Pattern)target;
     protected SerializedProperty Components { get; set; }
+    protected SerializedProperty Behaviour { get; set; }
     protected SerializedProperty Prefab { get; set; }
     protected ReorderableList List { get; set; }
-    protected List<Type> PatternTypes { get; set; }
-    protected string[] PatternOptions { get; set; }
+    protected List<Type> ComponentTypes { get; set; }
+    protected string[] ComponentOptions { get; set; }
+    protected List<Type> BehaviourTypes { get; set; }
+    protected string[] BehaviourOptions { get; set; }
+
+    private const float BEHAVIOUR_PADDING_TOP = 3;
+    private const float BEHAVIOUR_PADDING_BOTTOM = 7;
+    private const float POPUP_SPACING = 2;
 
     protected virtual void OnEnable()
     {
@@ -26,10 +33,11 @@ public class PatternInspector : Editor
         serializedObject.Update();
 
         DrawPrefabField();
+        DrawSpawnButton();
 
         EditorGUILayout.Space();
 
-        DrawSpawnButton();
+        DrawBehaviour();
         
         using (var scope = new EditorGUI.ChangeCheckScope())
         {
@@ -52,6 +60,99 @@ public class PatternInspector : Editor
             Target.Spawn();
         }
     }
+    protected virtual void DrawBehaviour()
+    {
+        DrawBehaviourHeader();
+
+        if(Target.BehaviourFoldoutState)
+            DrawBehaviourContent();
+    }
+    protected virtual void DrawBehaviourHeader()
+    {
+        Rect rect = EditorGUILayout.GetControlRect(false, EditorGUIUtility.singleLineHeight);
+
+        if (Event.current.type == EventType.Repaint)
+            Styles.HeaderBackground.Draw(rect, GUIContent.none, 0);
+
+        using (new EditorGUI.IndentLevelScope())
+        {
+            rect.y += 1;
+
+            string behaviourName = Target.Behaviour ? Target.Behaviour.GetType().Name : "null";
+
+            Target.BehaviourFoldoutState = EditorGUI.Foldout(rect, Target.BehaviourFoldoutState, new GUIContent($"Behaviour ({behaviourName})"), true);
+        }
+    }
+    protected virtual void DrawBehaviourContent()
+    {
+        float requiredHeight = 0;
+        requiredHeight += EditorGUIUtility.singleLineHeight;
+        requiredHeight += BEHAVIOUR_PADDING_TOP;
+        requiredHeight += BEHAVIOUR_PADDING_BOTTOM;
+        requiredHeight += POPUP_SPACING;
+
+        if (Target.Behaviour != null)
+        {
+            Type type = Target.Behaviour.GetType();
+            PropertyDrawer drawer = GetDrawer(type);
+
+            requiredHeight += drawer.GetPropertyHeight(Behaviour, GUIContent.none);
+        }
+
+        Rect rect = EditorGUILayout.GetControlRect(false, requiredHeight);
+        
+        if(Event.current.type == EventType.Repaint)
+            Styles.BoxBackground.Draw(rect, GUIContent.none, 0);
+
+        using (new EditorGUI.IndentLevelScope())
+        {
+            rect.y += BEHAVIOUR_PADDING_TOP;
+            rect.width -= 5;
+
+            DrawBehaviourPopup(rect);
+
+            rect.y += EditorGUIUtility.singleLineHeight + POPUP_SPACING;
+
+            if (Target.Behaviour != null)
+            {
+                Type type = Target.Behaviour.GetType();
+                PropertyDrawer drawer = GetDrawer(type);
+
+                DrawBehaviourInspector(rect, drawer);
+            }
+        }        
+    }
+    protected virtual void DrawBehaviourInspector(Rect rect, PropertyDrawer drawer)
+    {
+        if (Target.Behaviour == null)
+            return;
+        
+        drawer.OnGUI(rect, Behaviour, GUIContent.none);
+    }
+    protected virtual void DrawBehaviourPopup(Rect rect)
+    {
+        Type type = Target.Behaviour?.GetType();
+        int optionIndex = type == null ? BehaviourOptions.Length - 1 : BehaviourTypes.IndexOf(type);
+
+        int newIndex = EditorGUI.Popup(rect, optionIndex, BehaviourOptions);
+
+        if (newIndex != optionIndex)
+            SwitchBehaviourType(newIndex);
+
+        void SwitchBehaviourType(int typeIndex)
+        {
+            if(typeIndex >= BehaviourTypes.Count)
+            {
+                Target.Behaviour = null;
+            }
+            else
+            {
+                PatternBehaviour newInstance = CreateBehaviour(typeIndex);
+
+                Target.Behaviour = newInstance;
+            }
+        }
+    }
     protected virtual void DrawElement(Rect rect, SerializedProperty element, GUIContent label, bool selected, bool focused)
     {
         int elementIndex = List.IndexOf(element);
@@ -66,7 +167,7 @@ public class PatternInspector : Editor
         
         PropertyDrawer drawer = GetDrawer(type);
         float requiredHeight = drawer.GetPropertyHeight(element, GUIContent.none);
-        inspectorRect = new Rect(rect.x, rect.y + EditorGUIUtility.singleLineHeight, rect.width, requiredHeight);
+        inspectorRect = new Rect(rect.x, rect.y + rect.height, rect.width, requiredHeight);
 
         drawer.OnGUI(inspectorRect, element, GUIContent.none);
     }
@@ -74,17 +175,17 @@ public class PatternInspector : Editor
     {
         Type type = Target.Components[elementIndex].GetType();
 
-        popupRect = new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight);
-        int optionIndex = PatternTypes.IndexOf(type);
+        popupRect = new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight + POPUP_SPACING);
+        int optionIndex = ComponentTypes.IndexOf(type);
 
-        int newIndex = EditorGUI.Popup(popupRect, optionIndex, PatternOptions);
+        int newIndex = EditorGUI.Popup(popupRect, optionIndex, ComponentOptions);
 
         if (newIndex != optionIndex)
             SwitchInstanceType(newIndex);
 
         void SwitchInstanceType(int typeIndex)
         {
-            PatternComponent newInstance = CreateInstance(typeIndex);
+            PatternComponent newInstance = CreateComponent(typeIndex);
 
             Target.Components[elementIndex] = newInstance;
         }
@@ -97,38 +198,54 @@ public class PatternInspector : Editor
     }
     protected virtual void AddComponent(ReorderableList list)
     {
-        PatternComponent newComponent = CreateInstance(0);
+        PatternComponent newComponent = CreateComponent(0);
         Target.Components.Add(newComponent);
     }
-    protected virtual PatternComponent CreateInstance(int index)
+    protected virtual PatternComponent CreateComponent(int index)
     {
-        return CreateInstance(PatternTypes[index]);
+        return CreateComponent(ComponentTypes[index]);
     }
-    protected new virtual PatternComponent CreateInstance(Type type)
+    protected virtual PatternComponent CreateComponent(Type type)
     {
         return (PatternComponent)ScriptableObject.CreateInstance(type);
     }
+    protected virtual PatternBehaviour CreateBehaviour(int index)
+    {
+        return CreateBehaviour(BehaviourTypes[index]);
+    }
+    protected virtual PatternBehaviour CreateBehaviour(Type type)
+    {
+        return (PatternBehaviour)ScriptableObject.CreateInstance(type);
+    }
     protected virtual void BuildAvailablePatterns()
     {
-        PatternTypes = new List<Type>(PatternLoader.Patterns);
-        PatternOptions = new List<string>(PatternLoader.Patterns.Select(x => x.Name)).ToArray();
+        ComponentTypes = new List<Type>(PatternLoader.Components);
+        ComponentOptions = new List<string>(PatternLoader.Components.Select(x => x.Name)).ToArray();
+
+        BehaviourTypes = new List<Type>(PatternLoader.Behaviours);
+
+        List<string> options = new List<string>(PatternLoader.Behaviours.Select(x => x.Name));
+        options.Add("null");
+
+        BehaviourOptions = options.ToArray();
     }
     protected virtual PropertyDrawer GetDrawer(Type type)
     {
-        if (!PatternLoader.Drawers.ContainsKey(type))
+        if (!PropertyDrawerLoader.Drawers.ContainsKey(type))
             throw new System.NotImplementedException($"No PropertyDrawer for ({type.Name})");
 
-        return PatternLoader.Drawers[type];
+        return PropertyDrawerLoader.Drawers[type];
     }
     protected virtual float GetElementHeight(SerializedProperty property)
     {
         int elementIndex = List.IndexOf(property);
         PropertyDrawer drawer = GetDrawer(Target.Components[elementIndex].GetType());
 
-        return drawer.GetPropertyHeight(property, GUIContent.none) + EditorGUIUtility.singleLineHeight;
+        return drawer.GetPropertyHeight(property, GUIContent.none) + EditorGUIUtility.singleLineHeight + POPUP_SPACING;
     }
     protected virtual void CreateSerializedProperties()
     {
+        Behaviour = serializedObject.FindProperty("_behaviour");
         Components = serializedObject.FindProperty("_components");
         Prefab = serializedObject.FindProperty("_prefab");
     }
@@ -138,5 +255,17 @@ public class PatternInspector : Editor
         List.drawElementCallback += DrawElement;
         List.onAddCallback += AddComponent;
         List.getElementHeightCallback += GetElementHeight;
+    }
+
+    private static class Styles
+    {
+        public static GUIStyle BoxBackground;
+        public static GUIStyle HeaderBackground;
+
+        static Styles()
+        {
+            BoxBackground = new GUIStyle("RL Background");
+            HeaderBackground = new GUIStyle("RL Header");
+        }
     }
 }

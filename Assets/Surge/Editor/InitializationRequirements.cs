@@ -11,7 +11,7 @@ using UnityEngine;
 using UnityEditor;
 using System;
 
-namespace Pixelplacement
+namespace Surge
 {
 	[InitializeOnLoad]
 	public class InitializationRequirements

@@ -11,10 +11,10 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
-using Pixelplacement;
+using Surge;
 using UnityEngine.UI;
 
-namespace Pixelplacement
+namespace Surge
 {
 	public class Tween
 	{

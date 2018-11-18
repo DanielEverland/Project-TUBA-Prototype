@@ -10,7 +10,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Pixelplacement
+namespace Surge
 {
 	[CustomEditor(typeof(SplineAnchor))]
 	public class SplineAnchorEditor : Editor

@@ -10,7 +10,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Pixelplacement
+namespace Surge
 {
 	[CustomEditor(typeof(SplineTangent))]
 	public class SplineTangentEditor : Editor

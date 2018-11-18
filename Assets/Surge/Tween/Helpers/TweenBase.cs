@@ -9,11 +9,11 @@
 
 using UnityEngine;
 using System;
-using Pixelplacement;
+using Surge;
 
 #pragma warning disable 0168
 
-namespace Pixelplacement.TweenSystem
+namespace Surge.TweenSystem
 {
 	public abstract class TweenBase
 	{
