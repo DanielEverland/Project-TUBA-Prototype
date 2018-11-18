@@ -221,6 +221,17 @@ public class PatternInspector : Editor
     {
         PatternComponent newComponent = CreateComponent(0);
         Target.Components.Add(newComponent);
+
+        AddObject(newComponent);
+    }
+    protected virtual void RemoveComponent(ReorderableList list)
+    {
+        int index = list.Index;
+        Object obj = Target.Components[index];
+
+        Target.Components.RemoveAt(index);
+
+        RemoveObject(obj);
     }
     protected virtual PatternComponent CreateComponent(int index)
     {
@@ -275,6 +286,7 @@ public class PatternInspector : Editor
         List = new ReorderableList(Components);
         List.drawElementCallback += DrawElement;
         List.onAddCallback += AddComponent;
+        List.onRemoveCallback += RemoveComponent;
         List.getElementHeightCallback += GetElementHeight;
     }
 
