@@ -18,7 +18,7 @@ public class Pattern : ScriptableObject
         GameObject parent = new GameObject();
         parent.name = GetType().Name;
 
-        PatternObject pattern = new PatternObject();
+        PatternObject pattern = new PatternObject(parent);
         
         foreach (PatternComponent component in Components)
         {
