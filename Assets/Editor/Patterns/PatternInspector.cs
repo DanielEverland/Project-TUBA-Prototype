@@ -134,6 +134,7 @@ public class PatternInspector : Editor
         Type type = Target.Behaviour?.GetType();
         int optionIndex = type == null ? BehaviourOptions.Length - 1 : BehaviourTypes.IndexOf(type);
 
+        rect.height = EditorGUIUtility.singleLineHeight;
         int newIndex = EditorGUI.Popup(rect, optionIndex, BehaviourOptions);
 
         if (newIndex != optionIndex)
