@@ -144,13 +144,18 @@ public class PatternInspector : Editor
         {
             if(typeIndex >= BehaviourTypes.Count)
             {
+                RemoveObject(Target.Behaviour);
                 Target.Behaviour = null;
             }
             else
             {
+                if (Target.Behaviour != null)
+                    RemoveObject(Target.Behaviour);
+
                 PatternBehaviour newInstance = CreateBehaviour(typeIndex);
 
                 Target.Behaviour = newInstance;
+                AddObject(newInstance);
             }
         }
     }
@@ -186,10 +191,25 @@ public class PatternInspector : Editor
 
         void SwitchInstanceType(int typeIndex)
         {
+            RemoveObject(Target.Components[elementIndex]);
+
             PatternComponent newInstance = CreateComponent(typeIndex);
 
             Target.Components[elementIndex] = newInstance;
+            AddObject(newInstance);
         }
+    }
+    protected virtual void RemoveObject(Object obj)
+    {
+        DestroyImmediate(obj, true);
+    }
+    protected virtual void AddObject(Object obj)
+    {
+        obj.name = obj.GetType().Name;
+
+        AssetDatabase.AddObjectToAsset(obj, target);
+        AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(obj));
+        AssetDatabase.SaveAssets();
     }
     protected virtual PatternComponent GetObject(SerializedProperty element)
     {

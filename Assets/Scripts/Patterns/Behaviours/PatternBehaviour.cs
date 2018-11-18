@@ -8,6 +8,7 @@ public abstract class PatternBehaviour : ScriptableObject
     public PatternObject Pattern { get; set; }
 
     protected float StartTime { get; set; }
+    protected GameObject Parent => Pattern.Parent;
     
     public abstract void Update();
 

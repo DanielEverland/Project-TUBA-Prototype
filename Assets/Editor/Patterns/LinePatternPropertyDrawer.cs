@@ -12,6 +12,9 @@ public class LinePatternPropertyDrawer : PropertyDrawer
 
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
+        if (property.objectReferenceValue == null)
+            return;
+
         SerializedObject serializedObject = new SerializedObject(property.objectReferenceValue);
         serializedObject.Update();
 

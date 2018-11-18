@@ -10,6 +10,7 @@ public class PatternBehaviourExecutor : MonoBehaviour
     {
         _behaviour = behaviour;
         _behaviour.Pattern = obj;
+        _behaviour.Initialize();
     }
     private void Update()
     {

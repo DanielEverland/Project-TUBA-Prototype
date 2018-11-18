@@ -13,7 +13,71 @@ MonoBehaviour:
   m_Name: Demon Warith Attack Pattern
   m_EditorClassIdentifier: 
   _components:
-  - {fileID: 0}
-  _behaviour: {fileID: 0}
+  - {fileID: 114508437337943758}
+  _behaviour: {fileID: 114770794039730242}
   _prefab: {fileID: 1980229161757672, guid: ade9691b9f39f2845a7b9161b776b9b4, type: 3}
   BehaviourFoldoutState: 1
+--- !u!114 &114508437337943758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53845bd6697dc4346a3ba3d84c0e657f, type: 3}
+  m_Name: CirclePattern
+  m_EditorClassIdentifier: 
+  _offset:
+    _useConstant: 1
+    _constantValue: {x: 0, y: 0}
+    _variable: {fileID: 0}
+  _radius:
+    _useConstant: 1
+    _constantValue: 3
+    _variable: {fileID: 0}
+  _count:
+    _useConstant: 1
+    _constantValue: 15
+    _variable: {fileID: 0}
+--- !u!114 &114770794039730242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f208a3be222a0048bf9d8b60d989494, type: 3}
+  m_Name: PatternMoveToPoint
+  m_EditorClassIdentifier: 
+  _curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.29999998
+      value: 0
+      inSlope: 0.015794795
+      outSlope: -0
+      tangentMode: 1
+      weightedMode: 2
+      inWeight: 0.33333334
+      outWeight: 0.8562443
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 12.161303
+      outSlope: 12.161303
+      tangentMode: 0
+      weightedMode: 1
+      inWeight: 0.060147382
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _animationTime:
+    _useConstant: 1
+    _constantValue: 2
+    _variable: {fileID: 0}

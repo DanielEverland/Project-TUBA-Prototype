@@ -11,15 +11,28 @@ public class PatternMoveToPoint : PatternBehaviour
     
     public AnimationCurve Curve => _curve;
     public float AnimationTime => _animationTime.Value;
-    
+
+    protected Dictionary<GameObject, Vector2> StartPositions { get; set; }
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        
+        StartPositions = new Dictionary<GameObject, Vector2>();
+        Evaluate(x => StartPositions.Add(x, x.transform.localPosition));
+    }
     public override void Update()
     {
-        float time = Mathf.Clamp01(Time.time - StartTime / AnimationTime);
+        float time = Mathf.Clamp01((Time.time - StartTime) / AnimationTime);
         float animationValue = Curve.Evaluate(time);
-
+        
         Evaluate(x =>
         {
-            x.transform.localPosition = Vector3.MoveTowards(x.transform.localPosition, Vector3.zero, animationValue);
+            if (x != null)
+                x.transform.localPosition = Vector3.Lerp(StartPositions[x], Vector3.zero, animationValue);
         });
+
+        if (time == 1)
+            Destroy(Parent);            
     }
 }
