@@ -5,7 +5,8 @@ using UnityEngine;
 
 public abstract class PatternBehaviour : ScriptableObject
 {
-    protected PatternObject Pattern { get; private set; }
+    public PatternObject Pattern { get; set; }
+
     protected float StartTime { get; set; }
     
     public abstract void Update();

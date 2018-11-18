@@ -5,13 +5,10 @@ using UnityEngine;
 public class PatternMoveToPoint : PatternBehaviour
 {
     [SerializeField]
-    private GameObjectReference _target;
-    [SerializeField]
     private AnimationCurve _curve = AnimationCurve.Linear(0, 0, 1, 1);
     [SerializeField]
     private FloatReference _animationTime = new FloatReference(5);
-
-    public GameObject Target => _target.Value;
+    
     public AnimationCurve Curve => _curve;
     public float AnimationTime => _animationTime.Value;
     
@@ -22,7 +19,7 @@ public class PatternMoveToPoint : PatternBehaviour
 
         Evaluate(x =>
         {
-            Vector3.MoveTowards(x.transform.position, Vector3.zero, animationValue);
+            x.transform.localPosition = Vector3.MoveTowards(x.transform.localPosition, Vector3.zero, animationValue);
         });
     }
 }

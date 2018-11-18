@@ -8,7 +8,7 @@ public class PatternMoveToPointDrawer : PropertyDrawer
 {
     private const float TOP_PADDING = 2;
     private const float SPACING = 2;
-    private const int ELEMENTS = 3;
+    private const int ELEMENTS = 2;
 
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
@@ -16,15 +16,10 @@ public class PatternMoveToPointDrawer : PropertyDrawer
             return;
 
         SerializedObject serializedObject = new SerializedObject(property.objectReferenceValue);
+        serializedObject.Update();
+
         position.height = EditorGUIUtility.singleLineHeight;
         position.y += TOP_PADDING;
-
-        SerializedProperty targetProperty = serializedObject.FindProperty("_target");
-        if(targetProperty != null)
-            EditorGUI.PropertyField(position, targetProperty);
-
-        position.y += EditorGUIUtility.singleLineHeight;
-        position.y += SPACING;
 
         SerializedProperty animationCurve = serializedObject.FindProperty("_curve");
         if(animationCurve != null)
@@ -36,6 +31,8 @@ public class PatternMoveToPointDrawer : PropertyDrawer
         SerializedProperty animationTime = serializedObject.FindProperty("_animationTime");
         if(animationTime != null)
             EditorGUI.PropertyField(position, animationTime);
+
+        serializedObject.ApplyModifiedProperties();
     }
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {

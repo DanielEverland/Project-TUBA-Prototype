@@ -26,6 +26,12 @@ public class Pattern : ScriptableObject
         parent.name = GetType().Name;
 
         PatternObject pattern = new PatternObject(parent);
+
+        if(Behaviour != null)
+        {
+            PatternBehaviourExecutor executor = parent.AddComponent<PatternBehaviourExecutor>();
+            executor.Initialize(Behaviour, pattern);
+        }        
         
         foreach (PatternComponent component in Components)
         {

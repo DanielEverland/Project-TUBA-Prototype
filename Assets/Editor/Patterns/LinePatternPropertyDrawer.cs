@@ -13,6 +13,8 @@ public class LinePatternPropertyDrawer : PropertyDrawer
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
         SerializedObject serializedObject = new SerializedObject(property.objectReferenceValue);
+        serializedObject.Update();
+
         position.height = EditorGUIUtility.singleLineHeight;
         position.y += TOP_PADDING;
 
@@ -33,6 +35,8 @@ public class LinePatternPropertyDrawer : PropertyDrawer
         SerializedProperty countProperty = serializedObject.FindProperty("_count");
         if (countProperty != null)
             EditorGUI.PropertyField(position, countProperty);
+
+        serializedObject.ApplyModifiedProperties();
     }
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {
