@@ -51,8 +51,6 @@ public static class PatternLoader
         
         foreach (PropertyDrawer drawer in allDrawers)
         {
-            Debug.Log(drawer.GetType());
-
             object[] attributes = drawer.GetType().GetCustomAttributes(typeof(CustomPropertyDrawer), false);
 
             if(attributes.Length != 0)

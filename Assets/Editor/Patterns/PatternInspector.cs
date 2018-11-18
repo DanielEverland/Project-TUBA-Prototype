@@ -10,6 +10,7 @@ public class PatternInspector : Editor
 {
     protected Pattern Target => (Pattern)target;
     protected SerializedProperty Components { get; set; }
+    protected SerializedProperty Prefab { get; set; }
     protected ReorderableList List { get; set; }
     protected List<Type> PatternTypes { get; set; }
     protected string[] PatternOptions { get; set; }
@@ -24,10 +25,12 @@ public class PatternInspector : Editor
     {
         serializedObject.Update();
 
-        DrawSpawnButton();
+        DrawPrefabField();
 
         EditorGUILayout.Space();
 
+        DrawSpawnButton();
+        
         using (var scope = new EditorGUI.ChangeCheckScope())
         {
             List.DoLayoutList();
@@ -37,6 +40,10 @@ public class PatternInspector : Editor
         }
         
         serializedObject.ApplyModifiedProperties();
+    }
+    protected virtual void DrawPrefabField()
+    {
+        EditorGUILayout.PropertyField(Prefab);
     }
     protected virtual void DrawSpawnButton()
     {
@@ -123,6 +130,7 @@ public class PatternInspector : Editor
     protected virtual void CreateSerializedProperties()
     {
         Components = serializedObject.FindProperty("_components");
+        Prefab = serializedObject.FindProperty("_prefab");
     }
     protected virtual void CreateList()
     {

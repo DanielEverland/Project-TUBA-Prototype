@@ -7,8 +7,11 @@ public class Pattern : ScriptableObject
 {
     [SerializeField]
     private List<PatternComponent> _components;
-
+    [SerializeField]
+    private GameObject _prefab;
+    
     public List<PatternComponent> Components => _components;
+    public GameObject Prefab => _prefab;
 
     public PatternObject Spawn()
     {
@@ -19,7 +22,7 @@ public class Pattern : ScriptableObject
         
         foreach (PatternComponent component in Components)
         {
-            component.CreateChildren(parent, ref pattern);
+            component.CreateChildren(parent, Prefab, ref pattern);
         }
 
         for (int i = 0; i < pattern.Children.Count; i++)
