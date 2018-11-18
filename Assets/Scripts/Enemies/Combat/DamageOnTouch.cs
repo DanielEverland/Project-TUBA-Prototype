@@ -38,10 +38,15 @@ public class DamageOnTouch : MonoBehaviour {
     }
     protected virtual void Hit(GameObject target)
     {
-        target.GetComponentInChildren<Health>()?.TakeDamage(DamageAmount);
+        Health health = target.GetComponentInChildren<Health>();
+        
+        if(health != null)
+        {
+            if (DestroyOnHit && DestroyTarget != null && !health.IsInvincible)
+                Destroy(DestroyTarget);
 
-        if (DestroyOnHit && DestroyTarget != null)
-            Destroy(DestroyTarget);
+            health.TakeDamage(DamageAmount);
+        }
     }
     protected virtual void OnValidate()
     {

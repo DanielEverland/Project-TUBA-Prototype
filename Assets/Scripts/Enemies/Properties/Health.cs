@@ -29,13 +29,13 @@ public class Health : MonoBehaviour {
     public float CurrentHealth { get => _health.Value; set => _health.Value = value; }
     public bool DestroyBelowZero { get => _destroyBelowZero; set => _destroyBelowZero = value; }
     public float StartHealth => GetStartHealth();
-    
+    public bool IsInvincible => Time.time - InvincibleStart < InvincibleDuration;
+
     protected UnityEvent OnDamagedEvent => _onDamagedEvent;
     protected UnityEvent OnDeathEvent => _onDeathEvent;
     protected GameObject DestroyTarget => _destroyTarget;
     protected Renderer Renderer => _renderer;
     protected bool IsDying { get; set; }
-    protected bool IsInvincible => Time.time - InvincibleStart < InvincibleDuration;
     protected float InvincibleStart { get; set; }
     protected float InvincibleDuration { get; set; }
     protected float TimeTookDamage { get; set; }
