@@ -2119,7 +2119,8 @@ namespace UnityEditor
                 iconToolbarMinus = EditorGUIUtility.IconContent("Toolbar Minus", "Remove selection from list");
                 iconPagePrev = EditorGUIUtility.IconContent("Animation.PrevKey", "Previous page");
                 iconPageNext = EditorGUIUtility.IconContent("Animation.NextKey", "Next page");
-                iconPagePopup = EditorGUIUtility.IconContent("MiniPopupNoBg", "Select page");
+                //iconPagePopup = EditorGUIUtility.IconContent("MiniPopupNoBg", "Select page");
+                iconPagePopup = null;
 
                 paginationText = new GUIStyle();
                 paginationText.margin = new RectOffset(2, 2, 0, 0);
