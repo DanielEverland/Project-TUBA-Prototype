@@ -7,6 +7,14 @@ using static UnityEngine.Random;
 
 public static class Extensions
 {
+    public static T Next<T>(this T src) where T : struct
+    {
+        if (!typeof(T).IsEnum) throw new System.ArgumentException(System.String.Format("Argument {0} is not an Enum", typeof(T).FullName));
+
+        T[] Arr = (T[])System.Enum.GetValues(src.GetType());
+        int j = System.Array.IndexOf<T>(Arr, src) + 1;
+        return (Arr.Length == j) ? Arr[0] : Arr[j];
+    }
     /// <summary>
     /// Like clamp, but will wrap around instead of truncating
     /// </summary>

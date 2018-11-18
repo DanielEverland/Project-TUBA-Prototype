@@ -19,6 +19,11 @@ public class ProjectileBase : ObjectMover {
         _damage = weapon.TriggerData.Power;
         _renderer.material.color = weapon.SeekerData.Color;
     }
+    public void Initialize(float damage, Color color)
+    {
+        _damage = damage;
+        _renderer.material.color = color;
+    }
     protected override void Update()
     {
         base.Update();
