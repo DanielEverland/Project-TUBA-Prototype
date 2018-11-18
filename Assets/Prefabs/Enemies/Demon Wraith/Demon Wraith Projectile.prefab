@@ -149,7 +149,7 @@ MonoBehaviour:
     m_Bits: 0
   _radius:
     _useConstant: 1
-    _constantValue: 0.5
+    _constantValue: 0.25
     _variable: {fileID: 0}
   _destroyOnHit:
     _useConstant: 1

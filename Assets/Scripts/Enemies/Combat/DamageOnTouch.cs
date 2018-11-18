@@ -42,11 +42,20 @@ public class DamageOnTouch : MonoBehaviour {
         
         if(health != null)
         {
-            if (DestroyOnHit && DestroyTarget != null && !health.IsInvincible)
-                Destroy(DestroyTarget);
+            if (!health.IsInvincible)
+                Destroy();
 
             health.TakeDamage(DamageAmount);
         }
+        else
+        {
+            Destroy();
+        }
+    }
+    protected virtual void Destroy()
+    {
+        if (DestroyOnHit && DestroyTarget != null)
+            Destroy(DestroyTarget);
     }
     protected virtual void OnValidate()
     {
