@@ -37,7 +37,7 @@ public class CharacterController2D : MonoBehaviour
     }
     public virtual void Move(Vector2 direction)
     {
-        MoveDelta += direction;
+        MoveDelta = direction;
     }
     protected virtual void FixedUpdate()
     {
