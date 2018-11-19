@@ -14,7 +14,7 @@ public class RangedMovement : AIMover
     [SerializeField]
     private FloatReference _minDistance = new FloatReference(5);
     [SerializeField]
-    private ActState _defaultActState = ActState.Run;
+    private ActState _defaultActState = ActState.Move;
     [SerializeField]
     private AIAttacker _attacker;
 
@@ -52,7 +52,7 @@ public class RangedMovement : AIMover
     {
         switch (CurrentActState)
         {
-            case ActState.Run:
+            case ActState.Move:
                 DoRun();
                 break;
             case ActState.Attack:
@@ -91,7 +91,7 @@ public class RangedMovement : AIMover
         
         switch (state)
         {
-            case ActState.Run:
+            case ActState.Move:
                 {
                     TargetPosition = PlayerPosition - PlayerDirection * PreferredDistance;
                 }
@@ -112,7 +112,7 @@ public class RangedMovement : AIMover
     
     public enum ActState
     {
-        Run = 0,
+        Move = 0,
         Attack = 1,
     }
 
