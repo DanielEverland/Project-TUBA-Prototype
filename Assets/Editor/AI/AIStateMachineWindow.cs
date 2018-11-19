@@ -211,25 +211,25 @@ public class AIStateMachineWindow : EditorWindow
         Event e = Event.current;
 
         if (e.type == EventType.MouseDown && e.button == 1)
+        {
+            foreach (AIStateMachineNode node in Nodes)
+            {
+                Rect nodeRect = GetObjectRect(node);
+
+                if (nodeRect.Contains(Event.current.mousePosition))
+                    return;
+            }
+
             CreateNewState();
+        }
     }
     private void CreateNewState()
     {
-        AIStateMachineNode selectedNode = Selection.activeObject as AIStateMachineNode;
+        AIStateMachineStateNode newState = ScriptableObject.CreateInstance<AIStateMachineStateNode>();
+        newState.Position = ScreenToWorldPoint(Event.current.mousePosition);
 
-        if (selectedNode == null || !Nodes.Contains(selectedNode))
-            return;
-
-        Rect nodeRect = GetObjectRect(selectedNode);
-
-        if (Event.current.type == EventType.MouseDown && !nodeRect.Contains(Event.current.mousePosition))
-        {
-            AIStateMachineStateNode newState = ScriptableObject.CreateInstance<AIStateMachineStateNode>();
-            newState.Position = ScreenToWorldPoint(Event.current.mousePosition);
-
-            Nodes.Add(newState);
-            AddObject(newState);
-        }        
+        Nodes.Add(newState);
+        AddObject(newState);
     }
     private void PollScale()
     {
