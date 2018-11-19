@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b54cefcc5f99a39439658185288e7b79, type: 3}
   m_Name: AIStateMachine
   m_EditorClassIdentifier: 
-  CameraOffset: {x: -69.192444, y: 65.16086}
+  CameraOffset: {x: -316.19244, y: 26.160889}
   CameraScale: 1
   _nodes:
-  - {fileID: 114475964502872696}
-  - {fileID: 114093853081843932}
---- !u!114 &114093853081843932
+  - {fileID: 114866945334234792}
+  - {fileID: 114302562798078188}
+  - {fileID: 114485264101146032}
+  - {fileID: 114137488080665210}
+--- !u!114 &114137488080665210
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -29,7 +31,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fd4bcbd5659b49438f3b37444777fef, type: 3}
   m_Name: AIStateMachineStateNode
   m_EditorClassIdentifier: 
---- !u!114 &114475964502872696
+--- !u!114 &114302562798078188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd4bcbd5659b49438f3b37444777fef, type: 3}
+  m_Name: AIStateMachineStateNode
+  m_EditorClassIdentifier: 
+--- !u!114 &114485264101146032
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -39,5 +53,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b0175d71a59fb524ea04e6b1cc6c2b81, type: 3}
-  m_Name: 
+  m_Name: AIStateMachineStartNode
+  m_EditorClassIdentifier: 
+--- !u!114 &114866945334234792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd4bcbd5659b49438f3b37444777fef, type: 3}
+  m_Name: AIStateMachineStateNode
   m_EditorClassIdentifier: 

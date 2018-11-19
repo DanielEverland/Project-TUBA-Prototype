@@ -16,6 +16,7 @@ public class AIStateMachineWindow : EditorWindow
     private bool IsDragging => Event.current.type == EventType.MouseDrag;
     private Vector2 Center => new Vector2(position.width / 2, position.height / 2);
     private AIStateMachine Target { get; set; }
+    private AIStateMachineNode DraggedObject { get; set; }
 
     private const float PIXELS_PER_UNIT = 32;
     private const float SCALE_COEFFICIENT = 0.1f;
@@ -83,6 +84,10 @@ public class AIStateMachineWindow : EditorWindow
     {
         Selection.activeObject = node;
     }
+    private Rect GetObjectRect(AIStateMachineNode node)
+    {
+        return GetObjectRect(node.Position, node.Size);
+    }
     private Rect GetObjectRect(Vector2 position, Vector2 size)
     {
         Vector2 sizeInPixels = new Vector2()
@@ -130,6 +135,46 @@ public class AIStateMachineWindow : EditorWindow
         PollCameraOffset();
         PollCreateNewState();
         PollDeleteState();
+        PollNodeDrag();
+        PollDisableSelection();
+    }
+    private void PollDisableSelection()
+    {
+        AIStateMachineNode selectedNode = Selection.activeObject as AIStateMachineNode;
+
+        if (selectedNode == null || !Nodes.Contains(selectedNode))
+            return;
+
+        Rect nodeRect = GetObjectRect(selectedNode);
+
+        if (Event.current.type == EventType.MouseDown && !nodeRect.Contains(Event.current.mousePosition))
+        {
+            Selection.activeObject = null;
+        }
+    }
+    private void PollNodeDrag()
+    {
+        AIStateMachineNode selectedNode = Selection.activeObject as AIStateMachineNode;
+
+        if (selectedNode == null || !Nodes.Contains(selectedNode))
+            return;
+
+        Rect nodeRect = GetObjectRect(selectedNode);
+
+        if (Event.current.type == EventType.MouseDown && nodeRect.Contains(Event.current.mousePosition))
+        {
+            DraggedObject = selectedNode;
+        }
+        else if(Event.current.type == EventType.MouseDown)
+        {
+            DraggedObject = null;
+        }
+
+        if (Event.current.type == EventType.MouseDrag && DraggedObject == selectedNode)
+        {
+            selectedNode.Position += Event.current.delta / PIXELS_PER_UNIT;
+            Repaint();
+        }
     }
     private void PollDeleteState()
     {
