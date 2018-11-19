@@ -22,11 +22,14 @@ public class RangedMovement : AIMover
 
     [SerializeField]
     private ActStateEvent _onStateChanged;
+
+    private static readonly Color PreferredPositionColor = new Color(0, 0, 1, 0.3f);
     
     protected Vector2 TargetPosition { get; set; }
     protected ActState CurrentActState { get; set; }
     protected ActState DefaultActState => _defaultActState;
     protected AIAttacker Attacker => _attacker;
+    protected Vector2 PreferredPosition => PlayerPosition - PlayerDirection * PreferredDistance;
     protected bool IsActing => TimeSinceLastDecision < ActTime;
     protected float TimeBetweenDecisions => ActTime + PauseTime;
     protected float TimeSinceLastDecision { get; set; }
@@ -93,7 +96,7 @@ public class RangedMovement : AIMover
         {
             case ActState.Move:
                 {
-                    TargetPosition = PlayerPosition - PlayerDirection * PreferredDistance;
+                    TargetPosition = PreferredPosition;
                 }
                 break;
         }
@@ -101,6 +104,12 @@ public class RangedMovement : AIMover
         Attacker.CanAttack = false;
 
         _onStateChanged.Invoke(CurrentActState);
+    }
+    protected override void DrawDebug()
+    {
+        base.DrawDebug();
+
+        Debug.DrawLine(transform.position, PreferredPosition, PreferredPositionColor);
     }
     protected override void OnValidate()
     {
