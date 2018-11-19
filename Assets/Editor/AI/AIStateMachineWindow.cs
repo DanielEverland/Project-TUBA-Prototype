@@ -75,7 +75,7 @@ public class AIStateMachineWindow : EditorWindow
 
         node.Draw(nodeRect);
 
-        if(Event.current.type == EventType.MouseDown && nodeRect.Contains(Event.current.mousePosition))
+        if(Event.current.type == EventType.MouseDown && Event.current.button == 0 && nodeRect.Contains(Event.current.mousePosition))
         {
             SelectNode(node);
         }
