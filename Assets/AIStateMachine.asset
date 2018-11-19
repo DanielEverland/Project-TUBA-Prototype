@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b54cefcc5f99a39439658185288e7b79, type: 3}
   m_Name: AIStateMachine
   m_EditorClassIdentifier: 
-  CameraOffset: {x: -316.19244, y: 26.160889}
+  CameraOffset: {x: -230.19244, y: 59.16089}
   CameraScale: 1
   _nodes:
   - {fileID: 114866945334234792}
