@@ -95,6 +95,10 @@ MonoBehaviour:
     _useConstant: 1
     _constantValue: 10
     _variable: {fileID: 0}
+  _pauseTime:
+    _useConstant: 1
+    _constantValue: 1
+    _variable: {fileID: 0}
 --- !u!114 &114623103348089022
 MonoBehaviour:
   m_ObjectHideFlags: 0
