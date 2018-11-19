@@ -1,14 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public abstract class AIStateMachineNode : ScriptableObject
 {
-    public Vector2 Position { get; set; }
-    public Vector2 Size { get; set; } = new Vector2(3, 1);
+#if UNITY_EDITOR
+    public virtual Vector2 Position { get; set; }
+    public virtual Vector2 Size { get; set; } = new Vector2(3, 1);
 
     public virtual GUIStyle TextStyle => Styles.DefaultText;
+
+    protected bool IsSelected => Selection.activeObject == this;
 
     private const float FONT_SIZE_COEFFICIENT = 0.4f;
 
@@ -33,4 +38,5 @@ public abstract class AIStateMachineNode : ScriptableObject
             DefaultText.normal.textColor = Color.white;
         }
     }
+#endif
 }

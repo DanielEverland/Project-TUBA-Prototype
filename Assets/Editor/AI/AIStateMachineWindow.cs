@@ -14,9 +14,8 @@ public class AIStateMachineWindow : EditorWindow
 
     private bool MiddleMouseDown { get; set; }
     private bool IsDragging => Event.current.type == EventType.MouseDrag;
-    private Vector2 MousePosition => Event.current.mousePosition - Center + CameraOffset;
     private Vector2 Center => new Vector2(position.width / 2, position.height / 2);
-    private AIStateMachine Target => Selection.activeObject as AIStateMachine;
+    private AIStateMachine Target { get; set; }
 
     private const float PIXELS_PER_UNIT = 32;
     private const float SCALE_COEFFICIENT = 0.1f;
@@ -32,7 +31,7 @@ public class AIStateMachineWindow : EditorWindow
     }
     public void OnEnable()
     {
-        Selection.selectionChanged += Repaint;
+        Selection.selectionChanged += QuerySelection;
         
         if(!Nodes.Any(x => x.GetType() == typeof(AIStateMachineStartNode)))
         {
@@ -40,10 +39,6 @@ public class AIStateMachineWindow : EditorWindow
             Nodes.Add(startNode);
             AddObject(startNode);
         }
-    }
-    private void Update()
-    {
-        Repaint();
     }
     private void OnGUI()
     {
@@ -70,8 +65,23 @@ public class AIStateMachineWindow : EditorWindow
     {
         foreach (AIStateMachineNode node in Nodes)
         {
-            node.Draw(GetObjectRect(node.Position, node.Size));
+            DrawNode(node);
         }
+    }
+    private void DrawNode(AIStateMachineNode node)
+    {
+        Rect nodeRect = GetObjectRect(node.Position, node.Size);
+
+        node.Draw(nodeRect);
+
+        if(Event.current.type == EventType.MouseDown && nodeRect.Contains(Event.current.mousePosition))
+        {
+            SelectNode(node);
+        }
+    }
+    private void SelectNode(AIStateMachineNode node)
+    {
+        Selection.activeObject = node;
     }
     private Rect GetObjectRect(Vector2 position, Vector2 size)
     {
@@ -104,11 +114,38 @@ public class AIStateMachineWindow : EditorWindow
             Style.Background.Draw(new Rect(0, 0, position.width, position.height), GUIContent.none, 0);
         }            
     }
+    private void QuerySelection()
+    {
+        AIStateMachine targetMachine = Selection.activeObject as AIStateMachine;
+
+        if (targetMachine != null)
+            Target = targetMachine;
+
+        Repaint();
+    }
     private void PollInput()
     {
         PollMouseInput();
-        PollScale();
+        //PollScale();
         PollCameraOffset();
+        PollCreateNewState();
+        PollDeleteState();
+    }
+    private void PollDeleteState()
+    {
+        if(Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.Delete)
+        {
+            AIStateMachineNode selectedNode = Selection.activeObject as AIStateMachineNode;
+
+            if (selectedNode != null)
+            {
+                if (Nodes.Contains(selectedNode))
+                {
+                    Nodes.Remove(selectedNode);
+                    RemoveObject(selectedNode);
+                }
+            }
+        }
     }
     private void PollMouseInput()
     {
@@ -123,6 +160,21 @@ public class AIStateMachineWindow : EditorWindow
 
         if (e.type == EventType.MouseUp && e.button == 2)
             MiddleMouseDown = false;
+    }
+    private void PollCreateNewState()
+    {
+        Event e = Event.current;
+
+        if (e.type == EventType.MouseDown && e.button == 1)
+            CreateNewState();
+    }
+    private void CreateNewState()
+    {
+        AIStateMachineStateNode newState = ScriptableObject.CreateInstance<AIStateMachineStateNode>();
+        newState.Position = ScreenToWorldPoint(Event.current.mousePosition);
+
+        Nodes.Add(newState);
+        AddObject(newState);
     }
     private void PollScale()
     {
@@ -167,6 +219,7 @@ public class AIStateMachineWindow : EditorWindow
     private void RemoveObject(Object obj)
     {
         DestroyImmediate(obj, true);
+        AssetDatabase.SaveAssets();
     }
 
     private static class Style

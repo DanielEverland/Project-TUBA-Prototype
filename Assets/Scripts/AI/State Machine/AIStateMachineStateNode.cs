@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIStateMachineStartNode : AIStateMachineNode
+public class AIStateMachineStateNode : AIStateMachineNode
 {
+    public override Vector2 Size => new Vector2(6, 1);
+
     public override void Draw(Rect rect)
     {
-        if(Event.current.type == EventType.Repaint)
+        if (Event.current.type == EventType.Repaint)
         {
             if (IsSelected)
                 Style.SelectedBackground.Draw(rect, GUIContent.none, 0);
             else
                 Style.Background.Draw(rect, GUIContent.none, 0);
-        }            
+        }
 
         base.Draw(rect);
     }
@@ -25,11 +27,11 @@ public class AIStateMachineStartNode : AIStateMachineNode
         static Style()
         {
             Background = new GUIStyle();
-            Background.normal.background = Resources.Load<Texture2D>("Textures/StateMachineStartBackground");
+            Background.normal.background = Resources.Load<Texture2D>("Textures/StateMachineStateBackground");
             Background.border = new RectOffset(6, 6, 6, 0);
 
             SelectedBackground = new GUIStyle();
-            SelectedBackground.normal.background = Resources.Load<Texture2D>("Textures/StateMachineStartBackgroundOutline");
+            SelectedBackground.normal.background = Resources.Load<Texture2D>("Textures/StateMachineStateBackgroundOutline");
             SelectedBackground.border = new RectOffset(6, 6, 6, 0);
         }
     }
