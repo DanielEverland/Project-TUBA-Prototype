@@ -200,8 +200,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spiritualModifier: {fileID: 114271445181664562}
-  _corperalAttacker: {fileID: 114918966417315202}
-  _spiritualAttacker: {fileID: 114918966417315202}
+  _corperalAttacker: {fileID: 1609856685}
+  _spiritualAttacker: {fileID: 114993816187175856}
 --- !u!1 &1062397496230520
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,7 +302,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4330665250802016}
-  - component: {fileID: 114918966417315202}
+  - component: {fileID: 1609856685}
   m_Layer: 9
   m_Name: Corperal Attacker
   m_TagString: Untagged
@@ -324,7 +324,7 @@ Transform:
   m_Father: {fileID: 4526569083988298}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114918966417315202
+--- !u!114 &1609856685
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -333,21 +333,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1075360542612278}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be0a2e1a4b209ec4ba7ed0216a9ff0f8, type: 3}
+  m_Script: {fileID: 11500000, guid: a556e3666a1265741a2ab53a9a874021, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 11400000, guid: ce9bed48b5db97e4ba6459bc11ecd278, type: 2}
   _attackInterval:
-    _useConstant: 0
-    _constantValue: 0
-    _variable: {fileID: 11400000, guid: 56fc03bdb6caebf47948b457b1663dc7, type: 2}
-  _attackDamage:
-    _useConstant: 0
-    _constantValue: 0
-    _variable: {fileID: 11400000, guid: a33e1895d1c933a4f8b601eae132be87, type: 2}
-  _color: {r: 1, g: 0, b: 0, a: 1}
-  _projectilePrefab: {fileID: 114229059325804258, guid: ade9691b9f39f2845a7b9161b776b9b4,
-    type: 3}
+    _useConstant: 1
+    _constantValue: 0.2
+    _variable: {fileID: 0}
+  _pattern: {fileID: 11400000, guid: 4dfc6347c103fcd49b9c81dfdd7b2818, type: 2}
 --- !u!1 &1339999016116670
 GameObject:
   m_ObjectHideFlags: 0
