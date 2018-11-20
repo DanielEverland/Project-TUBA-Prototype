@@ -7,6 +7,11 @@ using UnityEditor;
 
 public abstract class AIStateMachineNode : AIStateMachineObject
 {
+    public List<AIStateMachineTransition> Transitions => _transitions;
+
+    [SerializeField]
+    private List<AIStateMachineTransition> _transitions;
+
 #if UNITY_EDITOR
     public virtual Vector2 Position { get; set; }
     public virtual Vector2 Size { get; set; } = new Vector2(3, 1);

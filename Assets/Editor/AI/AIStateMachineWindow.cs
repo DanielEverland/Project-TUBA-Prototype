@@ -241,6 +241,7 @@ public class AIStateMachineWindow : EditorWindow
                 {
                     AIStateMachineTransition transition = ScriptableObject.CreateInstance<AIStateMachineTransition>();
                     transition.StartNode = node;
+                    node.Transitions.Add(transition);
 
                     AddObject(transition);
                     Transitions.Add(transition);
@@ -331,6 +332,8 @@ public class AIStateMachineWindow : EditorWindow
     {
         if (Transitions.Contains(transition))
         {
+            transition.StartNode.Transitions.Remove(transition);
+
             Transitions.Remove(transition);
             RemoveObject(transition);
         }

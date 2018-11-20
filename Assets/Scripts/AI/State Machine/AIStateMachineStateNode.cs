@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AIStateMachineStateNode : AIStateMachineNode
 {
+#if UNITY_EDITOR
     public override Vector2 Size => new Vector2(6, 1);
 
     public override void Draw(Rect rect)
@@ -35,4 +36,5 @@ public class AIStateMachineStateNode : AIStateMachineNode
             SelectedBackground.border = new RectOffset(6, 6, 6, 0);
         }
     }
+#endif
 }
