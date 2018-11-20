@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-public abstract class AIStateMachineNode : ScriptableObject
+public abstract class AIStateMachineNode : AIStateMachineObject
 {
 #if UNITY_EDITOR
     public virtual Vector2 Position { get; set; }

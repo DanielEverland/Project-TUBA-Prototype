@@ -294,16 +294,45 @@ public class AIStateMachineWindow : EditorWindow
     {
         if(Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.Delete)
         {
-            AIStateMachineNode selectedNode = Selection.activeObject as AIStateMachineNode;
+            AIStateMachineObject selectedObject = Selection.activeObject as AIStateMachineObject;
 
-            if (selectedNode != null)
+            if (selectedObject != null)
             {
-                if (Nodes.Contains(selectedNode))
+                if(selectedObject is AIStateMachineStateNode state)
                 {
-                    Nodes.Remove(selectedNode);
-                    RemoveObject(selectedNode);
+                    DeleteState(state);
+                }
+                else if(selectedObject is AIStateMachineTransition transition)
+                {
+                    DeleteTransition(transition);
                 }
             }
+        }
+    }
+    private void DeleteState(AIStateMachineStateNode state)
+    {
+        if (Nodes.Contains(state))
+        {
+            Nodes.Remove(state);
+            RemoveObject(state);
+        }
+
+        for (int i = Transitions.Count - 1; i >= 0; i--)
+        {
+            AIStateMachineTransition transition = Transitions[i];
+
+            if (transition.StartNode == state || transition.TargetState == state)
+            {
+                DeleteTransition(transition);
+            }
+        }
+    }
+    private void DeleteTransition(AIStateMachineTransition transition)
+    {
+        if (Transitions.Contains(transition))
+        {
+            Transitions.Remove(transition);
+            RemoveObject(transition);
         }
     }
     private void PollMouseInput()

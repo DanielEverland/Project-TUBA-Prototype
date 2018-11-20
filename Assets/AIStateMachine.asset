@@ -23,13 +23,7 @@ MonoBehaviour:
   - {fileID: 114549092895670438}
   - {fileID: 114999383219883048}
   - {fileID: 114375052008350868}
-  - {fileID: 114415120393532850}
-  - {fileID: 114764679143262120}
-  - {fileID: 114665718646618372}
-  _transitions:
-  - {fileID: 114601162044303078}
-  - {fileID: 114988156250733484}
-  - {fileID: 114863499229146202}
+  _transitions: []
 --- !u!114 &114241834708610710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55,18 +49,6 @@ MonoBehaviour:
   m_Name: AIStateMachineStateNode
   m_EditorClassIdentifier: 
 --- !u!114 &114375052008350868
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fd4bcbd5659b49438f3b37444777fef, type: 3}
-  m_Name: AIStateMachineStateNode
-  m_EditorClassIdentifier: 
---- !u!114 &114415120393532850
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,32 +98,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fd4bcbd5659b49438f3b37444777fef, type: 3}
   m_Name: AIStateMachineStateNode
   m_EditorClassIdentifier: 
---- !u!114 &114601162044303078
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d8712d2e2878d24ebca09b0238abe31, type: 3}
-  m_Name: AIStateMachineTransition
-  m_EditorClassIdentifier: 
-  TargetState: {fileID: 114665718646618372}
-  StartNode: {fileID: 114764679143262120}
---- !u!114 &114665718646618372
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fd4bcbd5659b49438f3b37444777fef, type: 3}
-  m_Name: AIStateMachineStateNode
-  m_EditorClassIdentifier: 
 --- !u!114 &114732905142856058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,32 +110,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fd4bcbd5659b49438f3b37444777fef, type: 3}
   m_Name: AIStateMachineStateNode
   m_EditorClassIdentifier: 
---- !u!114 &114764679143262120
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fd4bcbd5659b49438f3b37444777fef, type: 3}
-  m_Name: AIStateMachineStateNode
-  m_EditorClassIdentifier: 
---- !u!114 &114863499229146202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d8712d2e2878d24ebca09b0238abe31, type: 3}
-  m_Name: AIStateMachineTransition
-  m_EditorClassIdentifier: 
-  TargetState: {fileID: 114764679143262120}
-  StartNode: {fileID: 114866945334234792}
 --- !u!114 &114866945334234792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,20 +122,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fd4bcbd5659b49438f3b37444777fef, type: 3}
   m_Name: AIStateMachineStateNode
   m_EditorClassIdentifier: 
---- !u!114 &114988156250733484
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d8712d2e2878d24ebca09b0238abe31, type: 3}
-  m_Name: AIStateMachineTransition
-  m_EditorClassIdentifier: 
-  TargetState: {fileID: 114665718646618372}
-  StartNode: {fileID: 114866945334234792}
 --- !u!114 &114999383219883048
 MonoBehaviour:
   m_ObjectHideFlags: 0

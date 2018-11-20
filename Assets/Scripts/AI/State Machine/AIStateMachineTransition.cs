@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-public class AIStateMachineTransition : ScriptableObject
+public class AIStateMachineTransition : AIStateMachineObject
 {
     public AIStateMachineStateNode TargetState;
 
