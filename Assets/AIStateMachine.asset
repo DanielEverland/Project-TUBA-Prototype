@@ -23,7 +23,8 @@ MonoBehaviour:
   - {fileID: 114549092895670438}
   - {fileID: 114999383219883048}
   - {fileID: 114375052008350868}
-  _transitions: []
+  _transitions:
+  - {fileID: 114247255124809416}
 --- !u!114 &114241834708610710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37,6 +38,20 @@ MonoBehaviour:
   m_Name: AIStateMachineStateNode
   m_EditorClassIdentifier: 
   _transitions: []
+--- !u!114 &114247255124809416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d8712d2e2878d24ebca09b0238abe31, type: 3}
+  m_Name: AIStateMachineTransition
+  m_EditorClassIdentifier: 
+  TargetState: {fileID: 114302562798078188}
+  StartNode: {fileID: 114375052008350868}
 --- !u!114 &114302562798078188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,7 +77,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fd4bcbd5659b49438f3b37444777fef, type: 3}
   m_Name: AIStateMachineStateNode
   m_EditorClassIdentifier: 
-  _transitions: []
+  _transitions:
+  - {fileID: 114247255124809416}
 --- !u!114 &114479790429611878
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -232,9 +232,6 @@ public class AIStateMachineWindow : EditorWindow
         {
             foreach (AIStateMachineNode node in Nodes)
             {
-                if (!(node is AIStateMachineStateNode))
-                    continue;
-
                 Rect rect = GetObjectRect(node);
 
                 if (rect.Contains(Event.current.mousePosition))
