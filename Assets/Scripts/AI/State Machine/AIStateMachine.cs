@@ -12,6 +12,10 @@ public class AIStateMachine : ScriptableObject
 #endif
 
     public List<AIStateMachineNode> Nodes => _nodes;
+    public List<AIStateMachineTransition> Transitions => _transitions;
+
     [SerializeField, HideInInspector]
     private List<AIStateMachineNode> _nodes = new List<AIStateMachineNode>();
+    [SerializeField, HideInInspector]
+    private List<AIStateMachineTransition> _transitions = new List<AIStateMachineTransition>();
 }

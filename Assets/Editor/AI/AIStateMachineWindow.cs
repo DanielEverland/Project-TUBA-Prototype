@@ -8,20 +8,24 @@ public class AIStateMachineWindow : EditorWindow
 {
     private const string STATE_MACHINE_BACKGROUND_NAME = "Textures/StateMachineBackground";
 
+    private AIStateMachine Target { get; set; }
+
     private float Scale { get => Target.CameraScale; set => Target.CameraScale = value; }
     private Vector2 CameraOffset { get => Target.CameraOffset; set => Target.CameraOffset = value; }
     private List<AIStateMachineNode> Nodes => Target.Nodes;
+    private List<AIStateMachineTransition> Transitions => Target.Transitions;
 
     private bool MiddleMouseDown { get; set; }
     private bool IsDragging => Event.current.type == EventType.MouseDrag;
     private Vector2 Center => new Vector2(position.width / 2, position.height / 2);
-    private AIStateMachine Target { get; set; }
     private AIStateMachineNode DraggedObject { get; set; }
+    private AIStateMachineTransition TransitionBeingPlaced { get; set; }
 
     private const float PIXELS_PER_UNIT = 32;
     private const float SCALE_COEFFICIENT = 0.1f;
     private const float SCALE_MAX = 10;
     private const float SCALE_MIN = 1;
+    private const float TRANSITION_HEIGHT = 0.5f;
 
     [MenuItem("Window/AI/State Machine", priority = 0)]
     private static void Init()
@@ -54,6 +58,7 @@ public class AIStateMachineWindow : EditorWindow
             }
             else
             {
+                DrawTransitions();
                 DrawNodes();
                 PollInput();
             }
@@ -61,6 +66,32 @@ public class AIStateMachineWindow : EditorWindow
             if (changeScope.changed)
                 EditorUtility.SetDirty(Target);
         }        
+    }
+    private void DrawTransitions()
+    {
+        HandleTransitionBeingPlaced();
+
+        foreach (AIStateMachineTransition transition in Transitions)
+        {
+            DrawTransition(transition);
+        }
+    }
+    private void DrawTransition(AIStateMachineTransition transition)
+    {
+        Vector2 startPos = WorldToScreenPoint(transition.StartPosition);
+        Vector2 endPos = WorldToScreenPoint(transition.EndPosition);
+        Vector2 delta = endPos - startPos;
+        Vector2 middlePoint = startPos + delta / 2;
+
+        float angle = Mathf.Atan2(delta.y, delta.x) * Mathf.Rad2Deg;
+        Vector2 size = new Vector2(delta.magnitude, TRANSITION_HEIGHT * PIXELS_PER_UNIT);
+        Rect rect = new Rect(middlePoint - size / 2, size);
+        
+        EditorGUIUtility.RotateAroundPivot(angle, middlePoint);
+
+        transition.Draw(rect);
+
+        GUI.matrix = Matrix4x4.identity;
     }
     private void DrawNodes()
     {
@@ -137,6 +168,89 @@ public class AIStateMachineWindow : EditorWindow
         PollDeleteState();
         PollNodeDrag();
         PollDisableSelection();
+        PollCreateNewTransition();
+        PollPlaceTransition();
+        PollSelectTransition();
+    }
+    private void PollSelectTransition()
+    {
+        if (Event.current.type == EventType.MouseDown && Event.current.button == 0)
+        {
+            if(Selection.activeObject is AIStateMachineTransition)
+                Selection.activeObject = null;
+
+            foreach (AIStateMachineTransition transition in Transitions)
+            {
+                Vector2 position = transition.StartPosition + (transition.EndPosition - transition.StartPosition) / 2;
+                Rect rect = GetObjectRect(position, Vector2.one);
+
+                if (rect.Contains(Event.current.mousePosition))
+                {
+                    Selection.activeObject = transition;
+                }
+            }
+        }            
+    }
+    private void PollPlaceTransition()
+    {
+        if (TransitionBeingPlaced == null)
+            return;
+
+        if (Event.current.type == EventType.MouseDown && Event.current.button == 0)
+        {
+            foreach (AIStateMachineNode node in Nodes)
+            {
+                if (node is AIStateMachineStateNode state)
+                {
+                    Rect rect = GetObjectRect(node);
+
+                    if (rect.Contains(Event.current.mousePosition))
+                    {
+                        TransitionBeingPlaced.TargetState = state;
+                        TransitionBeingPlaced = null;
+
+                        return;
+                    }
+                }
+            }
+        }
+    }
+    private void HandleTransitionBeingPlaced()
+    {
+        if (TransitionBeingPlaced == null)
+            return;
+
+        TransitionBeingPlaced.EndPosition = ScreenToWorldPoint(Event.current.mousePosition);
+        Repaint();
+    }
+    private void PollCreateNewTransition()
+    {
+        if (TransitionBeingPlaced != null)
+            return;
+
+        if (Event.current.type == EventType.MouseDown && Event.current.button == 1)
+        {
+            foreach (AIStateMachineNode node in Nodes)
+            {
+                if (!(node is AIStateMachineStateNode))
+                    continue;
+
+                Rect rect = GetObjectRect(node);
+
+                if (rect.Contains(Event.current.mousePosition))
+                {
+                    AIStateMachineTransition transition = ScriptableObject.CreateInstance<AIStateMachineTransition>();
+                    transition.StartNode = node;
+
+                    AddObject(transition);
+                    Transitions.Add(transition);
+
+                    TransitionBeingPlaced = transition;
+
+                    return;
+                }
+            }
+        }
     }
     private void PollDisableSelection()
     {
