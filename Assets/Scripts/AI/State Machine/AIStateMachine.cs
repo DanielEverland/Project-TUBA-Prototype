@@ -11,11 +11,14 @@ public class AIStateMachine : ScriptableObject
     public float CameraScale;
 #endif
 
+    public AIStateMachineStartNode StartNode { get => _startNode; set => _startNode = value; }
     public List<AIStateMachineNode> Nodes => _nodes;
     public List<AIStateMachineTransition> Transitions => _transitions;
 
-    [SerializeField, HideInInspector]
+    [SerializeField]
+    private AIStateMachineStartNode _startNode;
+    [SerializeField]
     private List<AIStateMachineNode> _nodes = new List<AIStateMachineNode>();
-    [SerializeField, HideInInspector]
+    [SerializeField]
     private List<AIStateMachineTransition> _transitions = new List<AIStateMachineTransition>();
 }

@@ -14,6 +14,7 @@ public class AIStateMachineWindow : EditorWindow
     private Vector2 CameraOffset { get => Target.CameraOffset; set => Target.CameraOffset = value; }
     private List<AIStateMachineNode> Nodes => Target.Nodes;
     private List<AIStateMachineTransition> Transitions => Target.Transitions;
+    private AIStateMachineStartNode StartNode { get => Target.StartNode; set => Target.StartNode = value; }
 
     private bool MiddleMouseDown { get; set; }
     private bool IsDragging => Event.current.type == EventType.MouseDrag;
@@ -43,6 +44,7 @@ public class AIStateMachineWindow : EditorWindow
             AIStateMachineStartNode startNode = ScriptableObject.CreateInstance<AIStateMachineStartNode>();
             Nodes.Add(startNode);
             AddObject(startNode);
+            StartNode = startNode;
         }
     }
     private void OnGUI()
