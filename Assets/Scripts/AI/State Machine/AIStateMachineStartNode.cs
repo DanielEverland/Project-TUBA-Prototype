@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AIStateMachineStartNode : AIStateMachineNode
 {
+    protected override string Title => "Start Node";
+
     public override void Draw(Rect rect)
     {
         if(Event.current.type == EventType.Repaint)
