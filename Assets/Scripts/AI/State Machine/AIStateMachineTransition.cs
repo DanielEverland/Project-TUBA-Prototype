@@ -13,7 +13,7 @@ public class AIStateMachineTransition : AIStateMachineObject
     [SerializeField]
     private AIStateMachineStateNode _targetState;
     [SerializeField]
-    private List<AIStateMachineCondition> _conditions;
+    private List<AIStateMachineCondition> _conditions = new List<AIStateMachineCondition>();
     
     public bool ConditionsMet
     {

@@ -27,7 +27,7 @@ public static class PropertyDrawerLoader
         _drawers = new Dictionary<Type, PropertyDrawer>();
 
         IEnumerable<PropertyDrawer> allDrawers = typeof(PatternLoader).Assembly.GetTypes()
-            .Where(x => typeof(PropertyDrawer).IsAssignableFrom(x))
+            .Where(x => typeof(PropertyDrawer).IsAssignableFrom(x) && !x.IsAbstract)
             .Select(x => Activator.CreateInstance(x) as PropertyDrawer);
 
         foreach (PropertyDrawer drawer in allDrawers)
