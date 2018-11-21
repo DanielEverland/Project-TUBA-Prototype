@@ -21,4 +21,20 @@ public class AIStateMachine : ScriptableObject
     private List<AIStateMachineNode> _nodes = new List<AIStateMachineNode>();
     [SerializeField]
     private List<AIStateMachineTransition> _transitions = new List<AIStateMachineTransition>();
+
+    public AIStateMachineNode CurrentNode { get; protected set; }
+    public GameObject GameObject { get; protected set; }
+
+    public void Initialize(GameObject owner)
+    {
+        CurrentNode = StartNode;
+        GameObject = owner;
+    }
+    public void Think()
+    {
+        foreach (AIStateMachineTransition transition in CurrentNode.Transitions)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
 }

@@ -417,6 +417,11 @@ public class AIStateMachineWindow : EditorWindow
     }
     private void AddObject(Object obj)
     {
+        if(obj is AIStateMachineObject stateObject)
+        {
+            stateObject.Owner = Target;
+        }
+
         obj.name = obj.GetType().Name;
 
         AssetDatabase.AddObjectToAsset(obj, Target);

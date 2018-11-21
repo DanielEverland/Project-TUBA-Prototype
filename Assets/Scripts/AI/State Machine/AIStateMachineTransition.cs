@@ -7,8 +7,28 @@ using UnityEditor;
 
 public class AIStateMachineTransition : AIStateMachineObject
 {
-    public AIStateMachineStateNode TargetState;
+    public AIStateMachineStateNode TargetState { get => _targetState; set => _targetState = value; }
+    public List<AIStateMachineCondition> Conditions => _conditions;
 
+    [SerializeField]
+    private AIStateMachineStateNode _targetState;
+    [SerializeField]
+    private List<AIStateMachineCondition> _conditions;
+    
+    public bool ConditionsMet
+    {
+        get
+        {
+            for (int i = 0; i < Conditions.Count; i++)
+            {
+                if (Conditions[i])
+                    return true;
+            }
+
+            return false;
+        }
+    }
+    
 #if UNITY_EDITOR
     public AIStateMachineNode StartNode;
 
