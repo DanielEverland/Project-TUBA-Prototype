@@ -24,7 +24,6 @@ public class AIStateMachineTransitionEditor : Editor
     {
         int index = ConditionsList.IndexOf(element);
         AIStateMachineCondition condition = Target.Conditions[index];
-        PropertyDrawer drawer = PropertyDrawerLoader.Drawers[condition.GetType()];
         System.Type type = condition.GetType();
         int typeIndex = ConditionsLoader.AllTypes.IndexOf(type);
 
@@ -34,7 +33,7 @@ public class AIStateMachineTransitionEditor : Editor
 
         rect.y += EditorGUIUtility.singleLineHeight;
 
-        drawer.OnGUI(rect, element, GUIContent.none);
+        GenericPropertyDrawer.Drawer.OnGUI(rect, element, GUIContent.none);
 
         if(newIndex != typeIndex)
         {
@@ -81,7 +80,7 @@ public class AIStateMachineTransitionEditor : Editor
     protected virtual float GetElementHeight(SerializedProperty element)
     {
         int index = ConditionsList.IndexOf(element);
-        return PropertyDrawerLoader.Drawers[Target.Conditions[index].GetType()].GetPropertyHeight(element, GUIContent.none) + EditorGUIUtility.singleLineHeight;
+        return GenericPropertyDrawer.Drawer.GetPropertyHeight(element, GUIContent.none) + EditorGUIUtility.singleLineHeight;
     }
     protected virtual void OnEnable()
     {
