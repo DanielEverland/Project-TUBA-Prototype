@@ -23,12 +23,13 @@ public class AIStateMachine : ScriptableObject
     private List<AIStateMachineTransition> _transitions = new List<AIStateMachineTransition>();
 
     public AIStateMachineNode CurrentState { get; protected set; }
-    public GameObject GameObject { get; protected set; }
+    public AIAgent Agent { get; protected set; }
+    public GameObject GameObject => Agent.gameObject;
 
-    public void Initialize(GameObject owner)
+    public void Initialize(AIAgent agent)
     {
         CurrentState = StartNode;
-        GameObject = owner;
+        Agent = agent;
     }
     public void Think()
     {

@@ -8,6 +8,10 @@ public class AIAgent : MonoBehaviour
     private IntReference _thinksPerSecond;
     [SerializeField]
     private AIStateMachine _stateMachine;
+    [SerializeField]
+    private CharacterController2D _characterController;
+
+    public CharacterController2D CharacterController => _characterController;
 
     protected AIStateMachine StateMachine => _stateMachine;
     protected int ThinksPerSecond => _thinksPerSecond.Value;

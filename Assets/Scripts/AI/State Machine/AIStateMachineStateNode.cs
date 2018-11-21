@@ -9,6 +9,10 @@ public class AIStateMachineStateNode : AIStateMachineNode
     /// </summary>
     public bool IsDone => true;
 
+    public List<AIStateMachineAction> Actions => _actions;
+    [SerializeField]
+    private List<AIStateMachineAction> _actions = new List<AIStateMachineAction>();
+
 #if UNITY_EDITOR
     protected override string Title => _name;
 

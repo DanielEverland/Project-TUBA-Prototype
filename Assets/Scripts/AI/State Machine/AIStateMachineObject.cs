@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class AIStateMachineObject : ScriptableObject
 {
-    public GameObject GameObject => Owner.GameObject;
-    public AIStateMachine Owner { get => _owner; set => _owner = value; }
+    public GameObject GameObject => Machine.GameObject;
+    public AIAgent Agent => Machine.Agent;
+    public AIStateMachine Machine { get => _machine; set => _machine = value; }
 
     [SerializeField]
-    private AIStateMachine _owner;
+    private AIStateMachine _machine;
 }

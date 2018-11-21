@@ -428,7 +428,7 @@ public class AIStateMachineWindow : EditorWindow
     {
         if(obj is AIStateMachineObject stateObject)
         {
-            stateObject.Owner = Target;
+            stateObject.Machine = Target;
         }
 
         obj.name = obj.GetType().Name;
