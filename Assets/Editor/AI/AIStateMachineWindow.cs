@@ -211,14 +211,18 @@ public class AIStateMachineWindow : EditorWindow
 
                     if (rect.Contains(Event.current.mousePosition))
                     {
-                        TransitionBeingPlaced.TargetState = state;
-                        TransitionBeingPlaced = null;
+                        PlaceTransition(state);
 
                         return;
                     }
                 }
             }
         }
+    }
+    private void PlaceTransition(AIStateMachineStateNode targetState)
+    {
+        TransitionBeingPlaced.TargetState = targetState;
+        TransitionBeingPlaced = null;
     }
     private void HandleTransitionBeingPlaced()
     {
@@ -378,6 +382,9 @@ public class AIStateMachineWindow : EditorWindow
 
         Nodes.Add(newState);
         AddObject(newState);
+
+        if (TransitionBeingPlaced != null)
+            PlaceTransition(newState);
     }
     private void PollCameraOffset()
     {
