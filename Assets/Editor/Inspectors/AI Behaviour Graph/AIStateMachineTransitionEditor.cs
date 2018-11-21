@@ -16,8 +16,15 @@ public class AIStateMachineTransitionEditor : Editor
     {
         serializedObject.Update();
 
-        ConditionsList.DoLayoutList();
-
+        if (Target.StartNode is AIStateMachineStartNode)
+        {
+            EditorGUILayout.HelpBox("Transitions projected from the Start Node cannot have conditions", MessageType.Info);
+        }
+        else
+        {
+            ConditionsList.DoLayoutList();
+        }
+        
         serializedObject.ApplyModifiedProperties();
     }
     protected virtual void DrawElement(Rect rect, SerializedProperty element, GUIContent label, bool selected, bool focused)
@@ -25,16 +32,18 @@ public class AIStateMachineTransitionEditor : Editor
         int index = ConditionsList.IndexOf(element);
         AIStateMachineCondition condition = Target.Conditions[index];
         PropertyDrawer drawer = PropertyDrawerLoader.Drawers[condition.GetType()];
+        System.Type type = condition.GetType();
+        int typeIndex = ConditionsLoader.AllTypes.IndexOf(type);
 
         rect.height = EditorGUIUtility.singleLineHeight;
-
-        int newIndex = EditorGUI.Popup(rect, index, TypeOptions);
+        
+        int newIndex = EditorGUI.Popup(rect, typeIndex, TypeOptions);
 
         rect.y += EditorGUIUtility.singleLineHeight;
 
         drawer.OnGUI(rect, element, GUIContent.none);
 
-        if(newIndex != index)
+        if(newIndex != typeIndex)
         {
             RemoveObject(condition);
             Target.Conditions.Remove(condition);
