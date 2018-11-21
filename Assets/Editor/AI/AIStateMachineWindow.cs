@@ -169,13 +169,16 @@ public class AIStateMachineWindow : EditorWindow
     {
         PollMouseInput();
         PollCameraOffset();
-        PollCreateNewState();
         PollDeleteState();
         PollNodeDrag();
         PollDisableSelection();
-        PollCreateNewTransition();
-        PollPlaceTransition();
         PollSelectTransition();
+        PollPlaceTransition();
+
+        if (PollCreateNewState())
+            return;
+        else if (PollCreateNewTransition())
+            return;
     }
     private void PollSelectTransition()
     {
@@ -239,10 +242,10 @@ public class AIStateMachineWindow : EditorWindow
         TransitionBeingPlaced.EndPosition = ScreenToWorldPoint(Event.current.mousePosition);
         Repaint();
     }
-    private void PollCreateNewTransition()
+    private bool PollCreateNewTransition()
     {
         if (TransitionBeingPlaced != null)
-            return;
+            return false;
 
         if (Event.current.type == EventType.MouseDown && Event.current.button == 1)
         {
@@ -261,10 +264,12 @@ public class AIStateMachineWindow : EditorWindow
 
                     TransitionBeingPlaced = transition;
 
-                    return;
+                    return true;
                 }
             }
         }
+
+        return false;
     }
     private void PollDisableSelection()
     {
@@ -366,7 +371,7 @@ public class AIStateMachineWindow : EditorWindow
         if (e.type == EventType.MouseUp && e.button == 2)
             MiddleMouseDown = false;
     }
-    private void PollCreateNewState()
+    private bool PollCreateNewState()
     {
         Event e = Event.current;
 
@@ -377,11 +382,14 @@ public class AIStateMachineWindow : EditorWindow
                 Rect nodeRect = GetObjectRect(node);
 
                 if (nodeRect.Contains(Event.current.mousePosition))
-                    return;
+                    return false;
             }
 
             CreateNewState();
+            return true;
         }
+
+        return false;
     }
     private void CreateNewState()
     {
