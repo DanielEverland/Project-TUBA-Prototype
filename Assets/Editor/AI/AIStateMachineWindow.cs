@@ -73,8 +73,8 @@ public class AIStateMachineWindow : EditorWindow
     }
     private void DrawTransition(AIStateMachineTransition transition)
     {
-        Vector2 startPos = WorldToScreenPoint(transition.StartPosition);
-        Vector2 endPos = WorldToScreenPoint(transition.EndPosition);
+        Vector2 startPos = WorldToScreenPoint(transition.StartPosition).RoundToNearest(RENDERING_ROUND_TO_NEAREST);
+        Vector2 endPos = WorldToScreenPoint(transition.EndPosition).RoundToNearest(RENDERING_ROUND_TO_NEAREST);
         Vector2 delta = endPos - startPos;
         Vector2 middlePoint = startPos + delta / 2;
 

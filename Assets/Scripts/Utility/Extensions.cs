@@ -2,15 +2,60 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using static UnityEngine.Random;
 
 public static class Extensions
 {
+    /// <summary>
+    /// Rounds the value to the nearest <paramref name="nearest"/>
+    /// </summary>
+    /// <param name="value">The value to round</param>
+    public static Vector4 RoundToNearest(this Vector4 vector, float nearest)
+    {
+        return new Vector4()
+        {
+            x = vector.x.RoundToNearest(nearest),
+            y = vector.y.RoundToNearest(nearest),
+            z = vector.z.RoundToNearest(nearest),
+            w = vector.w.RoundToNearest(nearest),
+        };
+    }
+    /// <summary>
+    /// Rounds the value to the nearest <paramref name="nearest"/>
+    /// </summary>
+    /// <param name="value">The value to round</param>
+    public static Vector3 RoundToNearest(this Vector3 vector, float nearest)
+    {
+        return new Vector3()
+        {
+            x = vector.x.RoundToNearest(nearest),
+            y = vector.y.RoundToNearest(nearest),
+            z = vector.z.RoundToNearest(nearest),
+        };
+    }
+    /// <summary>
+    /// Rounds the value to the nearest <paramref name="nearest"/>
+    /// </summary>
+    /// <param name="value">The value to round</param>
+    public static Vector2 RoundToNearest(this Vector2 vector, float nearest)
+    {
+        return new Vector2()
+        {
+            x = vector.x.RoundToNearest(nearest),
+            y = vector.y.RoundToNearest(nearest),
+        };
+    }
+    /// <summary>
+    /// Rounds the value to the nearest <paramref name="nearest"/>
+    /// </summary>
+    /// <param name="value">The value to round</param>
     public static float RoundToNearest(this float value, float nearest)
     {
         return Mathf.Round(value / nearest) * nearest;
     }
+    /// <summary>
+    /// Returns the next value from the enum
+    /// </summary>
     public static T Next<T>(this T src) where T : struct
     {
         if (!typeof(T).IsEnum) throw new System.ArgumentException(System.String.Format("Argument {0} is not an Enum", typeof(T).FullName));
@@ -43,10 +88,16 @@ public static class Extensions
 
         return value;
     }
+    /// <summary>
+    /// Returns a random item from the enumerable
+    /// </summary>
     public static T Random<T>(this IEnumerable<T> enumerable)
     {
         return new List<T>(enumerable).Random();
     }
+    /// <summary>
+    /// Returns a random item from the list
+    /// </summary>
     public static T Random<T>(this IList<T> list)
     {
         return list[Range(0, list.Count)];
