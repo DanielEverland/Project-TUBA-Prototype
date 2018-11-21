@@ -38,14 +38,6 @@ public class AIStateMachineWindow : EditorWindow
     public void OnEnable()
     {
         Selection.selectionChanged += QuerySelection;
-        
-        if(!Nodes.Any(x => x.GetType() == typeof(AIStateMachineStartNode)))
-        {
-            AIStateMachineStartNode startNode = ScriptableObject.CreateInstance<AIStateMachineStartNode>();
-            Nodes.Add(startNode);
-            AddObject(startNode);
-            StartNode = startNode;
-        }
     }
     private void OnGUI()
     {
@@ -55,11 +47,12 @@ public class AIStateMachineWindow : EditorWindow
 
             if (Target == null)
             {
-                EditorGUI.LabelField(new Rect(position.width / 2, position.height / 2, 200, 60), new GUIContent("No State Machine Selected"), Style.Text);
+                EditorGUI.LabelField(new Rect(position.width / 2 - 100, position.height / 2, 200, 60), new GUIContent("No State Machine Selected"), Style.Text);
                 return;
             }
             else
             {
+                QueryStartNode();
                 DrawTransitions();
                 DrawNodes();
                 PollInput();
@@ -160,6 +153,19 @@ public class AIStateMachineWindow : EditorWindow
             Target = targetMachine;
 
         Repaint();
+    }
+    private void QueryStartNode()
+    {
+        if (!EditorUtility.IsPersistent(Target))
+            return;
+
+        if (!Nodes.Any(x => x.GetType() == typeof(AIStateMachineStartNode)))
+        {
+            AIStateMachineStartNode startNode = ScriptableObject.CreateInstance<AIStateMachineStartNode>();
+            Nodes.Add(startNode);
+            AddObject(startNode);
+            StartNode = startNode;
+        }
     }
     private void PollInput()
     {
@@ -414,12 +420,10 @@ public class AIStateMachineWindow : EditorWindow
 
         AssetDatabase.AddObjectToAsset(obj, Target);
         AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(obj));
-        AssetDatabase.SaveAssets();
     }
     private void RemoveObject(Object obj)
     {
         DestroyImmediate(obj, true);
-        AssetDatabase.SaveAssets();
     }
 
     private static class Style
