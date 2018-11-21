@@ -17,6 +17,8 @@ public class GenericPropertyDrawer : PropertyDrawer
     }
     private static GenericPropertyDrawer _drawer;
 
+    public bool SkipScriptField { get; set; } = true;
+
     protected virtual float SingleLineHeight => EditorGUIUtility.singleLineHeight;
     protected virtual float TopPadding => 2;
     protected virtual float Spacing => 2;
@@ -33,6 +35,11 @@ public class GenericPropertyDrawer : PropertyDrawer
         position.y += TopPadding;
         
         SerializedProperty element = serializedObject.GetIterator();
+        // Skip the scripts field
+
+        if(SkipScriptField)
+            element.NextVisible(true);
+
         if (element.NextVisible(true))
         {
             do
@@ -65,6 +72,9 @@ public class GenericPropertyDrawer : PropertyDrawer
         {
             i++;
         }
+
+        if (SkipScriptField)
+            i--;
 
         return i;
     }
