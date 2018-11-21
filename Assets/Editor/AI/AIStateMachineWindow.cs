@@ -217,7 +217,14 @@ public class AIStateMachineWindow : EditorWindow
                     }
                 }
             }
+
+            ClearTransition();
         }
+    }
+    private void ClearTransition()
+    {
+        DeleteTransition(TransitionBeingPlaced);
+        TransitionBeingPlaced = null;
     }
     private void PlaceTransition(AIStateMachineStateNode targetState)
     {
