@@ -46,14 +46,12 @@ public class GenericPropertyDrawer : PropertyDrawer
             {
                 if (element != null)
                     EditorGUI.PropertyField(position, element);
+                
+                position.y += SingleLineHeight;
+                position.y += Spacing;
 
-                //if (ElementCount - i > 1)
-                //{
-                    position.y += SingleLineHeight;
-                    position.y += Spacing;
-                //}
-
-            } while (element.NextVisible(true));
+            }
+            while (element.NextVisible(false));
         }
 
         serializedObject.ApplyModifiedProperties();
@@ -68,14 +66,17 @@ public class GenericPropertyDrawer : PropertyDrawer
         SerializedProperty prop = serializedObject.GetIterator();
 
         int i = 0;
-        while (prop.NextVisible(true))
+        if (prop.NextVisible(true))
         {
-            i++;
+            while (prop.NextVisible(false))
+            {
+                i++;
+            }
         }
 
-        if (SkipScriptField)
-            i--;
-
+        if (!SkipScriptField)
+            i++;
+        
         return i;
     }
 }
