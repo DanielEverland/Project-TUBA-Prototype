@@ -13,7 +13,9 @@ public abstract class AIStateMachineNode : AIStateMachineObject
     private List<AIStateMachineTransition> _transitions = new List<AIStateMachineTransition>();
 
 #if UNITY_EDITOR
-    public virtual Vector2 Position { get; set; }
+    public virtual Vector2 Position { get => _position; set => _position = value; }
+    [SerializeField]
+    private Vector2 _position;
     
     public virtual GUIStyle TextStyle => Styles.DefaultText;
 

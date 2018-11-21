@@ -302,6 +302,7 @@ public class AIStateMachineWindow : EditorWindow
         {
             selectedNode.Position += Event.current.delta / PIXELS_PER_UNIT;
             Repaint();
+            EditorUtility.SetDirty(selectedNode);
         }
     }
     private void PollDeleteState()
