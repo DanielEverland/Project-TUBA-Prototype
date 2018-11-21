@@ -205,7 +205,7 @@ public class AIStateMachineWindow : EditorWindow
         {
             foreach (AIStateMachineNode node in Nodes)
             {
-                if (node is AIStateMachineStateNode state)
+                if (node is AIStateMachineStateNode state && node != TransitionBeingPlaced.StartNode)
                 {
                     Rect rect = GetObjectRect(node);
 
