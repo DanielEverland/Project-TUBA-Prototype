@@ -41,7 +41,7 @@ public class AIStateMachineTransitionEditor : Editor
             RemoveObject(condition);
             Target.Conditions.Remove(condition);
 
-            AIStateMachineCondition newCondition = (AIStateMachineCondition)ScriptableObject.CreateInstance(ConditionsLoader.AllTypes[newIndex]);
+            AIStateMachineCondition newCondition = CreateNewCondition(ConditionsLoader.AllTypes[newIndex]);
             Target.Conditions.Insert(index, newCondition);
 
             AddObject(newCondition);
@@ -49,12 +49,18 @@ public class AIStateMachineTransitionEditor : Editor
     }
     protected virtual void AddCondition(ReorderableList list)
     {
-        AIStateMachineCondition newCondition = (AIStateMachineCondition)ScriptableObject.CreateInstance(ConditionsLoader.AllTypes[0]);
+        AIStateMachineCondition newCondition = CreateNewCondition(ConditionsLoader.AllTypes[0]);
         Target.Conditions.Add(newCondition);
+
+        AddObject(newCondition);
+    }
+    protected virtual AIStateMachineCondition CreateNewCondition(System.Type type)
+    {
+        AIStateMachineCondition newCondition = (AIStateMachineCondition)ScriptableObject.CreateInstance(type);
 
         newCondition.name = newCondition.GetType().Name;
 
-        AddObject(newCondition);
+        return newCondition;
     }
     protected virtual void AddObject(Object obj)
     {

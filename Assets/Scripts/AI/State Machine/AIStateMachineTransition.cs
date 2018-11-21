@@ -9,7 +9,10 @@ public class AIStateMachineTransition : AIStateMachineObject
 {
     public AIStateMachineStateNode TargetState { get => _targetState; set => _targetState = value; }
     public List<AIStateMachineCondition> Conditions => _conditions;
+    public ConditionType ExpressionType => _expressionType;
 
+    [SerializeField]
+    private ConditionType _expressionType = ConditionType.All;
     [SerializeField]
     private AIStateMachineStateNode _targetState;
     [SerializeField]
@@ -19,14 +22,35 @@ public class AIStateMachineTransition : AIStateMachineObject
     {
         get
         {
-            for (int i = 0; i < Conditions.Count; i++)
+            switch (ExpressionType)
             {
-                if (Conditions[i])
-                    return true;
-            }
+                case ConditionType.All:
+                    {
+                        for (int i = 0; i < Conditions.Count; i++)
+                            if (Conditions[i] == false)
+                                return false;
 
-            return false;
+                        return true;
+                    }
+                case ConditionType.Any:
+                    {
+                        for (int i = 0; i < Conditions.Count; i++)
+                            if (Conditions[i] == true)
+                                return true;
+
+                        return false;
+                    }
+                default:
+                    throw new System.NotImplementedException();
+            }
         }
+    }
+
+    [System.Serializable]
+    public enum ConditionType
+    {
+        All,
+        Any,
     }
     
 #if UNITY_EDITOR

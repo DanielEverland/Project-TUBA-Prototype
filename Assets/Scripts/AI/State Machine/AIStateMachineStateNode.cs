@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class AIStateMachineStateNode : AIStateMachineNode
 {
+    /// <summary>
+    /// States can override this if a transition should check whether it has completed its action
+    /// </summary>
+    public bool IsDone => true;
+
 #if UNITY_EDITOR
     protected override string Title => _name;
 

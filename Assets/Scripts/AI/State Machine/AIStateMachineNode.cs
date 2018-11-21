@@ -12,6 +12,21 @@ public abstract class AIStateMachineNode : AIStateMachineObject
     [SerializeField]
     private List<AIStateMachineTransition> _transitions = new List<AIStateMachineTransition>();
 
+    /// <summary>
+    /// Called x amount of times per second for current state
+    /// </summary>
+    public virtual void Think()
+    {
+
+    }
+    /// <summary>
+    /// Called every frame for current state
+    /// </summary>
+    public virtual void Update()
+    {
+
+    }
+
 #if UNITY_EDITOR
     public virtual Vector2 Position { get => _position; set => _position = value; }
     [SerializeField]
@@ -28,7 +43,7 @@ public abstract class AIStateMachineNode : AIStateMachineObject
     public virtual void Draw(Rect rect)
     {
         DrawTitle(rect);
-    }
+    }    
     protected virtual void DrawTitle(Rect rect)
     {
         TextStyle.fontSize = (int)(rect.height * FONT_SIZE_COEFFICIENT);

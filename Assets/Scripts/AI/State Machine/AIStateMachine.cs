@@ -22,19 +22,32 @@ public class AIStateMachine : ScriptableObject
     [SerializeField]
     private List<AIStateMachineTransition> _transitions = new List<AIStateMachineTransition>();
 
-    public AIStateMachineNode CurrentNode { get; protected set; }
+    public AIStateMachineNode CurrentState { get; protected set; }
     public GameObject GameObject { get; protected set; }
 
     public void Initialize(GameObject owner)
     {
-        CurrentNode = StartNode;
+        CurrentState = StartNode;
         GameObject = owner;
     }
     public void Think()
     {
-        foreach (AIStateMachineTransition transition in CurrentNode.Transitions)
+        CurrentState.Think();
+        PollNextState();
+    }
+    public void Update()
+    {
+        CurrentState.Update();
+    }
+    private void PollNextState()
+    {
+        foreach (AIStateMachineTransition transition in CurrentState.Transitions)
         {
-            throw new System.NotImplementedException();
+            if (transition.ConditionsMet)
+            {
+                CurrentState = transition.TargetState;
+                return;
+            }
         }
     }
 }

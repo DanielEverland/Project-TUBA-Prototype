@@ -16,7 +16,8 @@ public class AIAgent : MonoBehaviour
 
     private void Awake()
     {
-
+        // We create a copy of the state machine
+        _stateMachine = Instantiate(StateMachine);
     }
     private void Update()
     {
