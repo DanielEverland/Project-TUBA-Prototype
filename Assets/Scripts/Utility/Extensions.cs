@@ -7,6 +7,10 @@ using static UnityEngine.Random;
 
 public static class Extensions
 {
+    public static float RoundToNearest(this float value, float nearest)
+    {
+        return Mathf.Round(value / nearest) * nearest;
+    }
     public static T Next<T>(this T src) where T : struct
     {
         if (!typeof(T).IsEnum) throw new System.ArgumentException(System.String.Format("Argument {0} is not an Enum", typeof(T).FullName));

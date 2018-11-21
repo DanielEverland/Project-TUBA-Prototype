@@ -129,8 +129,8 @@ public class AIStateMachineWindow : EditorWindow
 
         return new Rect()
         {
-            x = positionInPixels.x,
-            y = positionInPixels.y,
+            x = positionInPixels.x.RoundToNearest(8),
+            y = positionInPixels.y.RoundToNearest(8),
 
             width = sizeInPixels.x,
             height = sizeInPixels.y,
