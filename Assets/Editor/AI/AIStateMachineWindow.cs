@@ -26,6 +26,7 @@ public class AIStateMachineWindow : EditorWindow
     private const float SCALE_MAX = 10;
     private const float SCALE_MIN = 1;
     private const float TRANSITION_HEIGHT = 0.5f;
+    private const float RENDERING_ROUND_TO_NEAREST = 8;
 
     [MenuItem("Window/AI/State Machine", priority = 0)]
     private static void Init()
@@ -129,8 +130,8 @@ public class AIStateMachineWindow : EditorWindow
 
         return new Rect()
         {
-            x = positionInPixels.x.RoundToNearest(8),
-            y = positionInPixels.y.RoundToNearest(8),
+            x = positionInPixels.x.RoundToNearest(RENDERING_ROUND_TO_NEAREST),
+            y = positionInPixels.y.RoundToNearest(RENDERING_ROUND_TO_NEAREST),
 
             width = sizeInPixels.x,
             height = sizeInPixels.y,
