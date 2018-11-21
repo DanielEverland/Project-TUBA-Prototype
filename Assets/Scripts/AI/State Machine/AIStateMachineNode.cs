@@ -10,7 +10,7 @@ public abstract class AIStateMachineNode : AIStateMachineObject
     public List<AIStateMachineTransition> Transitions => _transitions;
 
     [SerializeField]
-    private List<AIStateMachineTransition> _transitions;
+    private List<AIStateMachineTransition> _transitions = new List<AIStateMachineTransition>();
 
 #if UNITY_EDITOR
     public virtual Vector2 Position { get; set; }
