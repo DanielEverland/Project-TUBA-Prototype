@@ -9,8 +9,7 @@ public class AIStateMachineWindow : EditorWindow
     private const string STATE_MACHINE_BACKGROUND_NAME = "Textures/StateMachineBackground";
 
     private AIStateMachine Target { get; set; }
-
-    private float Scale { get => Target.CameraScale; set => Target.CameraScale = value; }
+    
     private Vector2 CameraOffset { get => Target.CameraOffset; set => Target.CameraOffset = value; }
     private List<AIStateMachineNode> Nodes => Target.Nodes;
     private List<AIStateMachineTransition> Transitions => Target.Transitions;
@@ -97,8 +96,7 @@ public class AIStateMachineWindow : EditorWindow
     }
     private void DrawNode(AIStateMachineNode node)
     {
-        Rect nodeRect = GetObjectRect(node.Position, node.Size);
-
+        Rect nodeRect = GetObjectRect(node.Position, node.Size);        
         node.Draw(nodeRect);
 
         if(Event.current.type == EventType.MouseDown && Event.current.button == 0 && nodeRect.Contains(Event.current.mousePosition))
@@ -118,8 +116,8 @@ public class AIStateMachineWindow : EditorWindow
     {
         Vector2 sizeInPixels = new Vector2()
         {
-            x = size.x * PIXELS_PER_UNIT * Scale,
-            y = size.y * PIXELS_PER_UNIT * Scale,
+            x = size.x * PIXELS_PER_UNIT,
+            y = size.y * PIXELS_PER_UNIT,
         };
 
         Vector2 screenPoint = WorldToScreenPoint(position);
@@ -170,7 +168,6 @@ public class AIStateMachineWindow : EditorWindow
     private void PollInput()
     {
         PollMouseInput();
-        //PollScale();
         PollCameraOffset();
         PollCreateNewState();
         PollDeleteState();
@@ -382,17 +379,6 @@ public class AIStateMachineWindow : EditorWindow
         Nodes.Add(newState);
         AddObject(newState);
     }
-    private void PollScale()
-    {
-        Event e = Event.current;
-
-        if (e.isScrollWheel)
-        {
-            Scale = Mathf.Clamp(Scale - e.delta.y * SCALE_COEFFICIENT, SCALE_MIN, SCALE_MAX);
-
-            Repaint();
-        }
-    }
     private void PollCameraOffset()
     {
         if (MiddleMouseDown && Event.current.type == EventType.MouseDrag)
@@ -406,13 +392,13 @@ public class AIStateMachineWindow : EditorWindow
     {
         return new Vector2()
         {
-            x = Center.x + CameraOffset.x + worldPoint.x * PIXELS_PER_UNIT * Scale,
-            y = Center.y + CameraOffset.y + worldPoint.y * PIXELS_PER_UNIT * Scale,
+            x = Center.x + CameraOffset.x + worldPoint.x * PIXELS_PER_UNIT,
+            y = Center.y + CameraOffset.y + worldPoint.y * PIXELS_PER_UNIT,
         };
     }
     private Vector2 ScreenToWorldPoint(Vector2 screenPosition)
     {
-        return (screenPosition - Center - CameraOffset) / PIXELS_PER_UNIT / Scale;
+        return (screenPosition - Center - CameraOffset) / PIXELS_PER_UNIT;
     }
     private void AddObject(Object obj)
     {

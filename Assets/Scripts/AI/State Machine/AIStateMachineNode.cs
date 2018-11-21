@@ -14,12 +14,12 @@ public abstract class AIStateMachineNode : AIStateMachineObject
 
 #if UNITY_EDITOR
     public virtual Vector2 Position { get; set; }
-    public virtual Vector2 Size { get; set; } = new Vector2(3, 1);
-
+    
     public virtual GUIStyle TextStyle => Styles.DefaultText;
 
     protected bool IsSelected => Selection.activeObject == this;
     protected abstract string Title { get; }
+    public abstract Vector2 Size { get; }
 
     private const float FONT_SIZE_COEFFICIENT = 0.4f;
 
