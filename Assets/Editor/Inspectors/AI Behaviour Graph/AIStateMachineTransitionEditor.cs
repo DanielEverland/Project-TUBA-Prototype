@@ -16,15 +16,8 @@ public class AIStateMachineTransitionEditor : Editor
     {
         serializedObject.Update();
 
-        if (Target.StartNode is AIStateMachineStartNode)
-        {
-            EditorGUILayout.HelpBox("Transitions projected from the Start Node cannot have conditions", MessageType.Info);
-        }
-        else
-        {
-            ConditionsList.DoLayoutList();
-        }
-        
+        ConditionsList.DoLayoutList();
+
         serializedObject.ApplyModifiedProperties();
     }
     protected virtual void DrawElement(Rect rect, SerializedProperty element, GUIContent label, bool selected, bool focused)
