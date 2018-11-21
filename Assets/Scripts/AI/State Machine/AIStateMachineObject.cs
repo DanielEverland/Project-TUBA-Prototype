@@ -8,6 +8,6 @@ public class AIStateMachineObject : ScriptableObject
     public AIAgent Agent => Machine.Agent;
     public AIStateMachine Machine { get => _machine; set => _machine = value; }
 
-    [SerializeField]
+    [SerializeField, HideInInspector]
     private AIStateMachine _machine;
 }
