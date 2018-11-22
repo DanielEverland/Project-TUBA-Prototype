@@ -5,12 +5,12 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-public abstract class AIStateMachineNode : AIStateMachineObject
+public abstract class AINode : AIStateMachineObject
 {
-    public List<AIStateMachineTransition> Transitions => _transitions;
+    public List<AITransition> Transitions => _transitions;
 
     [SerializeField]
-    private List<AIStateMachineTransition> _transitions = new List<AIStateMachineTransition>();
+    private List<AITransition> _transitions = new List<AITransition>();
 
     /// <summary>
     /// Called x amount of times per second for current state

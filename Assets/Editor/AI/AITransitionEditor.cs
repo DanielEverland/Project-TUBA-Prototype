@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(AIStateMachineTransition))]
-public class AIStateMachineTransitionEditor : Editor
+[CustomEditor(typeof(AITransition))]
+public class AITransitionEditor : Editor
 {
-    protected AIStateMachineTransition Target { get { return (AIStateMachineTransition)target; } }
+    protected AITransition Target { get { return (AITransition)target; } }
     protected SerializedProperty Conditions { get; set; }
     protected SerializedProperty StartEvent { get; set; }
     protected SerializedProperty EndEvent { get; set; }
@@ -55,7 +55,7 @@ public class AIStateMachineTransitionEditor : Editor
     protected virtual void DrawElement(Rect rect, SerializedProperty element, GUIContent label, bool selected, bool focused)
     {
         int index = ConditionsList.IndexOf(element);
-        AIStateMachineCondition condition = Target.Conditions[index];
+        AICondition condition = Target.Conditions[index];
         System.Type type = condition.GetType();
         int typeIndex = ConditionsLoader.AllTypes.IndexOf(type);
 
@@ -72,7 +72,7 @@ public class AIStateMachineTransitionEditor : Editor
             RemoveObject(condition);
             Target.Conditions.Remove(condition);
 
-            AIStateMachineCondition newCondition = CreateNewCondition(ConditionsLoader.AllTypes[newIndex]);
+            AICondition newCondition = CreateNewCondition(ConditionsLoader.AllTypes[newIndex]);
             Target.Conditions.Insert(index, newCondition);
 
             AddObject(newCondition);
@@ -80,14 +80,14 @@ public class AIStateMachineTransitionEditor : Editor
     }
     protected virtual void AddCondition(ReorderableList list)
     {
-        AIStateMachineCondition newCondition = CreateNewCondition(ConditionsLoader.AllTypes[0]);
+        AICondition newCondition = CreateNewCondition(ConditionsLoader.AllTypes[0]);
         Target.Conditions.Add(newCondition);
 
         AddObject(newCondition);
     }
-    protected virtual AIStateMachineCondition CreateNewCondition(System.Type type)
+    protected virtual AICondition CreateNewCondition(System.Type type)
     {
-        AIStateMachineCondition newCondition = (AIStateMachineCondition)ScriptableObject.CreateInstance(type);
+        AICondition newCondition = (AICondition)ScriptableObject.CreateInstance(type);
 
         newCondition.name = newCondition.GetType().Name;
 
@@ -100,7 +100,7 @@ public class AIStateMachineTransitionEditor : Editor
     }
     protected virtual void RemoveCondition(ReorderableList list)
     {
-        AIStateMachineCondition toRemove = Conditions.GetArrayElementAtIndex(list.Index).objectReferenceValue as AIStateMachineCondition;
+        AICondition toRemove = Conditions.GetArrayElementAtIndex(list.Index).objectReferenceValue as AICondition;
 
         Target.Conditions.Remove(toRemove);
         RemoveObject(toRemove);

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConditionObjectWithinRange : AIStateMachineCondition
+public class ConditionObjectWithinRange : AICondition
 {
     [SerializeField]
     private GameObjectReference _targetObject;

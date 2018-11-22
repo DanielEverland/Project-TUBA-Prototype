@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class AIStateMachineStartNode : AIStateMachineNode
+public class AIStartNode : AINode
 {
 #if UNITY_EDITOR
     public override Vector2 MinSize => new Vector2(3, 1);

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActionMoveTowardsObject : AIStateMachineAction
+public class ActionMoveTowardsObject : AIAction
 {
     [SerializeField]
     private GameObjectReference _target;

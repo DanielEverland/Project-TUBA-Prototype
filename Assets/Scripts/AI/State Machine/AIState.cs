@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class AIStateMachineStateNode : AIStateMachineNode
+public class AIState : AINode
 {
     /// <summary>
     /// States can override this if a transition should check whether it has completed its action
@@ -12,9 +12,9 @@ public class AIStateMachineStateNode : AIStateMachineNode
     public UnityEvent OnStateStarted => _onStateStarted;
     public UnityEvent OnStateEnded => _onStateEnded;
 
-    public List<AIStateMachineAction> Actions => _actions;
+    public List<AIAction> Actions => _actions;
     [SerializeField]
-    private List<AIStateMachineAction> _actions = new List<AIStateMachineAction>();
+    private List<AIAction> _actions = new List<AIAction>();
     [SerializeField]
     private UnityEvent _onStateStarted;
     [SerializeField]

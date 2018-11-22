@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(AIStateMachineStartNode))]
-public class AIStateMachineStartNodeEditor : Editor
+[CustomEditor(typeof(AIStartNode))]
+public class AIStartNodeEditor : Editor
 {
-    AIStateMachineStartNode Target => target as AIStateMachineStartNode;
+    AIStartNode Target => target as AIStartNode;
 
     protected override void OnHeaderGUI()
     {

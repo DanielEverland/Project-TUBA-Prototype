@@ -12,15 +12,15 @@ public class AIStateMachineWindow : EditorWindow
     private AIStateMachine Target { get; set; }
     
     private Vector2 CameraOffset { get => Target.CameraOffset; set => Target.CameraOffset = value; }
-    private List<AIStateMachineNode> Nodes => Target.Nodes;
-    private List<AIStateMachineTransition> Transitions => Target.Transitions;
-    private AIStateMachineStartNode StartNode { get => Target.StartNode; set => Target.StartNode = value; }
+    private List<AINode> Nodes => Target.Nodes;
+    private List<AITransition> Transitions => Target.Transitions;
+    private AIStartNode StartNode { get => Target.StartNode; set => Target.StartNode = value; }
 
     private bool MiddleMouseDown { get; set; }
     private bool IsDragging => Event.current.type == EventType.MouseDrag;
     private Vector2 Center => new Vector2(position.width / 2, position.height / 2);
-    private AIStateMachineNode DraggedObject { get; set; }
-    private AIStateMachineTransition TransitionBeingPlaced { get; set; }
+    private AINode DraggedObject { get; set; }
+    private AITransition TransitionBeingPlaced { get; set; }
 
     private const float PIXELS_PER_UNIT = 32;
     private const float SCALE_COEFFICIENT = 0.1f;
@@ -74,12 +74,12 @@ public class AIStateMachineWindow : EditorWindow
     {
         HandleTransitionBeingPlaced();
 
-        foreach (AIStateMachineTransition transition in Transitions)
+        foreach (AITransition transition in Transitions)
         {
             DrawTransition(transition);
         }
     }
-    private void DrawTransition(AIStateMachineTransition transition)
+    private void DrawTransition(AITransition transition)
     {
         Vector2 startPos = WorldToScreenPoint(transition.StartPosition).RoundToNearest(RENDERING_ROUND_TO_NEAREST);
         Vector2 endPos = WorldToScreenPoint(transition.EndPosition).RoundToNearest(RENDERING_ROUND_TO_NEAREST);
@@ -98,12 +98,12 @@ public class AIStateMachineWindow : EditorWindow
     }
     private void DrawNodes()
     {
-        foreach (AIStateMachineNode node in Nodes)
+        foreach (AINode node in Nodes)
         {
             DrawNode(node);
         }
     }
-    private void DrawNode(AIStateMachineNode node)
+    private void DrawNode(AINode node)
     {
         Rect nodeRect = GetObjectRect(node);
         node.Draw(nodeRect);
@@ -113,11 +113,11 @@ public class AIStateMachineWindow : EditorWindow
             SelectNode(node);
         }
     }
-    private void SelectNode(AIStateMachineNode node)
+    private void SelectNode(AINode node)
     {
         Selection.activeObject = node;
     }
-    private Rect GetObjectRect(AIStateMachineNode node)
+    private Rect GetObjectRect(AINode node)
     {
         return GetObjectRect(node.Position, node.MinSize, node.Title, node.TextStyle);
     }
@@ -204,9 +204,9 @@ public class AIStateMachineWindow : EditorWindow
         if (!EditorUtility.IsPersistent(Target))
             return;
 
-        if (!Nodes.Any(x => x.GetType() == typeof(AIStateMachineStartNode)))
+        if (!Nodes.Any(x => x.GetType() == typeof(AIStartNode)))
         {
-            AIStateMachineStartNode startNode = ScriptableObject.CreateInstance<AIStateMachineStartNode>();
+            AIStartNode startNode = ScriptableObject.CreateInstance<AIStartNode>();
             startNode.Position = new Vector2(0, 10);
 
             Nodes.Add(startNode);
@@ -235,10 +235,10 @@ public class AIStateMachineWindow : EditorWindow
     {
         if (Event.current.type == EventType.MouseDown && Event.current.button == 0)
         {
-            if(Selection.activeObject is AIStateMachineTransition)
+            if(Selection.activeObject is AITransition)
                 Selection.activeObject = null;
 
-            foreach (AIStateMachineTransition transition in Transitions)
+            foreach (AITransition transition in Transitions)
             {
                 Vector2 position = transition.StartPosition + (transition.EndPosition - transition.StartPosition) / 2;
                 Rect rect = GetObjectRect(position, Vector2.one);
@@ -257,9 +257,9 @@ public class AIStateMachineWindow : EditorWindow
 
         if (Event.current.type == EventType.MouseDown && Event.current.button == 0)
         {
-            foreach (AIStateMachineNode node in Nodes)
+            foreach (AINode node in Nodes)
             {
-                if (node is AIStateMachineStateNode state && node != TransitionBeingPlaced.StartNode)
+                if (node is AIState state && node != TransitionBeingPlaced.StartNode)
                 {
                     Rect rect = GetObjectRect(node);
 
@@ -280,7 +280,7 @@ public class AIStateMachineWindow : EditorWindow
         DeleteTransition(TransitionBeingPlaced);
         TransitionBeingPlaced = null;
     }
-    private void PlaceTransition(AIStateMachineStateNode targetState)
+    private void PlaceTransition(AIState targetState)
     {
         TransitionBeingPlaced.TargetState = targetState;
         TransitionBeingPlaced = null;
@@ -300,13 +300,13 @@ public class AIStateMachineWindow : EditorWindow
 
         if (Event.current.type == EventType.MouseDown && Event.current.button == 1)
         {
-            foreach (AIStateMachineNode node in Nodes)
+            foreach (AINode node in Nodes)
             {
                 Rect rect = GetObjectRect(node);
 
                 if (rect.Contains(Event.current.mousePosition))
                 {
-                    AIStateMachineTransition transition = ScriptableObject.CreateInstance<AIStateMachineTransition>();
+                    AITransition transition = ScriptableObject.CreateInstance<AITransition>();
                     transition.StartNode = node;
                     node.Transitions.Add(transition);
 
@@ -324,7 +324,7 @@ public class AIStateMachineWindow : EditorWindow
     }
     private void PollDisableSelection()
     {
-        AIStateMachineNode selectedNode = Selection.activeObject as AIStateMachineNode;
+        AINode selectedNode = Selection.activeObject as AINode;
 
         if (selectedNode == null || !Nodes.Contains(selectedNode))
             return;
@@ -338,7 +338,7 @@ public class AIStateMachineWindow : EditorWindow
     }
     private void PollNodeDrag()
     {
-        AIStateMachineNode selectedNode = Selection.activeObject as AIStateMachineNode;
+        AINode selectedNode = Selection.activeObject as AINode;
 
         if (selectedNode == null || !Nodes.Contains(selectedNode))
             return;
@@ -369,18 +369,18 @@ public class AIStateMachineWindow : EditorWindow
 
             if (selectedObject != null)
             {
-                if(selectedObject is AIStateMachineStateNode state)
+                if(selectedObject is AIState state)
                 {
                     DeleteState(state);
                 }
-                else if(selectedObject is AIStateMachineTransition transition)
+                else if(selectedObject is AITransition transition)
                 {
                     DeleteTransition(transition);
                 }
             }
         }
     }
-    private void DeleteState(AIStateMachineStateNode state)
+    private void DeleteState(AIState state)
     {
         if (Nodes.Contains(state))
         {
@@ -390,7 +390,7 @@ public class AIStateMachineWindow : EditorWindow
 
         for (int i = Transitions.Count - 1; i >= 0; i--)
         {
-            AIStateMachineTransition transition = Transitions[i];
+            AITransition transition = Transitions[i];
 
             if (transition.StartNode == state || transition.TargetState == state)
             {
@@ -398,7 +398,7 @@ public class AIStateMachineWindow : EditorWindow
             }
         }
     }
-    private void DeleteTransition(AIStateMachineTransition transition)
+    private void DeleteTransition(AITransition transition)
     {
         if (Transitions.Contains(transition))
         {
@@ -428,7 +428,7 @@ public class AIStateMachineWindow : EditorWindow
 
         if (e.type == EventType.MouseDown && e.button == 1)
         {
-            foreach (AIStateMachineNode node in Nodes)
+            foreach (AINode node in Nodes)
             {
                 Rect nodeRect = GetObjectRect(node);
 
@@ -444,7 +444,7 @@ public class AIStateMachineWindow : EditorWindow
     }
     private void CreateNewState()
     {
-        AIStateMachineStateNode newState = ScriptableObject.CreateInstance<AIStateMachineStateNode>();
+        AIState newState = ScriptableObject.CreateInstance<AIState>();
         newState.Position = ScreenToWorldPoint(Event.current.mousePosition);
         newState.name = "New State";
 

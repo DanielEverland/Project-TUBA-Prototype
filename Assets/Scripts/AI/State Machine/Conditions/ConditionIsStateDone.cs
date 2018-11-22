@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConditionIsStateDone : AIStateMachineCondition
+public class ConditionIsStateDone : AICondition
 {
     [SerializeField]
-    private AIStateMachineStateNode _targetState;
+    private AIState _targetState;
 
-    protected AIStateMachineStateNode TargetState => _targetState;
+    protected AIState TargetState => _targetState;
 
     public override bool IsConditionsMet => TargetState.IsDone;
 }

@@ -6,10 +6,10 @@ using UnityEngine.Events;
 using UnityEditor;
 #endif
 
-public class AIStateMachineTransition : AIStateMachineObject
+public class AITransition : AIStateMachineObject
 {
-    public AIStateMachineStateNode TargetState { get => _targetState; set => _targetState = value; }
-    public List<AIStateMachineCondition> Conditions => _conditions;
+    public AIState TargetState { get => _targetState; set => _targetState = value; }
+    public List<AICondition> Conditions => _conditions;
     public ConditionType ExpressionType => _expressionType;
     public float TransitionTime => _transitionTime.Value;
     public UnityEvent OnTransitionStarted => _onTransitionStarted;
@@ -18,9 +18,9 @@ public class AIStateMachineTransition : AIStateMachineObject
     [SerializeField]
     private ConditionType _expressionType = ConditionType.All;
     [SerializeField]
-    private AIStateMachineStateNode _targetState;
+    private AIState _targetState;
     [SerializeField]
-    private List<AIStateMachineCondition> _conditions = new List<AIStateMachineCondition>();
+    private List<AICondition> _conditions = new List<AICondition>();
     [SerializeField]
     private FloatReference _transitionTime = new FloatReference(1);
     [SerializeField]
@@ -88,7 +88,7 @@ public class AIStateMachineTransition : AIStateMachineObject
     }
     
 #if UNITY_EDITOR
-    public AIStateMachineNode StartNode;
+    public AINode StartNode;
 
     public Vector2 StartPosition => StartNode.Position;
     public Vector2 EndPosition

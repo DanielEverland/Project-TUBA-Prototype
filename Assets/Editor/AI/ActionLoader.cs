@@ -20,8 +20,8 @@ public static class ActionLoader
 
     private static void LoadTypes()
     {
-        _allTypes = typeof(AIStateMachineAction).Assembly.GetTypes()
-            .Where(x => typeof(AIStateMachineAction).IsAssignableFrom(x) && !x.IsAbstract)
+        _allTypes = typeof(AIAction).Assembly.GetTypes()
+            .Where(x => typeof(AIAction).IsAssignableFrom(x) && !x.IsAbstract)
             .ToList();
     }
 }

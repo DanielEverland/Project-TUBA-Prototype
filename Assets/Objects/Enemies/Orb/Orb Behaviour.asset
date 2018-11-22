@@ -16,8 +16,8 @@ MonoBehaviour:
   CameraScale: 0
   _startNode: {fileID: 114730372628540440}
   _nodes:
-  - {fileID: 114730372628540440}
-  - {fileID: 114965851195013430}
+  - {fileID: 0}
+  - {fileID: 0}
   _transitions:
   - {fileID: 114992917344869270}
 --- !u!114 &114135820873722522
@@ -110,9 +110,13 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+    m_CallsDirty: 1
   _onTransitionEnded:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  StartNode: {fileID: 114730372628540440}
+    m_CallsDirty: 1
+  _transitionStartTime: 0.18106794
+  StartNode: {fileID: 0}
+  _endPosition: {x: 0, y: 0}

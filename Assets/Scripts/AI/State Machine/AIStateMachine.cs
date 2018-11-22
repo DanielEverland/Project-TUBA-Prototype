@@ -11,19 +11,19 @@ public class AIStateMachine : ScriptableObject
     public float CameraScale;
 #endif
 
-    public AIStateMachineStartNode StartNode { get => _startNode; set => _startNode = value; }
-    public List<AIStateMachineNode> Nodes => _nodes;
-    public List<AIStateMachineTransition> Transitions => _transitions;
+    public AIStartNode StartNode { get => _startNode; set => _startNode = value; }
+    public List<AINode> Nodes => _nodes;
+    public List<AITransition> Transitions => _transitions;
 
     [SerializeField]
-    private AIStateMachineStartNode _startNode;
+    private AIStartNode _startNode;
     [SerializeField]
-    private List<AIStateMachineNode> _nodes = new List<AIStateMachineNode>();
+    private List<AINode> _nodes = new List<AINode>();
     [SerializeField]
-    private List<AIStateMachineTransition> _transitions = new List<AIStateMachineTransition>();
+    private List<AITransition> _transitions = new List<AITransition>();
 
-    protected AIStateMachineStateNode CurrentState => CurrentObject as AIStateMachineStateNode;
-    protected AIStateMachineTransition CurrentTransition => CurrentObject as AIStateMachineTransition;
+    protected AIState CurrentState => CurrentObject as AIState;
+    protected AITransition CurrentTransition => CurrentObject as AITransition;
     
     public AIStateMachineObject CurrentObject { get; protected set; }
     public Agent Agent { get; protected set; }
@@ -46,12 +46,12 @@ public class AIStateMachine : ScriptableObject
         if (!IsInitialized)
             return;
 
-        if(CurrentObject is AIStateMachineNode node)
+        if(CurrentObject is AINode node)
         {
             node.Think();
             PollNextState();
         }
-        else if(CurrentObject is AIStateMachineTransition transition)
+        else if(CurrentObject is AITransition transition)
         {
             if(transition.Transition())
             {
@@ -68,9 +68,9 @@ public class AIStateMachine : ScriptableObject
     }
     private void PollNextState()
     {
-        if(CurrentObject is AIStateMachineNode node)
+        if(CurrentObject is AINode node)
         {
-            foreach (AIStateMachineTransition transition in node.Transitions)
+            foreach (AITransition transition in node.Transitions)
             {
                 if (transition.ConditionsMet)
                 {

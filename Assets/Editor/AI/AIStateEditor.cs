@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEditor;
 using System.Linq;
 
-[CustomEditor(typeof(AIStateMachineStateNode))]
-public class AIStateMachineStateEditor : Editor
+[CustomEditor(typeof(AIState))]
+public class AIStateEditor : Editor
 {
-    protected AIStateMachineStateNode Target { get { return (AIStateMachineStateNode)target; } }
+    protected AIState Target { get { return (AIState)target; } }
     protected SerializedProperty Actions { get; set; }
     protected SerializedProperty StartEvent { get; set; }
     protected SerializedProperty EndEvent { get; set; }
@@ -56,7 +56,7 @@ public class AIStateMachineStateEditor : Editor
     protected virtual void DrawElement(Rect rect, SerializedProperty element, GUIContent label, bool selected, bool focused)
     {
         int index = ActionsList.IndexOf(element);
-        AIStateMachineAction action = Target.Actions[index];
+        AIAction action = Target.Actions[index];
         System.Type type = action.GetType();
         int typeIndex = ActionLoader.AllTypes.IndexOf(type);
 
@@ -73,7 +73,7 @@ public class AIStateMachineStateEditor : Editor
             RemoveObject(action);
             Target.Actions.Remove(action);
 
-            AIStateMachineAction newAction = CreateNewAction(ActionLoader.AllTypes[newIndex]);
+            AIAction newAction = CreateNewAction(ActionLoader.AllTypes[newIndex]);
             Target.Actions.Insert(index, newAction);
 
             AddObject(newAction);
@@ -81,14 +81,14 @@ public class AIStateMachineStateEditor : Editor
     }
     protected virtual void AddAction(ReorderableList list)
     {
-        AIStateMachineAction newAction = CreateNewAction(ActionLoader.AllTypes[0]);
+        AIAction newAction = CreateNewAction(ActionLoader.AllTypes[0]);
         Target.Actions.Add(newAction);
 
         AddObject(newAction);
     }
-    protected virtual AIStateMachineAction CreateNewAction(System.Type type)
+    protected virtual AIAction CreateNewAction(System.Type type)
     {
-        AIStateMachineAction newAction = (AIStateMachineAction)ScriptableObject.CreateInstance(type);
+        AIAction newAction = (AIAction)ScriptableObject.CreateInstance(type);
 
         newAction.name = newAction.GetType().Name;
 
@@ -101,7 +101,7 @@ public class AIStateMachineStateEditor : Editor
     }
     protected virtual void RemoveAction(ReorderableList list)
     {
-        AIStateMachineAction toRemove = Actions.GetArrayElementAtIndex(list.Index).objectReferenceValue as AIStateMachineAction;
+        AIAction toRemove = Actions.GetArrayElementAtIndex(list.Index).objectReferenceValue as AIAction;
 
         Target.Actions.Remove(toRemove);
         RemoveObject(toRemove);

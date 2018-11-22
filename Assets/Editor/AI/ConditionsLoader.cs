@@ -21,8 +21,8 @@ public static class ConditionsLoader
 
     private static void LoadTypes()
     {
-        _allTypes = typeof(AIStateMachineCondition).Assembly.GetTypes()
-            .Where(x => typeof(AIStateMachineCondition).IsAssignableFrom(x) && !x.IsAbstract)
+        _allTypes = typeof(AICondition).Assembly.GetTypes()
+            .Where(x => typeof(AICondition).IsAssignableFrom(x) && !x.IsAbstract)
             .ToList();
     }
 }
