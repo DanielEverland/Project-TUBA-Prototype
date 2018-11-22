@@ -161,6 +161,7 @@ public class AIStateMachineWindow : EditorWindow
         if (!Nodes.Any(x => x.GetType() == typeof(AIStateMachineStartNode)))
         {
             AIStateMachineStartNode startNode = ScriptableObject.CreateInstance<AIStateMachineStartNode>();
+            startNode.Position = new Vector2(0, 10);
             Nodes.Add(startNode);
             AddObject(startNode);
             StartNode = startNode;
