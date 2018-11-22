@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AIStateMachineStartNode : AIStateMachineNode
 {
@@ -9,17 +7,17 @@ public class AIStateMachineStartNode : AIStateMachineNode
 
     public override void Draw(Rect rect)
     {
-        if(Event.current.type == EventType.Repaint)
+        if (Event.current.type == EventType.Repaint)
         {
             if (IsSelected)
                 Style.SelectedBackground.Draw(rect, GUIContent.none, 0);
             else
                 Style.Background.Draw(rect, GUIContent.none, 0);
-        }            
+        }
 
-        base.Draw(rect);
+        base.DrawTitle(rect);
     }
-
+    
     private static class Style
     {
         public static GUIStyle Background;

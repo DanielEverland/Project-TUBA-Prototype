@@ -26,19 +26,19 @@ public class AIStateMachine : ScriptableObject
     protected AIStateMachineTransition CurrentTransition => CurrentObject as AIStateMachineTransition;
     
     public AIStateMachineObject CurrentObject { get; protected set; }
-    public AIAgent Agent { get; protected set; }
+    public Agent Agent { get; protected set; }
     public GameObject GameObject => Agent.gameObject;
 
-    public void Initialize(AIAgent agent)
+    public void Initialize(Agent agent)
     {
         CurrentObject = StartNode;
         Agent = agent;
     }
     public void Think()
     {
-        if(CurrentObject is AIStateMachineStateNode state)
+        if(CurrentObject is AIStateMachineNode node)
         {
-            state.Think();
+            node.Think();
             PollNextState();
         }
         else if(CurrentObject is AIStateMachineTransition transition)
@@ -55,12 +55,15 @@ public class AIStateMachine : ScriptableObject
     }
     private void PollNextState()
     {
-        foreach (AIStateMachineTransition transition in CurrentState.Transitions)
+        if(CurrentObject is AIStateMachineNode node)
         {
-            if (transition.ConditionsMet)
+            foreach (AIStateMachineTransition transition in node.Transitions)
             {
-                ChangeCurrentObject(transition);
-                return;
+                if (transition.ConditionsMet)
+                {
+                    ChangeCurrentObject(transition);
+                    return;
+                }
             }
         }
     }

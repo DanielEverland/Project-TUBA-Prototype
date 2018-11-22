@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIAgent : MonoBehaviour
+public class Agent : MonoBehaviour
 {
     [SerializeField]
     private IntReference _thinksPerSecond;
@@ -26,7 +26,10 @@ public class AIAgent : MonoBehaviour
     }
     private void Update()
     {
+        StateMachine.Update();
         PollThink();
+
+        Debug.Log(StateMachine.CurrentObject);
     }
     private void PollThink()
     {
@@ -43,6 +46,9 @@ public class AIAgent : MonoBehaviour
     private void OnValidate()
     {
         if (_thinksPerSecond == null)
-            _thinksPerSecond.Value = Resources.Load<IntVariable>("DefaultThinksPerSecond");
+            _thinksPerSecond = new IntReference(Resources.Load<IntVariable>("DefaultThinksPerSecond").Value);
+
+        if (_characterController == null)
+            _characterController = GetComponent<CharacterController2D>();
     }
 }

@@ -12,4 +12,8 @@ public class AIStateMachineStartNodeEditor : Editor
 
         target.name = EditorGUILayoutHelper.DrawHeaderTextField(target.name);
     }
+    public override void OnInspectorGUI()
+    {
+        EditorGUILayout.HelpBox("Start Node has no behaviour", MessageType.Info);
+    }
 }

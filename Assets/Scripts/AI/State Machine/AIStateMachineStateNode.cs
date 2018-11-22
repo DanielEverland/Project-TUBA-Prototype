@@ -20,11 +20,11 @@ public class AIStateMachineStateNode : AIStateMachineNode
     [SerializeField]
     private UnityEvent _onStateEnded;
 
-    public void StateStarted()
+    public virtual void StateStarted()
     {
         OnStateStarted.Invoke();
     }
-    public void StateEnded()
+    public virtual void StateEnded()
     {
         OnStateEnded.Invoke();
     }
