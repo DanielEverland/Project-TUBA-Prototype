@@ -1,11 +1,37 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using static UnityEngine.Random;
 
 public static class Extensions
 {
+    /// <summary>
+    /// Creates a deep copy of <paramref name="obj"/>
+    /// </summary>
+    public static T DeepCopy<T>(this T obj)
+    {
+        using (var ms = new MemoryStream())
+        {
+            var formatter = new BinaryFormatter();
+            formatter.Serialize(ms, obj);
+            ms.Position = 0;
+
+            return (T)formatter.Deserialize(ms);
+        }
+    }
+    /// <summary>
+    /// Instantiates all entries in a list
+    /// </summary>
+    public static void Instantiate<T>(this List<T> list) where T : Object
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            list[i] = Object.Instantiate(list[i]);
+        }
+    }
     /// <summary>
     /// Rounds the value to the nearest <paramref name="nearest"/>
     /// </summary>

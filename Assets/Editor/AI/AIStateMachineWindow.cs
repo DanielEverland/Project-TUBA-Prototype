@@ -7,6 +7,7 @@ using UnityEditor;
 public class AIStateMachineWindow : EditorWindow
 {
     private const string STATE_MACHINE_BACKGROUND_NAME = "Textures/StateMachineBackground";
+    private const string STATE_MACHINE_HEADER_NAME = "Textures/StateMachineHeaderBackground";
 
     private AIStateMachine Target { get; set; }
     
@@ -62,6 +63,7 @@ public class AIStateMachineWindow : EditorWindow
                 DrawTransitions();
                 DrawNodes();
                 PollInput();
+                DrawHeader();
             }
 
             if (changeScope.changed)
@@ -158,6 +160,21 @@ public class AIStateMachineWindow : EditorWindow
             width = sizeInPixels.x,
             height = sizeInPixels.y,
         };
+    }
+    private void DrawHeader()
+    {
+        if (Event.current.type == EventType.Repaint)
+        {
+            float width = GUIStyle.none.CalcSize(new GUIContent(Target.name)).x;
+            Rect rect = new Rect()
+            {
+                width = width + 20,
+                height = 25,
+            };
+
+            Style.Header.Draw(rect, GUIContent.none, 0);
+            EditorGUI.LabelField(rect, new GUIContent(Target.name), Style.Text);
+        }
     }
     private void DrawBackground()
     {
@@ -477,17 +494,23 @@ public class AIStateMachineWindow : EditorWindow
 
     private static class Style
     {
+        public static GUIStyle Header;
         public static GUIStyle Background;
         public static GUIStyle Text;
 
         static Style()
         {
+            Header = new GUIStyle();
+            Header.normal.background = Resources.Load<Texture2D>(STATE_MACHINE_HEADER_NAME);
+            Header.border = new RectOffset(1, 1, 1, 1);
+
             Background = new GUIStyle();
             Background.normal = new GUIStyleState();
             Background.normal.background = Resources.Load<Texture2D>(STATE_MACHINE_BACKGROUND_NAME);
             
             Text = new GUIStyle();
-            Text.normal.textColor = Color.white;
+            Text.normal.textColor = new Color(0.8f, 0.8f, 0.8f, 1);
+            Text.alignment = TextAnchor.MiddleCenter;
         }
     }
 }

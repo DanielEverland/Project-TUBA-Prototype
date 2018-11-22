@@ -21,15 +21,16 @@ public class Agent : MonoBehaviour
     private void Awake()
     {
         // We create a copy of the state machine
-        _stateMachine = Instantiate(StateMachine);
+        _stateMachine = StateMachine;
         _stateMachine.Initialize(this);
+        _stateMachine.name = this.name;
     }
     private void Update()
     {
-        Debug.Log(StateMachine.Agent);
-
         StateMachine.Update();
         PollThink();
+
+        Debug.Log(name + " - " + StateMachine.CurrentObject.GetInstanceID());
     }
     private void PollThink()
     {
