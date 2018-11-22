@@ -120,8 +120,20 @@ public class AIStateMachineTransition : AIStateMachineObject
             {
                 Styles.TransitionArrow.Draw(arrowRect, GUIContent.none, 0);
                 Styles.TransitionBackground.Draw(rect, GUIContent.none, 0);
-            }            
+            }
+
+            if(IsCurrent)
+                DrawCurrentBackground(rect);
         }
+    }
+    private void DrawCurrentBackground(Rect rect)
+    {
+        float timePassed = Time.time - _transitionStartTime;
+        float percentage = Mathf.Clamp01(timePassed / TransitionTime);
+
+        rect.width *= percentage;
+
+        Styles.CurrentBackground.Draw(rect, GUIContent.none, 0);
     }
     private static class Styles
     {
@@ -130,6 +142,8 @@ public class AIStateMachineTransition : AIStateMachineObject
 
         public static GUIStyle SelectedTransitionBackground;
         public static GUIStyle SelectedTransitionArrow;
+
+        public static GUIStyle CurrentBackground;
 
         static Styles()
         {
@@ -145,6 +159,10 @@ public class AIStateMachineTransition : AIStateMachineObject
 
             SelectedTransitionArrow = new GUIStyle();
             SelectedTransitionArrow.normal.background = Resources.Load<Texture2D>("Textures/StateMachineTransitionArrowSelected");
+
+
+            CurrentBackground = new GUIStyle();
+            CurrentBackground.normal.background = Resources.Load<Texture2D>("Textures/StateMachineTransitionBackgroundCurrent");
         }
     }
 #endif

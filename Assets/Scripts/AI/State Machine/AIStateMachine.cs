@@ -33,6 +33,11 @@ public class AIStateMachine : ScriptableObject
     {
         CurrentObject = StartNode;
         Agent = agent;
+
+        foreach (AIStateMachineObject machineObject in Nodes.Select(x => x as AIStateMachineObject).Union(Transitions))
+        {
+            machineObject.Machine = this;
+        }
     }
     public void Think()
     {

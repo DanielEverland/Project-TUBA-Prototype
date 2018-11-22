@@ -10,10 +10,10 @@ public class Agent : MonoBehaviour
     private AIStateMachine _stateMachine;
     [SerializeField]
     private CharacterController2D _characterController;
-
+    
     public CharacterController2D CharacterController => _characterController;
+    public AIStateMachine StateMachine => _stateMachine;
 
-    protected AIStateMachine StateMachine => _stateMachine;
     protected int ThinksPerSecond => _thinksPerSecond.Value;
     protected float ThinksInterval => 1 / (float)ThinksPerSecond;
     protected float TimeSinceLastThink { get; set; }

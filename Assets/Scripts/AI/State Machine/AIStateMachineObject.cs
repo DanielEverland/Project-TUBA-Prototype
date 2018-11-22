@@ -10,4 +10,6 @@ public class AIStateMachineObject : ScriptableObject
 
     [SerializeField, HideInInspector]
     private AIStateMachine _machine;
+
+    protected bool IsCurrent => _machine.CurrentObject == this;
 }

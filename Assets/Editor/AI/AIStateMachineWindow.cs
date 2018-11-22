@@ -40,6 +40,11 @@ public class AIStateMachineWindow : EditorWindow
     {
         Selection.selectionChanged += QuerySelection;
     }
+    private void Update()
+    {
+        Repaint();
+        QuerySelection();
+    }
     private void OnGUI()
     {
         using (var changeScope = new EditorGUI.ChangeCheckScope())
@@ -163,10 +168,15 @@ public class AIStateMachineWindow : EditorWindow
     }
     private void QuerySelection()
     {
-        AIStateMachine targetMachine = Selection.activeObject as AIStateMachine;
-
-        if (targetMachine != null)
-            Target = targetMachine;
+        if(Selection.activeObject is AIStateMachine machine)
+        {
+            Target = machine;
+        }
+        else if(Selection.activeObject is GameObject gameObject)
+        {
+            Agent agent = gameObject.GetComponentInChildren<Agent>();
+            Target = agent.StateMachine;
+        }
 
         Repaint();
     }

@@ -53,6 +53,8 @@ public class AIStateMachineStateNode : AIStateMachineNode
         {
             if (IsSelected)
                 Style.SelectedBackground.Draw(rect, GUIContent.none, 0);
+            else if (IsCurrent)
+                Style.CurrentBackground.Draw(rect, GUIContent.none, 0);
             else
                 Style.Background.Draw(rect, GUIContent.none, 0);
         }
@@ -64,16 +66,21 @@ public class AIStateMachineStateNode : AIStateMachineNode
     {
         public static GUIStyle Background;
         public static GUIStyle SelectedBackground;
+        public static GUIStyle CurrentBackground;
 
         static Style()
         {
             Background = new GUIStyle();
             Background.normal.background = Resources.Load<Texture2D>("Textures/StateMachineStateBackground");
-            Background.border = new RectOffset(6, 6, 6, 0);
+            Background.border = new RectOffset(4, 4, 4, 4);
 
             SelectedBackground = new GUIStyle();
             SelectedBackground.normal.background = Resources.Load<Texture2D>("Textures/StateMachineStateBackgroundOutline");
-            SelectedBackground.border = new RectOffset(6, 6, 6, 0);
+            SelectedBackground.border = new RectOffset(4, 4, 4, 4);
+
+            CurrentBackground = new GUIStyle();
+            CurrentBackground.normal.background = Resources.Load<Texture2D>("Textures/StateMachineStateBackgroundCurrent");
+            CurrentBackground.border = new RectOffset(4, 4, 4, 4);
         }
     }
 #endif
