@@ -72,7 +72,7 @@ public class AIStateMachine : ScriptableObject
             }
         }
     }
-    private void ChangeCurrentObject(AIStateMachineObject obj)
+    public void ChangeCurrentObject(AIStateMachineObject obj)
     {
         if (CurrentState != null)
         {

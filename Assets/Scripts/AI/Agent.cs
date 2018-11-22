@@ -22,14 +22,12 @@ public class Agent : MonoBehaviour
     {
         // We create a copy of the state machine
         _stateMachine = Instantiate(StateMachine);
-        StateMachine.Initialize(this);
+        _stateMachine.Initialize(this);
     }
     private void Update()
     {
         StateMachine.Update();
         PollThink();
-
-        Debug.Log(StateMachine.CurrentObject);
     }
     private void PollThink()
     {
@@ -42,7 +40,6 @@ public class Agent : MonoBehaviour
             StateMachine.Think();
         }
     }
-
     private void OnValidate()
     {
         if (_thinksPerSecond == null)

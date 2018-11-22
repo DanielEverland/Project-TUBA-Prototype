@@ -33,12 +33,24 @@ public class AIStateMachineTransitionEditor : Editor
 
         DrawEvents();
 
+        DrawSelectButton();
+
         serializedObject.ApplyModifiedProperties();
     }
     protected virtual void DrawEvents()
     {
         EditorGUILayout.PropertyField(StartEvent);
         EditorGUILayout.PropertyField(EndEvent);
+    }
+    protected virtual void DrawSelectButton()
+    {
+        if(Application.isPlaying)
+        {
+            if (GUILayout.Button("Force Current"))
+            {
+                Target.Machine.ChangeCurrentObject(Target);
+            }
+        }
     }
     protected virtual void DrawElement(Rect rect, SerializedProperty element, GUIContent label, bool selected, bool focused)
     {

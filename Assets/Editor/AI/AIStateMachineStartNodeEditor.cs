@@ -6,6 +6,8 @@ using UnityEditor;
 [CustomEditor(typeof(AIStateMachineStartNode))]
 public class AIStateMachineStartNodeEditor : Editor
 {
+    AIStateMachineStartNode Target => target as AIStateMachineStartNode;
+
     protected override void OnHeaderGUI()
     {
         base.OnHeaderGUI();
@@ -15,5 +17,17 @@ public class AIStateMachineStartNodeEditor : Editor
     public override void OnInspectorGUI()
     {
         EditorGUILayout.HelpBox("Start Node has no behaviour", MessageType.Info);
+
+        DrawSelectButton();
+    }
+    protected virtual void DrawSelectButton()
+    {
+        if (Application.isPlaying)
+        {
+            if (GUILayout.Button("Force Current"))
+            {
+                Target.Machine.ChangeCurrentObject(Target);
+            }
+        }
     }
 }
