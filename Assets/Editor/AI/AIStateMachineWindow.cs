@@ -175,7 +175,9 @@ public class AIStateMachineWindow : EditorWindow
         else if(Selection.activeObject is GameObject gameObject)
         {
             Agent agent = gameObject.GetComponentInChildren<Agent>();
-            Target = agent.StateMachine;
+
+            if(agent != null)
+                Target = agent.StateMachine;
         }
 
         Repaint();

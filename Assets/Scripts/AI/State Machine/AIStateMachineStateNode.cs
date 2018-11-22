@@ -20,6 +20,13 @@ public class AIStateMachineStateNode : AIStateMachineNode
     [SerializeField]
     private UnityEvent _onStateEnded;
 
+    public override void Initialize(AIStateMachine machine)
+    {
+        foreach (AIStateMachineObject action in Actions)
+        {
+            action.Initialize(machine);
+        }
+    }
     public virtual void StateStarted()
     {
         OnStateStarted.Invoke();

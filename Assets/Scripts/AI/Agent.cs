@@ -26,6 +26,8 @@ public class Agent : MonoBehaviour
     }
     private void Update()
     {
+        Debug.Log(StateMachine.Agent);
+
         StateMachine.Update();
         PollThink();
     }

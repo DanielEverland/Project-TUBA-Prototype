@@ -12,4 +12,9 @@ public class AIStateMachineObject : ScriptableObject
     private AIStateMachine _machine;
 
     protected bool IsCurrent => _machine?.CurrentObject == this;
+
+    public virtual void Initialize(AIStateMachine machine)
+    {
+        Machine = machine;
+    }
 }

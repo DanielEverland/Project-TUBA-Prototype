@@ -28,19 +28,24 @@ public class AIStateMachine : ScriptableObject
     public AIStateMachineObject CurrentObject { get; protected set; }
     public Agent Agent { get; protected set; }
     public GameObject GameObject => Agent.gameObject;
+    protected bool IsInitialized { get; set; }
 
     public void Initialize(Agent agent)
     {
+        IsInitialized = true;
         CurrentObject = StartNode;
         Agent = agent;
 
         foreach (AIStateMachineObject machineObject in Nodes.Select(x => x as AIStateMachineObject).Union(Transitions))
         {
-            machineObject.Machine = this;
+            machineObject.Initialize(this);
         }
     }
     public void Think()
     {
+        if (!IsInitialized)
+            return;
+
         if(CurrentObject is AIStateMachineNode node)
         {
             node.Think();
@@ -56,6 +61,9 @@ public class AIStateMachine : ScriptableObject
     }
     public void Update()
     {
+        if (!IsInitialized)
+            return;
+
         CurrentState?.Update();
     }
     private void PollNextState()

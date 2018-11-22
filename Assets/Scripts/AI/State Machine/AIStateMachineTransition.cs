@@ -58,6 +58,13 @@ public class AIStateMachineTransition : AIStateMachineObject
 
     private float _transitionStartTime;
 
+    public override void Initialize(AIStateMachine machine)
+    {
+        foreach (AIStateMachineObject machineObject in Conditions)
+        {
+            machineObject.Initialize(machine);
+        }
+    }
     public void TransitionStarted()
     {
         _transitionStartTime = Time.time;
