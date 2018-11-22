@@ -12,6 +12,12 @@ public class AIStateMachineTransitionEditor : Editor
     protected ReorderableList ConditionsList { get; set; }
     protected string[] TypeOptions { get; set; }
 
+    protected override void OnHeaderGUI()
+    {
+        base.OnHeaderGUI();
+
+        target.name = EditorGUILayoutHelper.DrawHeaderTextField(target.name);
+    }
     public override void OnInspectorGUI()
     {
         serializedObject.Update();

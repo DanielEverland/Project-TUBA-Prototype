@@ -5,8 +5,7 @@ using UnityEngine;
 public class AIStateMachineStartNode : AIStateMachineNode
 {
 #if UNITY_EDITOR
-    public override Vector2 Size => new Vector2(3, 1);
-    protected override string Title => "Start Node";
+    public override Vector2 MinSize => new Vector2(3, 1);
 
     public override void Draw(Rect rect)
     {

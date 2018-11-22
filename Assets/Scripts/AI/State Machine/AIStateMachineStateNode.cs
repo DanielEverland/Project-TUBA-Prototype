@@ -14,12 +14,7 @@ public class AIStateMachineStateNode : AIStateMachineNode
     private List<AIStateMachineAction> _actions = new List<AIStateMachineAction>();
 
 #if UNITY_EDITOR
-    protected override string Title => _name;
-
-    [SerializeField]
-    private string _name = "New Node";
-
-    public override Vector2 Size => new Vector2(6, 1);
+    public override Vector2 MinSize => new Vector2(6, 1);
 
     public override void Draw(Rect rect)
     {

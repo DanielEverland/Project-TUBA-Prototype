@@ -27,6 +27,7 @@ public class AIStateMachineWindow : EditorWindow
     private const float SCALE_MIN = 1;
     private const float TRANSITION_HEIGHT = 0.5f;
     private const float RENDERING_ROUND_TO_NEAREST = 8;
+    private const float NODE_SIDE_PADDING = 10;
 
     [MenuItem("Window/AI/State Machine", priority = 0)]
     private static void Init()
@@ -97,7 +98,7 @@ public class AIStateMachineWindow : EditorWindow
     }
     private void DrawNode(AIStateMachineNode node)
     {
-        Rect nodeRect = GetObjectRect(node.Position, node.Size);        
+        Rect nodeRect = GetObjectRect(node);
         node.Draw(nodeRect);
 
         if(Event.current.type == EventType.MouseDown && Event.current.button == 0 && nodeRect.Contains(Event.current.mousePosition))
@@ -111,15 +112,31 @@ public class AIStateMachineWindow : EditorWindow
     }
     private Rect GetObjectRect(AIStateMachineNode node)
     {
-        return GetObjectRect(node.Position, node.Size);
+        return GetObjectRect(node.Position, node.MinSize, node.Title, node.TextStyle);
     }
     private Rect GetObjectRect(Vector2 position, Vector2 size)
     {
-        Vector2 sizeInPixels = new Vector2()
+        return GetObjectRect(position, size, string.Empty, null);
+    }
+    private Rect GetObjectRect(Vector2 position, Vector2 size, string content, GUIStyle style)
+    {
+        Vector2 minSizeInPixels = new Vector2()
         {
             x = size.x * PIXELS_PER_UNIT,
             y = size.y * PIXELS_PER_UNIT,
         };
+
+        Vector2 preferredSizeInPixels = new Vector2();
+        if (style != null)
+        {
+            preferredSizeInPixels = new Vector2()
+            {
+                x = style.CalcSize(new GUIContent(content)).x + NODE_SIDE_PADDING * 2,
+                y = size.y * PIXELS_PER_UNIT,
+            };
+        }            
+
+        Vector2 sizeInPixels = Vector2.Max(minSizeInPixels, preferredSizeInPixels);
 
         Vector2 screenPoint = WorldToScreenPoint(position);
         Vector2 positionInPixels = new Vector2()
@@ -397,6 +414,7 @@ public class AIStateMachineWindow : EditorWindow
     {
         AIStateMachineStateNode newState = ScriptableObject.CreateInstance<AIStateMachineStateNode>();
         newState.Position = ScreenToWorldPoint(Event.current.mousePosition);
+        newState.name = "New State";
 
         Nodes.Add(newState);
         AddObject(newState);

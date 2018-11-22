@@ -33,10 +33,10 @@ public abstract class AIStateMachineNode : AIStateMachineObject
     private Vector2 _position;
     
     public virtual GUIStyle TextStyle => Styles.DefaultText;
+    public virtual string Title => name;
+    public abstract Vector2 MinSize { get; }
 
     protected bool IsSelected => Selection.activeObject == this;
-    protected abstract string Title { get; }
-    public abstract Vector2 Size { get; }
 
     private const float FONT_SIZE_COEFFICIENT = 0.4f;
 
