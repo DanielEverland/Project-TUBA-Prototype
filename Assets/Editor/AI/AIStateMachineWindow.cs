@@ -179,9 +179,12 @@ public class AIStateMachineWindow : EditorWindow
         {
             AIStateMachineStartNode startNode = ScriptableObject.CreateInstance<AIStateMachineStartNode>();
             startNode.Position = new Vector2(0, 10);
+
             Nodes.Add(startNode);
             AddObject(startNode);
             StartNode = startNode;
+
+            startNode.name = "Start Node";
         }
     }
     private void PollInput()
