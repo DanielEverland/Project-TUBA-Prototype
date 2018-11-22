@@ -14,7 +14,7 @@ public class AIStateMachineStateNode : AIStateMachineNode
     private List<AIStateMachineAction> _actions = new List<AIStateMachineAction>();
 
 #if UNITY_EDITOR
-    public override Vector2 MinSize => new Vector2(6, 1);
+    public override Vector2 MinSize => new Vector2(2, 1);
 
     public override void Draw(Rect rect)
     {
