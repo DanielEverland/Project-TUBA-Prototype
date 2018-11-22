@@ -9,7 +9,9 @@ public class AIStateMachineStateEditor : Editor
 {
     protected AIStateMachineStateNode Target { get { return (AIStateMachineStateNode)target; } }
     protected SerializedProperty Actions { get; set; }
-    protected SerializedProperty Transitions { get; set; }
+    protected SerializedProperty StartEvent { get; set; }
+    protected SerializedProperty EndEvent { get; set; }
+    protected SerializedProperty Transitions { get; set; }    
     protected ReorderableList ActionsList { get; set; }
     protected ReorderableList TransitionsList { get; set; }
     protected string[] TypeOptions { get; set; }
@@ -23,14 +25,21 @@ public class AIStateMachineStateEditor : Editor
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
-
+        
         ActionsList.DoLayoutList();
+        
+        DrawEvents();
 
-        EditorGUILayout.Space();
-
+        TransitionsList.isExpanded = Target.TransitionsFoldout;
         TransitionsList.DoLayoutList();
+        Target.TransitionsFoldout = TransitionsList.isExpanded;
 
         serializedObject.ApplyModifiedProperties();
+    }
+    protected virtual void DrawEvents()
+    {
+        EditorGUILayout.PropertyField(StartEvent);
+        EditorGUILayout.PropertyField(EndEvent);
     }
     protected virtual void DrawElement(Rect rect, SerializedProperty element, GUIContent label, bool selected, bool focused)
     {
@@ -109,6 +118,8 @@ public class AIStateMachineStateEditor : Editor
     {
         Actions = serializedObject.FindProperty("_actions");
         Transitions = serializedObject.FindProperty("_transitions");
+        StartEvent = serializedObject.FindProperty("_onStateStarted");
+        EndEvent = serializedObject.FindProperty("_onStateEnded");
     }
     protected virtual void CreateActionList()
     {

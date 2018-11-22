@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AIStateMachineStateNode : AIStateMachineNode
 {
@@ -8,13 +9,43 @@ public class AIStateMachineStateNode : AIStateMachineNode
     /// States can override this if a transition should check whether it has completed its action
     /// </summary>
     public bool IsDone => true;
+    public UnityEvent OnStateStarted => _onStateStarted;
+    public UnityEvent OnStateEnded => _onStateEnded;
 
     public List<AIStateMachineAction> Actions => _actions;
     [SerializeField]
     private List<AIStateMachineAction> _actions = new List<AIStateMachineAction>();
+    [SerializeField]
+    private UnityEvent _onStateStarted;
+    [SerializeField]
+    private UnityEvent _onStateEnded;
+
+    public void StateStarted()
+    {
+        OnStateStarted.Invoke();
+    }
+    public void StateEnded()
+    {
+        OnStateEnded.Invoke();
+    }
+    public override void Update()
+    {
+        for (int i = 0; i < Actions.Count; i++)
+        {
+            Actions[i].Update();
+        }
+    }
+    public override void Think()
+    {
+        for (int i = 0; i < Actions.Count; i++)
+        {
+            Actions[i].Think();
+        }
+    }
 
 #if UNITY_EDITOR
     public override Vector2 MinSize => new Vector2(2, 1);
+    public bool TransitionsFoldout = false;
 
     public override void Draw(Rect rect)
     {

@@ -22,6 +22,7 @@ public class AIAgent : MonoBehaviour
     {
         // We create a copy of the state machine
         _stateMachine = Instantiate(StateMachine);
+        StateMachine.Initialize(this);
     }
     private void Update()
     {

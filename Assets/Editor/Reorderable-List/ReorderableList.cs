@@ -92,6 +92,12 @@ namespace UnityEditor
             set { pagination.fixedPageSize = value; }
         }
 
+        public bool isExpanded
+        {
+            get { return list.isExpanded; }
+            set { list.isExpanded = value; }
+        }
+
         internal readonly int id;
 
         private SerializedProperty list;

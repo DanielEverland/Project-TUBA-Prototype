@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -10,6 +11,9 @@ public class AIStateMachineTransition : AIStateMachineObject
     public AIStateMachineStateNode TargetState { get => _targetState; set => _targetState = value; }
     public List<AIStateMachineCondition> Conditions => _conditions;
     public ConditionType ExpressionType => _expressionType;
+    public float TransitionTime => _transitionTime.Value;
+    public UnityEvent OnTransitionStarted => _onTransitionStarted;
+    public UnityEvent OnTransitionEnded => _onTransitionEnded;
 
     [SerializeField]
     private ConditionType _expressionType = ConditionType.All;
@@ -17,6 +21,12 @@ public class AIStateMachineTransition : AIStateMachineObject
     private AIStateMachineStateNode _targetState;
     [SerializeField]
     private List<AIStateMachineCondition> _conditions = new List<AIStateMachineCondition>();
+    [SerializeField]
+    private FloatReference _transitionTime = new FloatReference(1);
+    [SerializeField]
+    private UnityEvent _onTransitionStarted;
+    [SerializeField]
+    private UnityEvent _onTransitionEnded;
     
     public bool ConditionsMet
     {
@@ -44,6 +54,23 @@ public class AIStateMachineTransition : AIStateMachineObject
                     throw new System.NotImplementedException();
             }
         }
+    }
+
+    private float _transitionStartTime;
+
+    public void TransitionStarted()
+    {
+        _transitionStartTime = Time.time;
+
+        OnTransitionStarted.Invoke();
+    }
+    public void TransitionEnded()
+    {
+        OnTransitionEnded.Invoke();
+    }
+    public bool Transition()
+    {
+        return Time.time - _transitionStartTime >= TransitionTime;
     }
 
     [System.Serializable]

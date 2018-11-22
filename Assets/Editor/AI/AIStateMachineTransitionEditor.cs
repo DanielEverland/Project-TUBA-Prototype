@@ -9,6 +9,9 @@ public class AIStateMachineTransitionEditor : Editor
 {
     protected AIStateMachineTransition Target { get { return (AIStateMachineTransition)target; } }
     protected SerializedProperty Conditions { get; set; }
+    protected SerializedProperty StartEvent { get; set; }
+    protected SerializedProperty EndEvent { get; set; }
+    protected SerializedProperty TransitionTime { get; set; }
     protected ReorderableList ConditionsList { get; set; }
     protected string[] TypeOptions { get; set; }
 
@@ -22,9 +25,20 @@ public class AIStateMachineTransitionEditor : Editor
     {
         serializedObject.Update();
 
+        EditorGUILayout.PropertyField(TransitionTime);
+
         ConditionsList.DoLayoutList();
 
+        EditorGUILayout.Space();
+
+        DrawEvents();
+
         serializedObject.ApplyModifiedProperties();
+    }
+    protected virtual void DrawEvents()
+    {
+        EditorGUILayout.PropertyField(StartEvent);
+        EditorGUILayout.PropertyField(EndEvent);
     }
     protected virtual void DrawElement(Rect rect, SerializedProperty element, GUIContent label, bool selected, bool focused)
     {
@@ -101,6 +115,9 @@ public class AIStateMachineTransitionEditor : Editor
     protected virtual void CreateSerializableProperties()
     {
         Conditions = serializedObject.FindProperty("_conditions");
+        StartEvent = serializedObject.FindProperty("_onTransitionStarted");
+        EndEvent = serializedObject.FindProperty("_onTransitionEnded");
+        TransitionTime = serializedObject.FindProperty("_transitionTime");
     }
     protected virtual void CreateList()
     {
