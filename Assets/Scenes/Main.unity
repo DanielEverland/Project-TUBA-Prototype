@@ -1165,6 +1165,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Orb
       objectReference: {fileID: 0}
+    - target: {fileID: 5832387318723406412, guid: 6627465ed5ccd8a4988a9ba38b5c82dc,
+        type: 3}
+      propertyPath: _stateMachine
+      value: 
+      objectReference: {fileID: 11400000, guid: e9deedba2ce722e47ae808b6535da6b7,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6627465ed5ccd8a4988a9ba38b5c82dc, type: 3}
 --- !u!224 &1195337304 stripped

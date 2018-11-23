@@ -21,85 +21,42 @@ public class AIStateMachine : ScriptableObject
     private List<AINode> _nodes = new List<AINode>();
     [SerializeField]
     private List<AITransition> _transitions = new List<AITransition>();
-
-    protected AIState CurrentState => CurrentObject as AIState;
-    protected AITransition CurrentTransition => CurrentObject as AITransition;
     
-    public AIStateMachineObject CurrentObject { get; protected set; }
-    public Agent Agent { get; protected set; }
-    public GameObject GameObject => Agent.gameObject;
-    protected bool IsInitialized { get; set; }
-
-    public void Initialize(Agent agent)
+    public void Think(Agent agent)
     {
-        IsInitialized = true;
-        CurrentObject = StartNode;
-        Agent = agent;
-
-        foreach (AIStateMachineObject machineObject in Nodes.Select(x => x as AIStateMachineObject).Union(Transitions))
+        if(agent.CurrentObject is AINode node)
         {
-            machineObject.Initialize(this);
+            node.Think(agent);
+            PollNextState(agent);
         }
-    }
-    public void Think()
-    {
-        if (!IsInitialized)
-            return;
-
-        if(CurrentObject is AINode node)
+        else if(agent.CurrentObject is AITransition transition)
         {
-            node.Think();
-            PollNextState();
-        }
-        else if(CurrentObject is AITransition transition)
-        {
-            if(transition.Transition())
+            if(transition.Transition(agent))
             {
-                ChangeCurrentObject(transition.TargetState);
+                agent.ChangeCurrentObject(transition.TargetState);
             }
         }
     }
-    public void Update()
+    public void PerformAction(Agent agent)
     {
-        if (!IsInitialized)
-            return;
-
-        CurrentState?.Update();
+        if(agent.CurrentObject is AIState state)
+        {
+            state.PerformAction(agent);
+        }
     }
-    private void PollNextState()
+    private void PollNextState(Agent agent)
     {
-        if(CurrentObject is AINode node)
+        if(agent.CurrentObject is AINode node)
         {
             foreach (AITransition transition in node.Transitions)
             {
                 if (transition.ConditionsMet)
                 {
-                    ChangeCurrentObject(transition);
+                    agent.ChangeCurrentObject(transition);
                     return;
                 }
             }
         }
     }
-    public void ChangeCurrentObject(AIStateMachineObject obj)
-    {
-        if (CurrentState != null)
-        {
-            CurrentState.StateEnded();
-        }
-        else if (CurrentTransition != null)
-        {
-            CurrentTransition.TransitionEnded();
-        }
-
-        CurrentObject = obj;
-
-        if (CurrentState != null)
-        {
-            CurrentState.StateStarted();
-        }
-        else if (CurrentTransition != null)
-        {
-            CurrentTransition.TransitionStarted();
-        }
-    }
+    
 }

@@ -12,8 +12,6 @@ public class AITransition : AIStateMachineObject
     public List<AICondition> Conditions => _conditions;
     public ConditionType ExpressionType => _expressionType;
     public float TransitionTime => _transitionTime.Value;
-    public UnityEvent OnTransitionStarted => _onTransitionStarted;
-    public UnityEvent OnTransitionEnded => _onTransitionEnded;
 
     [SerializeField]
     private ConditionType _expressionType = ConditionType.All;
@@ -23,10 +21,6 @@ public class AITransition : AIStateMachineObject
     private List<AICondition> _conditions = new List<AICondition>();
     [SerializeField]
     private FloatReference _transitionTime = new FloatReference(1);
-    [SerializeField]
-    private UnityEvent _onTransitionStarted;
-    [SerializeField]
-    private UnityEvent _onTransitionEnded;
     
     public bool ConditionsMet
     {
@@ -55,29 +49,19 @@ public class AITransition : AIStateMachineObject
             }
         }
     }
-
-    private float _transitionStartTime;
-
-    public override void Initialize(AIStateMachine machine)
+    
+    public void TransitionStarted(Agent agent)
     {
-        foreach (AIStateMachineObject machineObject in Conditions)
-        {
-            machineObject.Initialize(machine);
-        }
+        SetData(agent, AIDataTypes.TransitionStartTime, Time.time);
     }
-    public void TransitionStarted()
+    public void TransitionEnded(Agent agent)
     {
-        _transitionStartTime = Time.time;
+    }
+    public bool Transition(Agent agent)
+    {
+        float startTime = GetData<float>(agent, AIDataTypes.TransitionStartTime);
 
-        OnTransitionStarted.Invoke();
-    }
-    public void TransitionEnded()
-    {
-        OnTransitionEnded.Invoke();
-    }
-    public bool Transition()
-    {
-        return Time.time - _transitionStartTime >= TransitionTime;
+        return Time.time - startTime >= TransitionTime;
     }
 
     [System.Serializable]
@@ -107,7 +91,7 @@ public class AITransition : AIStateMachineObject
     }
     private Vector2 _endPosition;
 
-    public void Draw(Rect rect)
+    public void Draw(Rect rect, Agent agent)
     {
         if (Event.current.type == EventType.Repaint)
         {
@@ -129,13 +113,14 @@ public class AITransition : AIStateMachineObject
                 Styles.TransitionBackground.Draw(rect, GUIContent.none, 0);
             }
 
-            if(IsCurrent)
-                DrawCurrentBackground(rect);
+            if(agent?.CurrentObject == this)
+                DrawCurrentBackground(rect, agent);
         }
     }
-    private void DrawCurrentBackground(Rect rect)
+    private void DrawCurrentBackground(Rect rect, Agent agent)
     {
-        float timePassed = Time.time - _transitionStartTime;
+        float transitionStartTime = GetData<float>(agent, AIDataTypes.TransitionStartTime);
+        float timePassed = Time.time - transitionStartTime;
         float percentage = Mathf.Clamp01(timePassed / TransitionTime);
 
         rect.width *= percentage;

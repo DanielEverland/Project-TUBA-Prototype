@@ -11,6 +11,9 @@ public class ConditionObjectWithinRange : AICondition
 
     protected GameObject Target => _targetObject.Value;
     protected float Distance => _distance.Value;
-
-    public override bool IsConditionsMet => Vector2.Distance(GameObject.transform.position, Target.transform.position) <= Distance;
+    
+    public override bool Evaluate(Agent agent)
+    {
+        return Vector2.Distance(agent.transform.position, Target.transform.position) <= Distance;
+    }
 }

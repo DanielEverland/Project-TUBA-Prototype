@@ -9,8 +9,6 @@ public class AITransitionEditor : Editor
 {
     protected AITransition Target { get { return (AITransition)target; } }
     protected SerializedProperty Conditions { get; set; }
-    protected SerializedProperty StartEvent { get; set; }
-    protected SerializedProperty EndEvent { get; set; }
     protected SerializedProperty TransitionTime { get; set; }
     protected ReorderableList ConditionsList { get; set; }
     protected string[] TypeOptions { get; set; }
@@ -28,19 +26,10 @@ public class AITransitionEditor : Editor
         EditorGUILayout.PropertyField(TransitionTime);
 
         ConditionsList.DoLayoutList();
-
-        EditorGUILayout.Space();
-
-        DrawEvents();
-
+        
         DrawSelectButton();
 
         serializedObject.ApplyModifiedProperties();
-    }
-    protected virtual void DrawEvents()
-    {
-        EditorGUILayout.PropertyField(StartEvent);
-        EditorGUILayout.PropertyField(EndEvent);
     }
     protected virtual void DrawSelectButton()
     {
@@ -48,7 +37,7 @@ public class AITransitionEditor : Editor
         {
             if (GUILayout.Button("Force Current"))
             {
-                Target.Machine.ChangeCurrentObject(Target);
+                AIStateMachineWindow.Agent.ChangeCurrentObject(Target);
             }
         }
     }
@@ -127,8 +116,6 @@ public class AITransitionEditor : Editor
     protected virtual void CreateSerializableProperties()
     {
         Conditions = serializedObject.FindProperty("_conditions");
-        StartEvent = serializedObject.FindProperty("_onTransitionStarted");
-        EndEvent = serializedObject.FindProperty("_onTransitionEnded");
         TransitionTime = serializedObject.FindProperty("_transitionTime");
     }
     protected virtual void CreateList()

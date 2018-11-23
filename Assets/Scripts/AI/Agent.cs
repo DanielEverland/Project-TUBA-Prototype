@@ -13,24 +13,16 @@ public class Agent : MonoBehaviour
     
     public CharacterController2D CharacterController => _characterController;
     public AIStateMachine StateMachine => _stateMachine;
+    public AIStateMachineObject CurrentObject { get; protected set; }
 
     protected int ThinksPerSecond => _thinksPerSecond.Value;
     protected float ThinksInterval => 1 / (float)ThinksPerSecond;
     protected float TimeSinceLastThink { get; set; }
-
-    private void Awake()
-    {
-        // We create a copy of the state machine
-        _stateMachine = StateMachine;
-        _stateMachine.Initialize(this);
-        _stateMachine.name = this.name;
-    }
+    
     private void Update()
     {
-        StateMachine.Update();
+        StateMachine.PerformAction(this);
         PollThink();
-
-        Debug.Log(name + " - " + StateMachine.CurrentObject.GetInstanceID());
     }
     private void PollThink()
     {
@@ -40,7 +32,40 @@ public class Agent : MonoBehaviour
         {
             TimeSinceLastThink -= ThinksInterval;
 
-            StateMachine.Think();
+            StateMachine.Think(this);
+        }
+    }
+    public void ChangeCurrentObject(AIStateMachineObject newObject)
+    {
+        if (newObject == CurrentObject)
+            return;
+
+        HandleObjectEnded();
+        
+        CurrentObject = newObject;
+
+        HandleObjectStarted();
+    }
+    private void HandleObjectStarted()
+    {
+        if(CurrentObject is AIState state)
+        {
+            state.StateStarted(this);
+        }
+        else if(CurrentObject is AITransition transition)
+        {
+            transition.TransitionStarted(this);
+        }
+    }
+    private void HandleObjectEnded()
+    {
+        if (CurrentObject is AIState state)
+        {
+            state.StateEnded(this);
+        }
+        else if (CurrentObject is AITransition transition)
+        {
+            transition.TransitionEnded(this);
         }
     }
     private void OnValidate()

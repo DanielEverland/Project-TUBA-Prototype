@@ -26,7 +26,7 @@ public class AIStartNodeEditor : Editor
         {
             if (GUILayout.Button("Force Current"))
             {
-                Target.Machine.ChangeCurrentObject(Target);
+                AIStateMachineWindow.Agent.ChangeCurrentObject(Target);
             }
         }
     }

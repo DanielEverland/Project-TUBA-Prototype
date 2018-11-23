@@ -4,10 +4,5 @@ using UnityEngine;
 
 public abstract class AICondition : AIStateMachineObject
 {
-    public abstract bool IsConditionsMet { get; }
-
-    public static implicit operator bool(AICondition condition)
-    {
-        return condition.IsConditionsMet;
-    }
+    public abstract bool Evaluate(Agent agent);
 }

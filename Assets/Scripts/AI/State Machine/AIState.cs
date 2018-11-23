@@ -5,48 +5,28 @@ using UnityEngine.Events;
 
 public class AIState : AINode
 {
-    /// <summary>
-    /// States can override this if a transition should check whether it has completed its action
-    /// </summary>
-    public bool IsDone => true;
-    public UnityEvent OnStateStarted => _onStateStarted;
-    public UnityEvent OnStateEnded => _onStateEnded;
-
     public List<AIAction> Actions => _actions;
     [SerializeField]
     private List<AIAction> _actions = new List<AIAction>();
-    [SerializeField]
-    private UnityEvent _onStateStarted;
-    [SerializeField]
-    private UnityEvent _onStateEnded;
-
-    public override void Initialize(AIStateMachine machine)
+    
+    public virtual void StateStarted(Agent agent)
     {
-        foreach (AIStateMachineObject action in Actions)
-        {
-            action.Initialize(machine);
-        }
     }
-    public virtual void StateStarted()
+    public virtual void StateEnded(Agent agent)
     {
-        OnStateStarted.Invoke();
     }
-    public virtual void StateEnded()
-    {
-        OnStateEnded.Invoke();
-    }
-    public override void Update()
+    public override void PerformAction(Agent agent)
     {
         for (int i = 0; i < Actions.Count; i++)
         {
-            Actions[i].Update();
+            Actions[i].PerformAction(agent);
         }
     }
-    public override void Think()
+    public override void Think(Agent agent)
     {
         for (int i = 0; i < Actions.Count; i++)
         {
-            Actions[i].Think();
+            Actions[i].Think(agent);
         }
     }
 
@@ -54,19 +34,19 @@ public class AIState : AINode
     public override Vector2 MinSize => new Vector2(2, 1);
     public bool TransitionsFoldout = false;
 
-    public override void Draw(Rect rect)
+    public override void Draw(Rect rect, Agent agent)
     {
         if (Event.current.type == EventType.Repaint)
         {
-            if (IsSelected)
-                Style.SelectedBackground.Draw(rect, GUIContent.none, 0);
-            else if (IsCurrent)
+            if(agent?.CurrentObject == this)
                 Style.CurrentBackground.Draw(rect, GUIContent.none, 0);
+            else if(IsSelected)
+                Style.SelectedBackground.Draw(rect, GUIContent.none, 0);
             else
-                Style.Background.Draw(rect, GUIContent.none, 0);
+                Style.Background.Draw(rect, GUIContent.none, 0);                
         }
 
-        base.Draw(rect);
+        base.Draw(rect, agent);
     }
 
     private static class Style

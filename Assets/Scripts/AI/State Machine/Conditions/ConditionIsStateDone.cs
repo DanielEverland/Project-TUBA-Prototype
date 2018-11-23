@@ -8,6 +8,9 @@ public class ConditionIsStateDone : AICondition
     private AIState _targetState;
 
     protected AIState TargetState => _targetState;
-
-    public override bool IsConditionsMet => TargetState.IsDone;
+    
+    public override bool Evaluate(Agent agent)
+    {
+        return TargetState.GetData<bool>(agent, AIDataTypes.StateIsDone);
+    }
 }

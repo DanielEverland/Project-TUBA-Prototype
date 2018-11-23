@@ -15,14 +15,14 @@ public abstract class AINode : AIStateMachineObject
     /// <summary>
     /// Called x amount of times per second for current state
     /// </summary>
-    public virtual void Think()
+    public virtual void Think(Agent agent)
     {
 
     }
     /// <summary>
     /// Called every frame for current state
     /// </summary>
-    public virtual void Update()
+    public virtual void PerformAction(Agent agent)
     {
 
     }
@@ -40,7 +40,7 @@ public abstract class AINode : AIStateMachineObject
 
     private const float FONT_SIZE_COEFFICIENT = 0.4f;
 
-    public virtual void Draw(Rect rect)
+    public virtual void Draw(Rect rect, Agent agent)
     {
         DrawTitle(rect);
     }    

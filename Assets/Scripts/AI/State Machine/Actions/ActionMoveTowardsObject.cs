@@ -11,15 +11,18 @@ public class ActionMoveTowardsObject : AIAction
 
     protected GameObject Target => _target.Value;
     protected Vector2 TargetPosition { get; set; }
-    protected Vector2 Direction => (TargetPosition - (Vector2)GameObject.transform.position).normalized;
     protected float MovementSpeed => _movementSpeed.Value;
 
-    public override void Think()
+    public override void Think(Agent agent)
     {
         TargetPosition = Target.transform.position;
     }
-    public override void Update()
+    public override void PerformAction(Agent agent)
     {
-        Agent.CharacterController.Move(Direction * MovementSpeed * Time.deltaTime);
+        agent.CharacterController.Move(Direction(agent) * MovementSpeed * Time.deltaTime);
+    }
+    private Vector2 Direction(Agent agent)
+    {
+        return (TargetPosition - (Vector2)agent.transform.position).normalized;
     }
 }

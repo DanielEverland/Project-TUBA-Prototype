@@ -6,11 +6,12 @@ using UnityEditor;
 
 public class AIStateMachineWindow : EditorWindow
 {
+    public static Agent Agent { get; set; }
+
     private const string STATE_MACHINE_BACKGROUND_NAME = "Textures/StateMachineBackground";
     private const string STATE_MACHINE_HEADER_NAME = "Textures/StateMachineHeaderBackground";
 
-    private AIStateMachine Target { get; set; }
-    
+    private AIStateMachine Target { get; set; }   
     private Vector2 CameraOffset { get => Target.CameraOffset; set => Target.CameraOffset = value; }
     private List<AINode> Nodes => Target.Nodes;
     private List<AITransition> Transitions => Target.Transitions;
@@ -92,7 +93,7 @@ public class AIStateMachineWindow : EditorWindow
         
         EditorGUIUtility.RotateAroundPivot(angle, middlePoint);
 
-        transition.Draw(rect);
+        transition.Draw(rect, Agent);
 
         GUI.matrix = Matrix4x4.identity;
     }
@@ -106,7 +107,7 @@ public class AIStateMachineWindow : EditorWindow
     private void DrawNode(AINode node)
     {
         Rect nodeRect = GetObjectRect(node);
-        node.Draw(nodeRect);
+        node.Draw(nodeRect, Agent);
 
         if(Event.current.type == EventType.MouseDown && Event.current.button == 0 && nodeRect.Contains(Event.current.mousePosition))
         {
@@ -185,16 +186,18 @@ public class AIStateMachineWindow : EditorWindow
     }
     private void QuerySelection()
     {
-        if(Selection.activeObject is AIStateMachine machine)
+        if (Selection.activeObject is GameObject gameObject)
+        {
+            Agent = gameObject.GetComponentInChildren<Agent>();
+        }
+        else
+        {
+            Agent = null;
+        }
+
+        if (Selection.activeObject is AIStateMachine machine)
         {
             Target = machine;
-        }
-        else if(Selection.activeObject is GameObject gameObject)
-        {
-            Agent agent = gameObject.GetComponentInChildren<Agent>();
-
-            if(agent != null)
-                Target = agent.StateMachine;
         }
 
         Repaint();
@@ -477,11 +480,6 @@ public class AIStateMachineWindow : EditorWindow
     }
     private void AddObject(Object obj)
     {
-        if(obj is AIStateMachineObject stateObject)
-        {
-            stateObject.Machine = Target;
-        }
-
         obj.name = obj.GetType().Name;
 
         AssetDatabase.AddObjectToAsset(obj, Target);

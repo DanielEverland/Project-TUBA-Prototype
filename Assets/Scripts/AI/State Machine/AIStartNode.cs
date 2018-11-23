@@ -5,14 +5,14 @@ public class AIStartNode : AINode
 #if UNITY_EDITOR
     public override Vector2 MinSize => new Vector2(3, 1);
 
-    public override void Draw(Rect rect)
+    public override void Draw(Rect rect, Agent agent)
     {
         if (Event.current.type == EventType.Repaint)
         {
-            if (IsSelected)
-                Style.SelectedBackground.Draw(rect, GUIContent.none, 0);
-            else if (IsCurrent)
+            if(agent?.CurrentObject == this)
                 Style.CurrentBackground.Draw(rect, GUIContent.none, 0);
+            else if (IsSelected)
+                Style.SelectedBackground.Draw(rect, GUIContent.none, 0);
             else
                 Style.Background.Draw(rect, GUIContent.none, 0);
         }

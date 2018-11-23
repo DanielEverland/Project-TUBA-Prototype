@@ -9,8 +9,6 @@ public class AIStateEditor : Editor
 {
     protected AIState Target { get { return (AIState)target; } }
     protected SerializedProperty Actions { get; set; }
-    protected SerializedProperty StartEvent { get; set; }
-    protected SerializedProperty EndEvent { get; set; }
     protected SerializedProperty Transitions { get; set; }    
     protected ReorderableList ActionsList { get; set; }
     protected ReorderableList TransitionsList { get; set; }
@@ -28,8 +26,6 @@ public class AIStateEditor : Editor
         
         ActionsList.DoLayoutList();
         
-        DrawEvents();
-
         TransitionsList.isExpanded = Target.TransitionsFoldout;
         TransitionsList.DoLayoutList();
         Target.TransitionsFoldout = TransitionsList.isExpanded;
@@ -38,18 +34,13 @@ public class AIStateEditor : Editor
 
         serializedObject.ApplyModifiedProperties();
     }
-    protected virtual void DrawEvents()
-    {
-        EditorGUILayout.PropertyField(StartEvent);
-        EditorGUILayout.PropertyField(EndEvent);
-    }
     protected virtual void DrawSelectButton()
     {
         if (Application.isPlaying)
         {
             if (GUILayout.Button("Force Current"))
             {
-                Target.Machine.ChangeCurrentObject(Target);
+                AIStateMachineWindow.Agent.ChangeCurrentObject(Target);
             }
         }
     }
@@ -130,8 +121,6 @@ public class AIStateEditor : Editor
     {
         Actions = serializedObject.FindProperty("_actions");
         Transitions = serializedObject.FindProperty("_transitions");
-        StartEvent = serializedObject.FindProperty("_onStateStarted");
-        EndEvent = serializedObject.FindProperty("_onStateEnded");
     }
     protected virtual void CreateActionList()
     {
