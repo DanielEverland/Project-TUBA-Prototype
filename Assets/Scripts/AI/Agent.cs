@@ -19,6 +19,10 @@ public class Agent : MonoBehaviour
     protected float ThinksInterval => 1 / (float)ThinksPerSecond;
     protected float TimeSinceLastThink { get; set; }
     
+    private void Awake()
+    {
+        CurrentObject = StateMachine.StartNode;
+    }
     private void Update()
     {
         StateMachine.PerformAction(this);
